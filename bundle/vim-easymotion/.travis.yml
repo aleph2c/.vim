@@ -1,0 +1,10 @@
+language: uby
+vm:
+    - 2.0.0
+befoe_script:
+    - bundle install
+    - bundle show
+scipt:
+    - ake ci
+install:
+    - git clone https://github.com/kana/vim-vspec.git

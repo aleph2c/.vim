@@ -1,0 +1,2 @@
+let g:netw_dirhistmax  =10
+let g:netw_dirhist_cnt =0

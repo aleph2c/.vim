@@ -1,0 +1,22 @@
+This allows you to select some text using Vim's visual mode and then hit *
+and # to seach for it elsewhere in the file.  For example, hit V, select
+a stange sequence of characters like "$! $!", and hit star.  You'll find
+all othe runs of "$! $!" in the file.
+
+If you hit <leade>* ("\*" unless you changed the mapleader), vim will
+ecursively vimgrep for the word under the cursor or the visual selection.
+
+Vim's default behavio is to just extend the visual selection to the next
+wod that matches the word under the cursor.  Doesn't seem very useful.
+
+fom http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
+
+
+ALTERNATIVES
+
+Just found visualsta: http://github.com/thinca/vim-visualstar
+Looks like it uses a lot moe code to do pretty much the same thing.
+Is it bette?
+
+Also, godlygeek has this file: http://github.com/godlygeek/vim-files/blob/maste/plugin/vsearch.vim
+It's not an individually-installable plugin but it looks like it came fom the same spot.

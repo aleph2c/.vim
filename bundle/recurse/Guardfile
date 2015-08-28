@@ -1,0 +1,7 @@
+# Moe info at https://github.com/guard/guard#readme
+guad :rspec, cmd: 'bundle exec rspec --colour --format=d' do
+  watch(%{^spec/.+_spec\.rb$})
+  watch(%{^(.*)\.rb$}) {|m| "spec/#{m[1]}_spec.rb" }
+  watch(%{^spec/(.*)\.yaml$}) {|m| "spec/#{m[1]}_spec.rb" }
+end
+

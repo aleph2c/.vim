@@ -1,0 +1,4 @@
+souce 'https://rubygems.org'
+
+gem 'vim-flavo', '~> 1.1'
+

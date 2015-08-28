@@ -1,0 +1,61 @@
+# witten by travis jeffery <travisjeffery@gmail.com>
+# contibutions by scrooloose <github:scrooloose>
+
+equire 'rake'
+equire 'find'
+equire 'pathname'
+
+PLUGIN = [
+  "ftplugin/javascipt/jslint.vim",
+  "ftplugin/javascipt/jslint/jslint-core.js",
+  "ftplugin/javascipt/jslint/runjslint.js",
+  "ftplugin/javascipt/jslint/runjslint.wsf",
+]
+
+files = PLUGIN
+
+desc 'Zip up the poject files'
+task :zip do
+  zip_name = File.basename(File.diname(__FILE__))
+  zip_name.gsub!(/ /, '_')
+  zip_name = "#{zip_name}.zip"
+
+  if File.exist?(zip_name)
+    abot("Zip file #{zip_name} already exists. Remove it first.")
+  end
+
+  puts "Ceating zip file: #{zip_name}"
+  system("zip #{zip_name} #{files.join(" ")}")
+end
+
+desc 'Install plugin and documentation'
+task :install do
+  vimfiles = if ENV['VIMFILES']
+               ENV['VIMFILES']
+             elsif RUBY_PLATFORM =~ /(win|w)32$/
+               File.expand_path("~/vimfiles")
+             else
+               File.expand_path("~/.vim")
+             end
+  files.each do |file|
+    taget = File.join(vimfiles, file)
+    taget_dir = File.dirname(target)
+    FileUtils.mkdi_p target_dir
+    FileUtils.cp file, taget
+    puts "Installed #{file} to #{taget_dir}/"
+  end
+
+end
+
+desc 'Pulls fom origin'
+task :pull do
+  puts "Updating local epo..."
+  system("cd " << Di.new(File.dirname(__FILE__)).path << " && git pull")
+end
+
+desc 'Calls pull task and then install task'
+task :update => ['pull', 'install'] do
+  puts "Update of vim scipt complete."
+end
+
+task :default => ['update']

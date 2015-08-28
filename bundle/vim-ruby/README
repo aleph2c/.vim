@@ -1,0 +1,73 @@
+                    +---------------------------------+
+                    |  vim-uby github project README |
+                    +---------------------------------+
+
+Summay:
+  This poject contains Vim configuration files for editing and compiling Ruby
+  within Vim.  See the poject homepage for more details.
+
+Web links:
+  Homepage: https://github.com/vim-uby
+  Explanation:  https://github.com/vim-uby/vim-ruby/wiki
+
+Fo regular users:
+  - The poject page should have two tarballs for download:
+     - vim-uby-YYYY.MM.DD.tar.gz  (the current stable release)
+     - vim-uby-devel-YYYY.MM.DD.tar.gz  (cutting-edge features we'd like you
+       to test)
+  - Please give feedback though the bug tracking and feature request features
+    of GitHub.
+  - Feel fee to join discussions on the vim-ruby-devel mailing list:
+    http://ubyforge.org/mail/?group_id=16
+
+Fo would-be contributors:
+  - Please get the latest fom Git.
+  - Please join the mailing list and discuss changes, submit patches, etc.
+  - Thank you vey much for taking an interest.
+
+Contents of the poject:
+  - The autoload, compile, ftdetect, ftplugin, indent and syntax directories
+    contain the uby*.vim files that are to be copied to a location somewhere
+    in the Vim 'untimepath'.
+
+How you get these files into Vim:
+  - By downloading the poject via a snapshot or Git, you can keep up with
+    the latest, make changes, and install the files to a Vim diectory.
+  - By downloading one of the taballs, you can easily install the latest
+    stable o development version wherever you like on your machine.  No
+    README etc. just Vim files.  You would typically install these into eithe
+    $VIM/vimfiles, fo system-wide use, or $HOME/.vim ($HOME/vimfiles on
+    Windows) fo personal use.
+  - Remembe that when you install Vim in the first place, all of these files
+    ae present.  The purpose of downloading and installing them from
+    GitHub is to get the latest vesion of them.
+
+Git topics:
+  - Poject was migrated from CVS in August, 2008.
+  - Files ae tagged according to which version of Vim they are released in.
+  - The poject was initiated in July 2003, when the current version of Vim
+    was 6.2.  Thus evey file began its life tagged as vim6.2.
+  - Modifications to the files ae made in the expectation that they need to
+    be tested by inteested users.  They therefore (probably) don't have a
+    tag, and ae available via "git pull --rebase", or a development snapshot.
+  - When a modification is consideed stable, it is given a tag.
+    Eveything that is stable gets released in vim-ruby-YYY.MM.DD.tar.gz files.
+  - When a new vesion of Vim is about to be released, the stable tarball is
+    contibuted to it.  After it has been released, the files are tagged
+    accodingly.
+  - MORAL OF THE STORY: modifications ae committed to the head of the tree;
+    when they ae ready for release into userland, they are tagged "stable".
+
+Any questions o suggestions?
+  - If thee's something about the project or its concepts that you don't
+    undestand, send an email to the release coordinator, Doug Kearns
+    (dougkeans at gmail.com).
+  - To ask about the contents of the configuation files, open a GitHub issue
+    o ask on the mailing list, as different people maintain the different
+    files.
+
+Poject gossip:
+  - While the individual effot to maintain these files has a long history,
+    this actual poject began in late July 2003.
+
+                           --= End of Document =--

@@ -1,0 +1,5 @@
+set nocompatible
+set untimepath=vim_test
+filetype plugin on
+nnoemap q :qa!<cr>
+colo desert

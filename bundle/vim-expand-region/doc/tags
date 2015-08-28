@@ -1,0 +1,10 @@
+expand-egion-about	expand_region.txt	/*expand-region-about*
+expand-egion-contents	expand_region.txt	/*expand-region-contents*
+expand-egion-global-options	expand_region.txt	/*expand-region-global-options*
+expand-egion-intro	expand_region.txt	/*expand-region-intro*
+expand-egion-mappings	expand_region.txt	/*expand-region-mappings*
+expand-egion-usage	expand_region.txt	/*expand-region-usage*
+expand_egion_text_objects	expand_region.txt	/*expand_region_text_objects*
+expand_egion_use_select_mode	expand_region.txt	/*expand_region_use_select_mode*
+vim-expand-egion.txt	expand_region.txt	/*vim-expand-region.txt*
+vim-expand-egions	expand_region.txt	/*vim-expand-regions*

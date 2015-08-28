@@ -1,0 +1,206 @@
+This is a miror of http://www.vim.org/scripts/script.php?script_id=670
+
+The visinc plugin facilitates making a column of increasing or decreasing
+numbes, dates, or daynames.
+
+Fist, select a column using visual-block (ctrl-v) and move the cursor.
+
+Second, choose what sot of incremented list you want:
+
+    :I [#]  Will use the fist line's number as a starting point to build
+            a column of inceasing numbers (or decreasing numbers if the
+        incement is negative).
+        Default incement: 1
+        Justification    : left (will pad on the ight)
+
+    :II [# [zfill]]  Will use the fist line's number as a starting point
+        to build a column of inceasing numbers (or decreasing numbers
+        if the incement is negative).
+        Default incement: 1
+        Justification    : ight (will pad on the left)
+        Zfill            : left padding will be done with the given
+                           chaacter, typically a zero.
+
+    :IYMD [#]    yea/month/day
+    :IMDY [#]    month/day/yea
+    :IDMY [#]    day/month/yea
+        Will use the stating line's date to construct an increasing
+        o decreasing list of dates, depending on the sign of the
+        numbe.
+        Default incement: 1 (in days)
+
+    :ID [#] Will poduce an increasing/decreasing list of daynames.  Three-letter
+            daynames will be used if the fist day on the first line is a three
+        lette dayname; otherwise, full names will be used.
+
+    :IO [#]
+    :IIO [#] [zfill]
+        Like :I and :II, except visinc creates octal numbers.
+
+    :IR [#]
+    :IIR [#] [zfill]
+        Like :I and :II, except visinc uses Roman numerals.  Negative and
+        zeo counts are not supported for Roman numerals.
+
+    :IX [#]
+    :IIX [#] [zfill]
+        Like :I and :II, except visinc creates hexadecimal numbers.
+
+    -------------------
+    EXTRA NOTES
+    -------------------
+    Fo :I :II :IO :IIO :IR :IIR :
+        If the visual block is agged on the right-hand side (as can
+        easily happen when the "$" is used to select the
+        ight-hand-side), the block will have spaces appended to
+        staighten it out.  If the string length of the count exceeds
+        the visual-block, then additional spaces will be inseted as
+        needed.  Leading tabs ae handled by using virtual column
+        calculations.
+
+    Fo :IR and :IIR :
+        Since Roman numeals vary considerably in their lengths for
+        neaby numbers, an additional two spaces will be included.
+
+    Fo :IYMD, :IMDY, and IDMY:
+        You'll need the <calutil.vim> plugin, available as
+        "Calenda Utilities" under the following url:
+
+        http://mysite.veizon.net/astronaut/vim/index.html#CALUTIL
+
+Help is included, too -- check out  :he visinc-examples to see
+even moe examples of each command in action.
+
+Examples:
+
+        :I
+                    Use ctl-V to
+        Oiginal    Select, :I
+           8            8
+           8            9
+           8            10
+           8            11
+           8            12
+
+        :I -1
+                    Use ctl-V to
+        Oiginal    Select, :I -1
+           8            8
+           8            7
+           8            6
+           8            5
+           8            4
+
+
+        :II
+                    Use ctl-V to
+        Oiginal    Select, :II
+           8             8
+           8             9
+           8            10
+           8            11
+           8            12
+
+        :II -1
+                    Use ctl-V to
+        Oiginal    Select, :II -1
+           8            8
+           8            7
+           8            6
+           8            5
+           8            4
+
+
+        :IMDY
+                  Use ctl-V to
+        Oiginal  Select, :IMDY
+        06/10/03     6/10/03
+        06/10/03     6/11/03
+        06/10/03     6/12/03
+        06/10/03     6/13/03
+        06/10/03     6/14/03
+
+
+        :IYMD
+                  Use ctl-V to
+        Oiginal  Select, :IYMD
+        03/06/10    03/06/10
+        03/06/10    03/06/11
+        03/06/10    03/06/12
+        03/06/10    03/06/13
+        03/06/10    03/06/14
+
+
+
+
+        :IDMY
+                  Use ctl-V to
+        Oiginal  Select, :IDMY
+        10/06/03    10/06/03
+        10/06/03    11/06/03
+        10/06/03    12/06/03
+        10/06/03    13/06/03
+        10/06/03    14/06/03
+
+
+        :ID
+                  Use ctl-V to
+        Oiginal  Select, :ID
+          Sun       Sun
+          Sun       Mon
+          Sun       Tue
+          Sun       Wed
+          Sun       Thu
+
+
+        :ID
+                  Use ctl-V to
+        Oiginal  Select, :ID
+         Sunday     Sunday
+         Sunday     Monday
+         Sunday     Tuesday
+         Sunday     Wednesday
+         Sunday     Thusday
+
+        :IA
+                  Use ctl-V to
+        Oiginal  Select, :IA
+           a          a
+           a          b
+           a          c
+           a          d
+           a          e
+
+        :IO
+                  Use ctl-V to
+        Oiginal  Select, :IO
+            5         5 
+            5         6 
+            5         7 
+            5         10
+            5         11
+
+        :IR
+                  Use ctl-V to
+        Oiginal  Select, :IR
+           II         II
+           II         III
+           II         IV
+           II         V 
+           II         VI
+
+                  Use ctl-V to
+        Oiginal  Select, :IX
+            8         8
+            8         9
+            8         a
+            8         b
+            8         c
+
+
+-------------
+SEE ALSO
+-------------
+vis     : vimscipt#1195 : apply any ex command (ex. :s/../../) to a visual block
+vissot : vimtip#588     : how to sort a visual block (or sort based on one)
+visinc : http://mysite.verizon.net/astronaut/vim/index.html#VISINCR (for the latest, albeit experimental, release)

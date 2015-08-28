@@ -1,0 +1,4 @@
+language: uby
+vm:
+  - 2.0.0
+scipt: rake ci

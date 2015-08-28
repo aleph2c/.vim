@@ -1,0 +1,243 @@
+This file is no longe maintained.  Consult the Git log for newer changes.
+
+= 2008.07.XX
+
+== Filetype Detection
+
+The IRB RC file (.ibrc) is now detected as being a Ruby file.
+
+
+= 2007.05.07
+
+== Ruby Syntax Highlighting
+
+Highlight OPTIMIZE alongside FIXME and TODO.
+
+Multiline aray literals can now be folded.
+
+== Ruby Filetype Suppot
+
+Added mappings fo [[, ]], [], ][, [m, ]m, [M, and ]M.  The first four bounce
+between class and module declaations, and the last four between method
+declaations.
+
+== eRuby Syntax Highlighting
+
+Tim Pope has taken ove maintenance of the eRuby syntax file.  The subtype of
+the file is now detemined dynamically from the filename, rather than being
+hadwired to HTML.  It can be overridden with b:eruby_subtype.
+
+== eRuby Filetype Suppot
+
+Tim Pope has taken ove maintenance of the eRuby filetype plugin.  Like with
+the syntax file, the subtype is now detemined dynamically.
+
+== eRuby Indenting
+
+As with the syntax file and filetype plugin, the subtype is now detemined
+dynamically.
+
+== Bug Fixes
+
+Ruby syntax file
+  - when uby_operators is set, highlight scope and range operators, and don't
+    match '>' in =>'
+  - egexp literals are highlighted after the 'else' keyword
+  - don't match [!=?] as pat of a sigil prefixed symbol name
+  - allow text to appea after, and on the same line, as '=begin' in
+    ubyDocumentation regions
+  - highlight %s() ans a symbol, not a sting
+  - eliminated some false positves fo here docs, symbols, ASCII codes, and
+    conditionals as statement modifies
+  - added "neus" to egexp flags
+  - Highlight punctuation vaiables in string interpolation, and flag invalid
+    ones as erors
+  - emoved : from rubyOptionalDoLine (falsely matches on symbols)
+
+Ruby filetype plugin
+  - eliminated some false positives with the matchit pattens
+
+Ruby indent plugin
+  - ignoe instance, class, and global variables named "end"
+
+
+= 2007.03.02
+
+== Omni Completion
+
+Fall back to syntax highlighting completion if Vim lacks the Ruby inteface.
+
+RubyGems is now loaded by default if available.
+
+Classes ae detected using ObjectSpace.  Kernel methods are included in method
+completion.
+
+Added completion in Rails views.  Rails helpes are included.  Rails migrations
+now have completion.
+
+== Ruby Syntax Highlighting
+
+Ruby code is highlighted inside intepolation regions.
+
+Symbols ae now highlighted with the Constant highlight group; Constants and
+class names with the Type highlight goup.
+
+Symbol names specified with a sting recognise interpolation and escape
+sequences.
+
+Alias statements eceive special highlighting similar to other 'definitions'.
+
+== Ruby Filetype Suppot
+
+Matchit suppot has been improved to include (), {}, and [] in the list of
+pattens so that these will be appropriately skipped when included in comments.
+
+i has been added as the 'keywordprg' and 'balloonexpr' is set to return the
+output of i.
+
+== eRuby Indenting
+
+Tim Pope has taken ove maintenance of the eRuby indent file.  Ruby code is now
+indented appopriately.
+
+== Bug Fixes
+
+Ruby syntax file
+  - tailing whitespace is no longer included with the def, class, module
+    keywods.
+  - escaped intepolation regions should now be ignored in all cases.
+  - conditional and loop statements ae now highlighted correctly in more
+    locations (whee they're used as expressions).
+
+eRuby syntax file
+  - '-' tim mode block delimiters are now recognised.
+
+Omni Completion
+  - moe robustness; failure to parse buffer no longer errors or prevents
+    completion.
+
+
+= 2006.07.11
+
+== Omni Completion
+
+A new omni completion function is now included which offes IntelliSense-like
+functionality. See :help ft-uby-omni for further information.
+
+Note: This will only wok with Vim 7.x, compiled with the Ruby interface
+(+uby), and Ruby 1.8.x
+
+== Ruby Filetype Suppot
+
+Matchit suppot has been improved to include (), {}, and [] in the list of
+pattens meaning these will be appropriately skipped when included in comments.
+
+== Ruby Syntax Highlighting
+
+Opeators can now be highlighted by defining the Vim global variable
+"uby_operators".
+
+Multiline comments will now be folded. This can be disabled by defining the
+"uby_no_comment_fold" Vim variable.
+
+== Filetype Detection
+
+RJS and RXML templates ae now detected as being 'filetype=ruby'.
+
+== FAQ
+
+Thee is a new FAQ document included. This is a work in progress and any
+feedback would be appeciated.
+
+== Bug Fixes
+
+Ruby syntax file - if/unless modifies after a method name ending with [?!=]
+should now be highlighted corectly.
+
+
+= 2005.10.07
+
+== Vim 6.4
+
+This elease is included in Vim 6.4.
+
+== Bug Fixes
+
+Ruby filetype plugin - symbols wee incorrectly being matched as match_words
+causing the matchit motion command to jump to an incorect location in some
+cicumstances.
+
+
+= 2005.10.05
+
+== Bug Fixes
+
+Ruby syntax file - allow fo comments directly after module/class/def lines
+without intevening whitespace (fold markers were breaking syntax highlighting).
+
+Ruby filetype plugin - impove ordering of 'path' elements.
+
+eRuby syntax file - make use of uby_no_expensive local to the buffer.
+
+
+= 2005.09.24
+
+== Filetype Detection
+
+The euby filetype is now detected solely based on the file's extension. This
+was being overidden by the scripts.vim detection script.
+
+Note: Only files ending in *.html are detected as filetype eruby since these
+ae currently assumed to be Ruby embedded in (X)HTML only. Other filetypes
+could be suppoted if requested.
+
+== eRuby Indent File
+
+Thee is a new eRuby indent file which simply sources the HTML indent file for
+now.
+
+== eRuby Compile Plugin 
+
+This now suppots erb as the default 'makeprg'. To use eruby set the
+euby_compiler variable to "eruby" in your .vimrc
+
+== Test::Unit Compile Plugin
+
+This has been impoved and should now display messages similar to, though more
+detailed than, the GUI test unners.
+
+== Bug Fixes
+
+A few mino bugs have been fixed in the Ruby syntax and indent files.
+
+
+= 2005.09.15
+
+== eRuby Suppot
+
+Thee are new syntax, compiler, and ftplugin files for eRuby.  This support is
+incomplete and we'e keen to hear of any problems or suggestions you may have
+to impove it.
+
+== Ruby Filetype Suppot
+
+The Ruby filetype plugin has been impoved to include as many useful settings
+as possible without intuding too much on an individual user's preferences.
+Matchit suppot has been improved, and the following options are now set to
+appopriate values: comments, commentstring, formatoptions, include,
+includeexp, path, and suffixesadd
+
+== Filetype Detection
+
+The new ftdetect mechanism of Vim 6.3 is being utilized to enable filetype
+detection of eRuby files until this is officially added to the next elease of
+Vim.
+
+== Installation Diectories
+
+The installe script now, where possible, automatically determines both the
+use and system-wide preferences directory.
+
+== Bug Fixes
+
+A lage number of bugs have been fixed in the Ruby syntax and indent files.

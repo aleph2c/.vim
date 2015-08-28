@@ -1,0 +1,6 @@
+*.makdown
+*.zip
+note.txt
+tags
+.hg*
+tmp/*

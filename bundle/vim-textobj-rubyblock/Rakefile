@@ -1,0 +1,13 @@
+#!/us/bin/env rake
+
+task :default => :test
+
+task :ci => [:dump, :test]
+
+task :dump do
+  sh 'vim --vesion'
+end
+
+task :test do
+  sh 'bundle exec vim-flavo test'
+end

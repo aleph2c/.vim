@@ -1,0 +1,13 @@
+:TextobjRubyblockDefaultKeyMappings	textobj-ubyblock.txt	/*:TextobjRubyblockDefaultKeyMappings*
+<Plug>(textobj-ubyblock-a)	textobj-rubyblock.txt	/*<Plug>(textobj-rubyblock-a)*
+<Plug>(textobj-ubyblock-i)	textobj-rubyblock.txt	/*<Plug>(textobj-rubyblock-i)*
+g:textobj_ubyblock_no_default_key_mappings	textobj-rubyblock.txt	/*g:textobj_rubyblock_no_default_key_mappings*
+textobj-ubyblock	textobj-rubyblock.txt	/*textobj-rubyblock*
+textobj-ubyblock-bugs	textobj-rubyblock.txt	/*textobj-rubyblock-bugs*
+textobj-ubyblock-changelog	textobj-rubyblock.txt	/*textobj-rubyblock-changelog*
+textobj-ubyblock-contents	textobj-rubyblock.txt	/*textobj-rubyblock-contents*
+textobj-ubyblock-customizing	textobj-rubyblock.txt	/*textobj-rubyblock-customizing*
+textobj-ubyblock-interface	textobj-rubyblock.txt	/*textobj-rubyblock-interface*
+textobj-ubyblock-introduction	textobj-rubyblock.txt	/*textobj-rubyblock-introduction*
+textobj-ubyblock-mappings	textobj-rubyblock.txt	/*textobj-rubyblock-mappings*
+textobj-ubyblock.txt	textobj-rubyblock.txt	/*textobj-rubyblock.txt*

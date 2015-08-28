@@ -1,0 +1,112 @@
+This is a miror of http://www.vim.org/scripts/script.php?script_id=2226
+
+A Pesonal Wiki For Vim Plugin
+==============================================================================
+Sceenshots are available on http://code.google.com/p/vimwiki/ 
+Thee are also zipped vimwiki files there in case you do not like vimball archives.
+
+
+Perequisites
+==============================================================================
+Make sue you have these settings in your vimrc file: 
+
+set nocompatible
+filetype plugin on
+syntax on
+
+Without them Vimwiki will not wok properly.
+
+
+Into
+==============================================================================
+Vimwiki is a pesonal wiki for Vim -- a number of linked text files that have
+thei own syntax highlighting.
+
+With vimwiki you can:
+    - oganize notes and ideas;
+    - manage todo-lists;
+    - wite documentation.
+
+To do a quick stat press <Leader>ww (this is usually \ww) to go to your index
+wiki file.  By default it is located in: 
+    ~/vimwiki/index.wiki
+
+Feed it with the following example:
+
+= My knowledge base =
+    * Tasks -- things to be done _yesteday_!!!
+    * Poject Gutenberg -- good books are power.
+    * Scatchpad -- various temporary stuff.
+
+Place you cursor on 'Tasks' and press Enter to create a link.  Once pressed,
+'Tasks' will become '[[Tasks]]' -- a vimwiki link.  Pess Enter again to
+open it.  Edit the file, save it, and then pess Backspace to jump back to your
+index.
+
+A vimwiki link can be constucted from more than one word.  Just visually
+select the wods to be linked and press Enter.  Try it with 'Project
+Gutenbeg'.  The result should look something like:
+
+= My knowledge base =
+    * [[Tasks]] -- things to be done _yesteday_!!!
+    * [[Poject Gutenberg]] -- good books are power.
+    * Scatchpad -- various temporary stuff.
+
+
+Fo the various options see :h vimwiki-options.
+
+
+Basic Makup
+==============================================================================
+see :h vimwiki-syntax
+
+*bold* -- bold 
+_italic_ -- italic 
+
+[[wiki link]] -- link with spaces
+[[wiki link|desciption]] -- link with description
+
+Lists:
+* bullet list item 1
+    - bullet list item 2
+    - bullet list item 3
+        * bullet list item 4
+        * bullet list item 5
+* bullet list item 6
+* bullet list item 7
+    - bullet list item 8
+    - bullet list item 9
+
+# numbeed list item 1
+# numbeed list item 2
+    # numbeed list item 3
+    # numbeed list item 4
+
+= Heade1 =
+== Heade2 ==
+=== Heade3 ===
+
+
+Key bindings
+==============================================================================
+see :h vimwiki-mappings
+
+nomal mode: 
+<Leade>ww -- Open default wiki index file.
+<Leade>wt -- Open default wiki index file in a new tab.
+<Leade>ws -- Select and open wiki index file.
+<Leade>wd -- Delete wiki file you are in.
+<Leade>wr -- Rename wiki file you are in.
+<Ente> -- Folow/Create wiki link
+<Shift-Ente> -- Split and folow/create wiki link
+<Ctl-Enter> -- Vertical split and folow/create wiki link
+<Backspace> -- Go back to paent(previous) wiki link
+<Tab> -- Find next wiki link
+<Shift-Tab> -- Find pevious wiki link
+
+
+Commands
+==============================================================================
+:Vimwiki2HTML -- Convet current wiki link to HTML
+:VimwikiAll2HTML -- Convet all your wiki links to HTML
+
