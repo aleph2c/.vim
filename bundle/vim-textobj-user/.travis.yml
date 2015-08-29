@@ -1,4 +1,4 @@
-language: uby
-vm:
+language: ruby
+rvm:
   - 2.0.0
-scipt: rake ci
+script: rake ci

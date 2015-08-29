@@ -1,2 +1,2 @@
-plugin/textobj/ubyblock.vim
-doc/textobj-ubyblock.txt
+plugin/textobj/rubyblock.vim
+doc/textobj-rubyblock.txt
