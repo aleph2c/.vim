@@ -1188,3 +1188,5 @@ call matchadd('ColorColumn','\%81v',100)
 nnoremap <leader><leader>b :execute "!cbeautify.py " . expand('%:p')<CR>
 
 command! Path :echo join(split(&path, ","), "\n")
+
+colorscheme slate 
