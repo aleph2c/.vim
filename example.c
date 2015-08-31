@@ -1,5 +1,5 @@
-typedef struct mercy{
-	data
+typedef struct mercy {
+	int data
 } bob;
 
-//bob
+bob a;
