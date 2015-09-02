@@ -1,31 +1,31 @@
-" What a funny comment chaacter
-" .gvimc
+" What a funny comment character
+" .gvimrc
 " v 0.1
-" ev. 2009-03-18
+" rev. 2009-03-18
 
-" Tun on line numbers
-set numbe
+" Turn on line numbers
+set number
 
-" Change coloscheme
-" coloscheme slate
+" Change colorscheme
+" colorscheme slate
 
-" Tuns on the tab bar always
+" Turns on the tab bar always
 set showtabline=2
 
-" Numbe of horizontal lines on the screen
+" Number of horizontal lines on the screen
 set lines=60
 
-" GUI Option to emove the Toolbar (T)
+" GUI Option to remove the Toolbar (T)
 set guioptions-=T
 
 " Sets the font and size
-set guifont=Bitsteam\ Vera\ Sans\ Mono:h28
+set guifont=Bitstream\ Vera\ Sans\ Mono:h28
 
-" Sets the pecent transparency
-set tansparency=2
+" Sets the percent transparency
+set transparency=2
 
-highlight DiffAdd tem=reverse cterm=bold ctermbg=green ctermfg=white 
-highlight DiffChange tem=reverse cterm=bold ctermbg=cyan ctermfg=black 
-highlight DiffText tem=reverse cterm=bold ctermbg=gray ctermfg=black 
-highlight DiffDelete tem=reverse cterm=bold ctermbg=red ctermfg=black
-let mapleade="_"
+highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=white 
+highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black 
+highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black 
+highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
+let mapleader="_"

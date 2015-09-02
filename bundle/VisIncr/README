@@ -1,81 +1,81 @@
-This is a miror of http://www.vim.org/scripts/script.php?script_id=670
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=670
 
-The visinc plugin facilitates making a column of increasing or decreasing
-numbes, dates, or daynames.
+The visincr plugin facilitates making a column of increasing or decreasing
+numbers, dates, or daynames.
 
-Fist, select a column using visual-block (ctrl-v) and move the cursor.
+First, select a column using visual-block (ctrl-v) and move the cursor.
 
-Second, choose what sot of incremented list you want:
+Second, choose what sort of incremented list you want:
 
-    :I [#]  Will use the fist line's number as a starting point to build
-            a column of inceasing numbers (or decreasing numbers if the
-        incement is negative).
-        Default incement: 1
-        Justification    : left (will pad on the ight)
+    :I [#]  Will use the first line's number as a starting point to build
+            a column of increasing numbers (or decreasing numbers if the
+        increment is negative).
+        Default increment: 1
+        Justification    : left (will pad on the right)
 
-    :II [# [zfill]]  Will use the fist line's number as a starting point
-        to build a column of inceasing numbers (or decreasing numbers
-        if the incement is negative).
-        Default incement: 1
-        Justification    : ight (will pad on the left)
+    :II [# [zfill]]  Will use the first line's number as a starting point
+        to build a column of increasing numbers (or decreasing numbers
+        if the increment is negative).
+        Default increment: 1
+        Justification    : right (will pad on the left)
         Zfill            : left padding will be done with the given
-                           chaacter, typically a zero.
+                           character, typically a zero.
 
-    :IYMD [#]    yea/month/day
-    :IMDY [#]    month/day/yea
-    :IDMY [#]    day/month/yea
-        Will use the stating line's date to construct an increasing
-        o decreasing list of dates, depending on the sign of the
-        numbe.
-        Default incement: 1 (in days)
+    :IYMD [#]    year/month/day
+    :IMDY [#]    month/day/year
+    :IDMY [#]    day/month/year
+        Will use the starting line's date to construct an increasing
+        or decreasing list of dates, depending on the sign of the
+        number.
+        Default increment: 1 (in days)
 
-    :ID [#] Will poduce an increasing/decreasing list of daynames.  Three-letter
-            daynames will be used if the fist day on the first line is a three
-        lette dayname; otherwise, full names will be used.
+    :ID [#] Will produce an increasing/decreasing list of daynames.  Three-letter
+            daynames will be used if the first day on the first line is a three
+        letter dayname; otherwise, full names will be used.
 
     :IO [#]
     :IIO [#] [zfill]
-        Like :I and :II, except visinc creates octal numbers.
+        Like :I and :II, except visincr creates octal numbers.
 
     :IR [#]
     :IIR [#] [zfill]
-        Like :I and :II, except visinc uses Roman numerals.  Negative and
-        zeo counts are not supported for Roman numerals.
+        Like :I and :II, except visincr uses Roman numerals.  Negative and
+        zero counts are not supported for Roman numerals.
 
     :IX [#]
     :IIX [#] [zfill]
-        Like :I and :II, except visinc creates hexadecimal numbers.
+        Like :I and :II, except visincr creates hexadecimal numbers.
 
     -------------------
     EXTRA NOTES
     -------------------
-    Fo :I :II :IO :IIO :IR :IIR :
-        If the visual block is agged on the right-hand side (as can
+    For :I :II :IO :IIO :IR :IIR :
+        If the visual block is ragged on the right-hand side (as can
         easily happen when the "$" is used to select the
-        ight-hand-side), the block will have spaces appended to
-        staighten it out.  If the string length of the count exceeds
-        the visual-block, then additional spaces will be inseted as
-        needed.  Leading tabs ae handled by using virtual column
+        right-hand-side), the block will have spaces appended to
+        straighten it out.  If the string length of the count exceeds
+        the visual-block, then additional spaces will be inserted as
+        needed.  Leading tabs are handled by using virtual column
         calculations.
 
-    Fo :IR and :IIR :
-        Since Roman numeals vary considerably in their lengths for
-        neaby numbers, an additional two spaces will be included.
+    For :IR and :IIR :
+        Since Roman numerals vary considerably in their lengths for
+        nearby numbers, an additional two spaces will be included.
 
-    Fo :IYMD, :IMDY, and IDMY:
+    For :IYMD, :IMDY, and IDMY:
         You'll need the <calutil.vim> plugin, available as
-        "Calenda Utilities" under the following url:
+        "Calendar Utilities" under the following url:
 
-        http://mysite.veizon.net/astronaut/vim/index.html#CALUTIL
+        http://mysite.verizon.net/astronaut/vim/index.html#CALUTIL
 
-Help is included, too -- check out  :he visinc-examples to see
-even moe examples of each command in action.
+Help is included, too -- check out  :he visincr-examples to see
+even more examples of each command in action.
 
 Examples:
 
         :I
-                    Use ctl-V to
-        Oiginal    Select, :I
+                    Use ctrl-V to
+        Original    Select, :I
            8            8
            8            9
            8            10
@@ -83,8 +83,8 @@ Examples:
            8            12
 
         :I -1
-                    Use ctl-V to
-        Oiginal    Select, :I -1
+                    Use ctrl-V to
+        Original    Select, :I -1
            8            8
            8            7
            8            6
@@ -93,8 +93,8 @@ Examples:
 
 
         :II
-                    Use ctl-V to
-        Oiginal    Select, :II
+                    Use ctrl-V to
+        Original    Select, :II
            8             8
            8             9
            8            10
@@ -102,8 +102,8 @@ Examples:
            8            12
 
         :II -1
-                    Use ctl-V to
-        Oiginal    Select, :II -1
+                    Use ctrl-V to
+        Original    Select, :II -1
            8            8
            8            7
            8            6
@@ -112,8 +112,8 @@ Examples:
 
 
         :IMDY
-                  Use ctl-V to
-        Oiginal  Select, :IMDY
+                  Use ctrl-V to
+        Original  Select, :IMDY
         06/10/03     6/10/03
         06/10/03     6/11/03
         06/10/03     6/12/03
@@ -122,8 +122,8 @@ Examples:
 
 
         :IYMD
-                  Use ctl-V to
-        Oiginal  Select, :IYMD
+                  Use ctrl-V to
+        Original  Select, :IYMD
         03/06/10    03/06/10
         03/06/10    03/06/11
         03/06/10    03/06/12
@@ -134,8 +134,8 @@ Examples:
 
 
         :IDMY
-                  Use ctl-V to
-        Oiginal  Select, :IDMY
+                  Use ctrl-V to
+        Original  Select, :IDMY
         10/06/03    10/06/03
         10/06/03    11/06/03
         10/06/03    12/06/03
@@ -144,8 +144,8 @@ Examples:
 
 
         :ID
-                  Use ctl-V to
-        Oiginal  Select, :ID
+                  Use ctrl-V to
+        Original  Select, :ID
           Sun       Sun
           Sun       Mon
           Sun       Tue
@@ -154,17 +154,17 @@ Examples:
 
 
         :ID
-                  Use ctl-V to
-        Oiginal  Select, :ID
+                  Use ctrl-V to
+        Original  Select, :ID
          Sunday     Sunday
          Sunday     Monday
          Sunday     Tuesday
          Sunday     Wednesday
-         Sunday     Thusday
+         Sunday     Thursday
 
         :IA
-                  Use ctl-V to
-        Oiginal  Select, :IA
+                  Use ctrl-V to
+        Original  Select, :IA
            a          a
            a          b
            a          c
@@ -172,8 +172,8 @@ Examples:
            a          e
 
         :IO
-                  Use ctl-V to
-        Oiginal  Select, :IO
+                  Use ctrl-V to
+        Original  Select, :IO
             5         5 
             5         6 
             5         7 
@@ -181,16 +181,16 @@ Examples:
             5         11
 
         :IR
-                  Use ctl-V to
-        Oiginal  Select, :IR
+                  Use ctrl-V to
+        Original  Select, :IR
            II         II
            II         III
            II         IV
            II         V 
            II         VI
 
-                  Use ctl-V to
-        Oiginal  Select, :IX
+                  Use ctrl-V to
+        Original  Select, :IX
             8         8
             8         9
             8         a
@@ -201,6 +201,6 @@ Examples:
 -------------
 SEE ALSO
 -------------
-vis     : vimscipt#1195 : apply any ex command (ex. :s/../../) to a visual block
-vissot : vimtip#588     : how to sort a visual block (or sort based on one)
-visinc : http://mysite.verizon.net/astronaut/vim/index.html#VISINCR (for the latest, albeit experimental, release)
+vis     : vimscript#1195 : apply any ex command (ex. :s/../../) to a visual block
+vissort : vimtip#588     : how to sort a visual block (or sort based on one)
+visincr : http://mysite.verizon.net/astronaut/vim/index.html#VISINCR (for the latest, albeit experimental, release)

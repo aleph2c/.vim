@@ -3,4 +3,4 @@ syntax:glob
 *.un~
 *.pyc
 tags
-.DS_Stoe
+.DS_Store
