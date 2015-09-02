@@ -1,4 +1,4 @@
-souce 'https://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'vim-flavo', '~> 1.1'
+gem 'vim-flavor', '~> 1.1'
 

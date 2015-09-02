@@ -1,30 +1,30 @@
-# witten by travis jeffery <travisjeffery@gmail.com>
-# contibutions by scrooloose <github:scrooloose>
+# written by travis jeffery <travisjeffery@gmail.com>
+# contributions by scrooloose <github:scrooloose>
 
-equire 'rake'
-equire 'find'
-equire 'pathname'
+require 'rake'
+require 'find'
+require 'pathname'
 
 PLUGIN = [
-  "ftplugin/javascipt/jslint.vim",
-  "ftplugin/javascipt/jslint/jslint-core.js",
-  "ftplugin/javascipt/jslint/runjslint.js",
-  "ftplugin/javascipt/jslint/runjslint.wsf",
+  "ftplugin/javascript/jslint.vim",
+  "ftplugin/javascript/jslint/jslint-core.js",
+  "ftplugin/javascript/jslint/runjslint.js",
+  "ftplugin/javascript/jslint/runjslint.wsf",
 ]
 
 files = PLUGIN
 
-desc 'Zip up the poject files'
+desc 'Zip up the project files'
 task :zip do
-  zip_name = File.basename(File.diname(__FILE__))
+  zip_name = File.basename(File.dirname(__FILE__))
   zip_name.gsub!(/ /, '_')
   zip_name = "#{zip_name}.zip"
 
   if File.exist?(zip_name)
-    abot("Zip file #{zip_name} already exists. Remove it first.")
+    abort("Zip file #{zip_name} already exists. Remove it first.")
   end
 
-  puts "Ceating zip file: #{zip_name}"
+  puts "Creating zip file: #{zip_name}"
   system("zip #{zip_name} #{files.join(" ")}")
 end
 
@@ -38,24 +38,24 @@ task :install do
                File.expand_path("~/.vim")
              end
   files.each do |file|
-    taget = File.join(vimfiles, file)
-    taget_dir = File.dirname(target)
-    FileUtils.mkdi_p target_dir
-    FileUtils.cp file, taget
-    puts "Installed #{file} to #{taget_dir}/"
+    target = File.join(vimfiles, file)
+    target_dir = File.dirname(target)
+    FileUtils.mkdir_p target_dir
+    FileUtils.cp file, target
+    puts "Installed #{file} to #{target_dir}/"
   end
 
 end
 
-desc 'Pulls fom origin'
+desc 'Pulls from origin'
 task :pull do
-  puts "Updating local epo..."
-  system("cd " << Di.new(File.dirname(__FILE__)).path << " && git pull")
+  puts "Updating local repo..."
+  system("cd " << Dir.new(File.dirname(__FILE__)).path << " && git pull")
 end
 
 desc 'Calls pull task and then install task'
 task :update => ['pull', 'install'] do
-  puts "Update of vim scipt complete."
+  puts "Update of vim script complete."
 end
 
 task :default => ['update']

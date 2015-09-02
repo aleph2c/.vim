@@ -1,6 +1,6 @@
-souce 'https://rubygems.org'
-gem 'spec',       require: 'spec'
-gem 'debugge'
-gem 'guad'
-gem "guad-rspec", require: false
+source 'https://rubygems.org'
+gem 'rspec',       require: 'spec'
+gem 'debugger'
+gem 'guard'
+gem "guard-rspec", require: false
 gem "wdm", '>= 0.1.0'

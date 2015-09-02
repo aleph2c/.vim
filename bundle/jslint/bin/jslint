@@ -1,24 +1,24 @@
-#!/us/bin/env ruby
+#!/usr/bin/env ruby
 
-taget = File.expand_path(ARGV.first)
+target = File.expand_path(ARGV.first)
 
-# Coss-platform way of finding an executable in the $PATH.
+# Cross-platform way of finding an executable in the $PATH.
 #
-#   which('uby') #=> /usr/bin/ruby
+#   which('ruby') #=> /usr/bin/ruby
 def which(cmd)
   exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
   ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
     exts.each { |ext|
       exe = "#{path}/#{cmd}#{ext}"
-      eturn exe if File.executable? exe
+      return exe if File.executable? exe
     }
   end
-  eturn nil
+  return nil
 end
 
 if RUBY_PLATFORM =~ /win32/i
-  js_cmd = 'cscipt'
-  unjslint_ext = 'wsf'
+  js_cmd = 'cscript'
+  runjslint_ext = 'wsf'
   plugin_path = File.join(ENV['HOME'], 'vimfiles')
 else
   if ENV['JS_CMD']
@@ -27,16 +27,16 @@ else
     js_cmd = ['node', 'nodejs', 'js'].find { |ex| which ex }
   end
 
-  if !js_cmd and File.exist?('/System/Libary/Frameworks/JavaScriptCore.framework/Resources/jsc')
-    js_cmd = '/System/Libary/Frameworks/JavaScriptCore.framework/Resources/jsc'
+  if !js_cmd and File.exist?('/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc')
+    js_cmd = '/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc'
   end
 
-  unjslint_ext = 'js'
+  runjslint_ext = 'js'
 
   plugin_path = File.join(ENV['HOME'], '.vim')
 end
 
-# check fo pathogen
+# check for pathogen
 pathogen_path = File.join(plugin_path, 'bundle', 'jslint.vim')
 if File.exist? pathogen_path
   plugin_path = pathogen_path
@@ -45,10 +45,10 @@ else
   plugin_path = pathogen_path if File.exist?(pathogen_path)
 end
 
-Di.chdir(File.join(plugin_path, 'ftplugin', 'javascript', 'jslint')) do |dir|
-  IO.popen("#{js_cmd} unjslint.#{runjslint_ext}", 'r+') do |jslint|
-    jslint.wite(File.open(target, 'r') { |f| f.read })
-    jslint.close_wite
-    $stdout.wite(jslint.read)
+Dir.chdir(File.join(plugin_path, 'ftplugin', 'javascript', 'jslint')) do |dir|
+  IO.popen("#{js_cmd} runjslint.#{runjslint_ext}", 'r+') do |jslint|
+    jslint.write(File.open(target, 'r') { |f| f.read })
+    jslint.close_write
+    $stdout.write(jslint.read)
   end
 end

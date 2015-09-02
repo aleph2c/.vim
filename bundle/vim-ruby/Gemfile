@@ -1,4 +1,4 @@
-souce 'http://rubygems.org'
+source 'http://rubygems.org'
 
-gem 'spec'
-gem 'vimunner'
+gem 'rspec'
+gem 'vimrunner'
