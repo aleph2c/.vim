@@ -1,0 +1,231 @@
+priority -50
+
+extends texmath
+
+snippet "b(egin)?" "begin{} / end{}" br
+\begin{${1:something}}
+	${0:${VISUAL}}
+\end{$1}
+endsnippet
+
+snippet abs "abstract environment" b
+\begin{abstract}
+	$0
+\end{abstract}
+endsnippet
+
+snippet tab "tabular / array environment" b
+\begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
+$0${2/(?<=.)(c|l|r)|./(?1: & )/g}
+\end{$1${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+endsnippet
+
+snippet table "Table environment" b
+\begin{table}[${1:htpb}]
+	\centering
+	\caption{${2:caption}}
+	\label{tab:${3:label}}
+	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${5:c}}
+	$0${5/(?<=.)(c|l|r)|./(?1: & )/g}
+	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+\end{table}
+endsnippet
+
+snippet fig "Figure environment" b
+\begin{figure}[${2:htpb}]
+	\centering
+	\includegraphics[width=${3:0.8}\linewidth]{${4:name.ext}}
+	\caption{${4/(\w+)\.\w+/\u$1/}$0}
+	\label{fig:${4/(\w+)\.\w+/$1/}}
+\end{figure}
+endsnippet
+
+snippet enum "Enumerate" b
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet item "Itemize" b
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+#snippet desc "Description" b
+#\begin{description}
+#	\item[$1] $0
+#\end{description}
+#endsnippet
+
+#snippet part "Part" b
+#\part{${1:part name}}
+#\label{prt:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/ga}}}
+#
+#$0
+#endsnippet
+
+#snippet sec* "Section" b
+#\section*{${1:section name}}
+#\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+#
+#${0}
+#endsnippet
+
+#snippet sub "Subsection" b
+#\subsection{${1:subsection name}}
+#\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+#
+#$0
+#endsnippet
+
+snippet sub* "Subsection" b
+\subsection*{${1:subsection name}}
+\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+
+snippet ssub "Subsubsection" b
+\subsubsection{${1:subsubsection name}}
+\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+snippet ssub* "Subsubsection" b
+\subsubsection*{${1:subsubsection name}}
+\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+
+snippet par "Paragraph" b
+\paragraph{${1:paragraph name}}
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+snippet subp "Subparagraph" b
+\subparagraph{${1:subparagraph name}}
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+snippet ni "Non-indented paragraph" b
+\noindent
+$0
+endsnippet
+
+snippet pac "Package" b
+\usepackage`!p snip.rv='[' if t[1] else ""`${1:options}`!p snip.rv = ']' if t[1] else ""`{${2:package}}$0
+endsnippet
+
+snippet lp "Long parenthesis"
+\left(${1:${VISUAL:contents}}\right)$0
+endsnippet
+
+snippet code "writing a code block in tex" b
+\begin{Code}[numbers=left,label=code: $1]
+	$0
+\end{Code}
+endsnippet
+
+snippet includegraphics "including graphics" b
+\begin{figure}[H]
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\caption{${1:figure title}}
+\centering
+\includegraphics[scale=${3:0.5}]{./images/${4}.png}
+\end{figure}$0
+endsnippet
+
+snippet seq "writing a sequence block in tex" b
+\begin{figure}[H]
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\caption{${1:sequence title}}
+\begin{Sequence}[numbers=none, label=$3: Sequence Diagram]
+	$0
+\end{Sequence}
+\end{figure}
+endsnippet
+
+snippet dir "writing a directory block in tex" b
+\begin{Directory}[label=directory: $1]
+	$0
+\end{Directory}
+endsnippet
+
+snippet file "writing a file block in tex" b
+\begin{File}[label=file: $1]
+	$0
+\end{File}
+endsnippet
+
+snippet config "writing a config block in tex" b
+\begin{Config}[label=configuration file: $1]
+	$0
+\end{Config}
+endsnippet
+
+snippet dv "writing a dv block in tex" b
+\begin{DV}
+	$0
+\end{DV}
+endsnippet
+
+snippet ts "writing a ts block in tex" b
+\begin{TS}
+	$0
+\end{TS}
+endsnippet
+
+snippet bf "bold text"
+\textbf{$1${VISUAL}}$0
+endsnippet
+
+snippet it "italicized text"
+\textit{$1${VISUAL}}$0
+endsnippet
+
+snippet ul "writing a ts block in tex"
+\underline{$1${VISUAL}}$0
+endsnippet
+
+snippet em "emphasized text"
+\emph{$1${VISUAL}}$0
+endsnippet
+
+global !p
+
+import re
+def hypertarget(filename,t):
+	return filename + '_' + re.sub(' ', '_', t).lower()
+
+endglobal
+# To get the time: `!v strftime("%c")`
+snippet sec "Writing a section" b
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\section{${1:${VISUAL:section title}}}
+$0
+%end of section $1
+endsnippet
+
+snippet "sub.*" "Writing a subsection" rb
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\subsection{${1:${VISUAL:subsection title}}}
+$0
+%end of subsection $1
+endsnippet
+
+snippet "ch.*" "Writing a chapter" rb
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\chapter{${1:${VISUAL:chapter title}}}
+\minitoc% Creating a mini table of contents
+$0
+%end of chapter $1
+endsnippet
+# vim:ft=snippets:
+

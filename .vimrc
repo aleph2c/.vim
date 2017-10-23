@@ -83,14 +83,47 @@ call plug#begin($VIMRCHOME.'/plugged')
   Plug 'w0rp/ale'
 
 call plug#end()
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                     ALE                                      "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn on only one linter per language, or you will be trying to shut off
+" messages in the wrong tool.
+let g:ale_linters ={
+\ 'python': ['flake8']
+\}
+nmap <silent> <leader><C-j> <Plug>(ale_next_wrap)
+nmap <silent> <leader><C-k> <Plug>(ale_previous_wrap)
 let g:ale_sign_column_always=1
-let g:ale_python_flake8_options="--ignore E111,E402,E127,E241,E114,E501,E221,E272,W0311,C0302,C0326"
+let g:ale_python_flake8_executable='flake8'
+
+" PEP8 noise over-rides
+let g:ale_python_flake8_options =  "--ignore=W0311,"
+let g:ale_python_flake8_options .= 'E501,' "line too long for the 70s
+let g:ale_python_flake8_options .= 'E114,' "indent must be 4
+let g:ale_python_flake8_options .= 'E111,' "indentation is not a multiple of four
+let g:ale_python_flake8_options .= 'E272,' "multiple spaces before keyword
+let g:ale_python_flake8_options .= 'E221,' "multiple spaces before operator
+let g:ale_python_flake8_options .= 'E251,' "continuation line with same indent as next logical line
+let g:ale_python_flake8_options .= 'E241,' "multiple space after ','
+let g:ale_python_flake8_options .= 'E121,' "weird OCD overhang noise
+let g:ale_python_flake8_options .= 'E222,' "multiple spaces after operator
+let g:ale_python_flake8_options .= 'E131,' "another weird indent issue
+let g:ale_python_flake8_options .= 'E128,' "another weird indent issue
+let g:ale_python_flake8_options .= 'E127,' "another weird indent issue
+let g:ale_python_flake8_options .= 'E116,' "another weird indent issue
+let g:ale_python_flake8_options .= 'E126,' "another weird indent issue
+let g:ale_python_flake8_options .= 'E122,' "another weird indent issue
+let g:ale_python_flake8_options .= 'W391,' "why care about blank lines at the end of a file?
+
+
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
 let g:session_directory       = $VIMRCHOME.'/sessions'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Tabularize                                  "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>\ :Tabularize /\<CR>
 nnoremap <leader>= :Tabularize /=<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -101,14 +134,6 @@ nnoremap <leader>= :Tabularize /=<CR>
 let g:rooter_patterns = ['.git/']
 let g:rooter_silent_chdir = 1
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                 $VIMRCHOME windows == ~\AppData\Local\nvim\                  "
-"                      $VIMRCHOME *nix == ~\.config\nvim\                      "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let $VIMRCHOME = strpart($MYVIMRC, 0, strlen($MYVIMRC)-6)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Custom configurations for plugins found in the same directory as $MYVIMRC   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            Functions and Commands                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -516,8 +541,8 @@ nmap Y v$y
 "colorscheme base16-darktooth
 "colorscheme base16-brewer
 colorscheme base16-3024
-set background=dark
-"let g:airline_base16_apathy = 1
+set background=light
+let g:airline_base16_apathy = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Easymotion Configuration                           "
@@ -665,6 +690,7 @@ endfunction
 
 autocmd User AirlineAfterInit call AirlineInit()
 "let g:airline#extensions#tabline#enabled = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               You Complete Me                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -681,6 +707,7 @@ autocmd User AirlineAfterInit call AirlineInit()
 "  > cd C:/User/<user>/AppData/Local/nvim/plugged/YouCompleteMe
 "  > python install.py --msvc 15
 "
+" Or, you can install the windows linux subsystem and work within it
 set encoding=utf8
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 1
