@@ -1,14 +1,13 @@
-"On windows this file is in ~\AppData\Local\nvim\init.vim
- "
-" This will timeout nvim and hang, LAME... if you see this, edit this file with
-" vim and run the command manually, it will load the plug.vim file into the
-" required directory 
-if isdirectory($VIM . '/runtime/autoload')
-  if empty(glob($VIM . '/runtime/autoload/plug.vim'))
-    silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  endif
+set guioptions -=m
+set guioptions -=T
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window (for an alternative on Windows, see simalt below).
+  au GUIEnter * simalt ~x
 endif
+let g:acp_enableAtStartup = 0
 
+let $MYVIMRC = expand("<sfile>:p")
 let mapleader=","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Installed Plugins                               "
@@ -63,8 +62,8 @@ call plug#begin($VIMRCHOME.'/plugged')
   Plug 'easymotion/vim-easymotion'
 
   " Fuzzy Searching
-  Plug 'junegunn/fzf' 
-  Plug 'junegunn/fzf.vim' 
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
   Plug 'mileszs/ack.vim'
 
   " Search and Search/Replace - This is the only neovim plugin
@@ -83,6 +82,8 @@ call plug#begin($VIMRCHOME.'/plugged')
   Plug 'w0rp/ale'
 
 call plug#end()
+set undofile
+set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     ALE                                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -114,7 +115,6 @@ let g:ale_python_flake8_options .= 'E116,' "another weird indent issue
 let g:ale_python_flake8_options .= 'E126,' "another weird indent issue
 let g:ale_python_flake8_options .= 'E122,' "another weird indent issue
 let g:ale_python_flake8_options .= 'W391,' "why care about blank lines at the end of a file?
-
 
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
@@ -367,10 +367,7 @@ nnoremap k gk
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                 Changing the font will crash NVIM on startup                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! Ffont()
-  exe "Guifont! Consolas:h15"
-endfunction
-nnoremap <leader>ff :call Ffont()<CR>
+set guifont=Consolas:h13
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Reload your VIMRC                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -672,8 +669,8 @@ let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsUsePythonVersion    = 3
 
-let g:UltiSnipsSnippetDirectories  = [$VIMRCHOME . "\snippets"]
-let g:UltiSnipsSnippetsDir         = $VIMRCHOME . "\snippets"
+let g:UltiSnipsSnippetDirectories  = [$VIMRCHOME . "/.vim/snippets"]
+let g:UltiSnipsSnippetsDir         = $VIMRCHOME . "/.vim/snippets"
 let g:UltiSnipsEnableSnipMate      = 0
 map <C-F8> :UltiSnipsEdit<CR>
 
