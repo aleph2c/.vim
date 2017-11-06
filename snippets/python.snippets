@@ -242,4 +242,15 @@ endsnippet
 
 snippet repr "methods implementing string representation"
 def __repr__(self):
+endsnippet
 
+snippet debugger "add a break point in your code" b
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet pp "pretty print routine" b
+import pprint
+def pp(item):
+	pprint.pprint(item)
+endsnippet
+# vim:ft=snippets:
