@@ -1,6 +1,0 @@
-source 'https://rubygems.org'
-gem 'rspec',       require: 'spec'
-gem 'debugger'
-gem 'guard'
-gem "guard-rspec", require: false
-gem "wdm", '>= 0.1.0'
