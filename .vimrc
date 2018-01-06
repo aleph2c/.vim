@@ -1,5 +1,3 @@
-set guioptions -=m
-set guioptions -=T
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window (for an alternative on Windows, see simalt below).

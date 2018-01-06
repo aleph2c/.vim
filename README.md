@@ -11,3 +11,35 @@ Create symbolic links for your rc files:
 
 The vim config has been tested on the WSL and it works, the TMUX setup hasn't
 been modernized.  I haven't touched tmux for year.
+
+
+# To setup on window (outside of WLS)
+Find root directory of your VIM installation, open VIM and type $VIM what you
+just saw will be called <Install Root> for the rest of this documentation.
+
+Open <Install Root> in windows explorer.  At the end of the `_vimrc` add:
+
+    source $VIM/.vim/.vim
+
+Restart VIM.  Then type:
+
+:PluginInstall 
+
+After this VIM is mostly ready to get.
+
+Now if you would like (to waste about 3 hours of your life to get)
+[YouCompleteMe](https://github.com/Valloric/YouCompleteMe) to work, download:
+
+ * Virtual Studio Community Addition (5Gigs download, C++)
+ * Virtual Studio Build Tools        (2Gigs download, Only works after first download)
+ * Cmake
+
+Adjust your path (rapid path editor) so that the following can by found:
+
+ * Cmake is found
+ * MsBuild.exe can be found
+
+Restart your shell so your path is updated, then:
+
+    > cd <Install Root>\plugged\YouCompleteMe
+    > python install.py --msvc 15
