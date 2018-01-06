@@ -14,10 +14,11 @@ been modernized.  I haven't touched tmux for year.
 
 
 # To setup on window (outside of WLS)
-Find root directory of your VIM installation, open VIM and type $VIM what you
-just saw will be called <Install Root> for the rest of this documentation.
+Find root directory of your VIM installation, open VIM and type $VIM.  Take note
+of the output, this is your `<Install Root>`.
 
-Open <Install Root> in windows explorer.  At the end of the `_vimrc` add:
+Open `<Install Root>` in windows explorer.  Edit `_vimrc` with notepad, by
+adding the following at the end of the file:
 
     source $VIM/.vim/.vim
 
@@ -43,3 +44,5 @@ Restart your shell so your path is updated, then:
 
     > cd <Install Root>\plugged\YouCompleteMe
     > python install.py --msvc 15
+
+Restart Vim.
