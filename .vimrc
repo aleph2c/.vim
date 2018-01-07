@@ -9,12 +9,14 @@ if has("win32") && has('gui_running')
   set guioptions-=r  "remove right-hand scroll bar
   set guioptions-=L  "remove left-hand scroll bar
   au GUIEnter * simalt ~x
+  sign unplace *
 endif
 
-" disable file noise
+"I use fugitive so I don't need vim's file clutter
 set nobackup
 set nowritebackup
 set noswapfile
+set noundofile
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Installed Plugins                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -131,7 +133,6 @@ let g:session_directory       = $VIMRCHOME.'/sessions'
 let $VIMRCHOME= $VIM.'/.vim'
 source $VIMRCHOME\code_vimrc.vim
 source $VIMRCHOME\colorscheme_vimrc.vim
-"source $VIMRCHOME\denite_vimrc.vim
 source $VIMRCHOME\easymotion_vimrc.vim
 source $VIMRCHOME\fastfold_vimrc.vim
 source $VIMRCHOME\fugitive_vimrc.vim
