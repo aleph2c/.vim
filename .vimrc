@@ -20,9 +20,13 @@ set noundofile
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Installed Plugins                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin($VIM . '/.vim' .'/plugged')
+if has("win32")
+  call plug#begin($VIM . '/.vim' .'/plugged')
+else
+  call plug#begin($HOME . '/.vim' . '/plugged')
+endif
   " Autocomplete
-  Plug 'Valloric/YouCompleteMe'
+  " Plug 'Valloric/YouCompleteMe'
 
   "Look of nvim
   Plug 'Lokaltog/vim-powerline'
@@ -125,12 +129,15 @@ let g:ale_python_flake8_options .= 'W391,' "why care about blank lines at the en
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
-let g:session_directory       = $VIMRCHOME.'/sessions'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Custom configurations for plugins found in the same directory as $MYVIMRC   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let $VIMRCHOME= $VIM.'/.vim'
+if has("win32")
+  let $VIMRCHOME= $VIM.'/.vim'
+else
+  let $VIMRCHOME= $HOME.'/.vim/'
+endif
 source $VIMRCHOME\code_vimrc.vim
 source $VIMRCHOME\colorscheme_vimrc.vim
 source $VIMRCHOME\easymotion_vimrc.vim
@@ -147,6 +154,8 @@ source $VIMRCHOME\ultisnips_vimrc.vim
 source $VIMRCHOME\youcompleteme_vimrc.vim
 source $VIMRCHOME\trace.vim
 source $VIMRCHOME\ripgrep_vimrc.vim
+
+let g:session_directory = $VIMRCHOME.'/sessions'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Tabularize                                  "
