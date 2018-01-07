@@ -14,6 +14,8 @@ been modernized.  I haven't touched tmux for year.
 
 
 # To setup on window (outside of WLS)
+Install Plug.vim into your autoload directory for your VIM installation.
+
 Find root directory of your VIM installation, open VIM and type $VIM.  Take note
 of the output, this is your `<Install Root>`.
 

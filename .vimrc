@@ -1,18 +1,24 @@
-if has("gui_running")
-  " GUI is running or is about to start.
-  " Maximize gvim window (for an alternative on Windows, see simalt below).
-  au GUIEnter * simalt ~x
-endif
 let g:acp_enableAtStartup = 0
 
 let $MYVIMRC = expand("<sfile>:p")
 let mapleader=","
+
+if has("win32") && has('gui_running')
+  set guioptions-=m  "remove menu bar
+  set guioptions-=T  "remove toolbar
+  set guioptions-=r  "remove right-hand scroll bar
+  set guioptions-=L  "remove left-hand scroll bar
+  au GUIEnter * simalt ~x
+endif
+
+" disable file noise
+set nobackup
+set nowritebackup
+set noswapfile
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Installed Plugins                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let $VIMRCHOME = $HOME
-
-call plug#begin($VIMRCHOME.'/plugged')
+call plug#begin($VIM . '/.vim' .'/plugged')
   " Autocomplete
   Plug 'Valloric/YouCompleteMe'
 
@@ -66,7 +72,7 @@ call plug#begin($VIMRCHOME.'/plugged')
 
   " Search and Search/Replace - This is the only neovim plugin
   "                             hardly worth the pain
-  Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' }
+  "Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' }
 
 
   " Drawing boxes
@@ -118,6 +124,28 @@ let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
 let g:session_directory       = $VIMRCHOME.'/sessions'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Custom configurations for plugins found in the same directory as $MYVIMRC   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let $VIMRCHOME= $VIM.'/.vim'
+source $VIMRCHOME\code_vimrc.vim
+source $VIMRCHOME\colorscheme_vimrc.vim
+"source $VIMRCHOME\denite_vimrc.vim
+source $VIMRCHOME\easymotion_vimrc.vim
+source $VIMRCHOME\fastfold_vimrc.vim
+source $VIMRCHOME\fugitive_vimrc.vim
+source $VIMRCHOME\language_vimrc.vim
+source $VIMRCHOME\nerdtree_vimrc.vim
+source $VIMRCHOME\vimairline_vimrc.vim
+source $VIMRCHOME\vimwiki_vimrc.vim
+source $VIMRCHOME\ackvimrc.vim
+source $VIMRCHOME\fzfvimrc.vim
+source $VIMRCHOME\fold_vimrc.vim
+source $VIMRCHOME\ultisnips_vimrc.vim
+source $VIMRCHOME\youcompleteme_vimrc.vim
+source $VIMRCHOME\trace.vim
+source $VIMRCHOME\ripgrep_vimrc.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Tabularize                                  "
@@ -685,34 +713,4 @@ endfunction
 
 autocmd User AirlineAfterInit call AirlineInit()
 "let g:airline#extensions#tabline#enabled = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               You Complete Me                                "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" The windows set up is a NIGHTMARE, download and install:
-" * Virtual Studio Community Addition (5Gigs)
-" * Virtual Studio Build Tools        (2Gigs)
-" * Cmake
-"
-" Adjust path so that (using rapid path editor):
-" * Cmake is found
-" * MsBuild.exe can be found
-"
-" Restart whatever shell you have so that the path is updated, then:
-"  > cd C:/User/<user>/AppData/Local/nvim/plugged/YouCompleteMe
-"  > python install.py --msvc 15
-"
-" Or, you can install the windows linux subsystem and work within it
-set encoding=utf8
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_goto_buffer_command = 'horizontal-split'
-let g:ycm_use_ultisnips_completer=1
-map <F9> :YcmRestartServer<CR>
-nnoremap <leader>yd :YcmDiags<CR>
-nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
-nnoremap <leader>g  :YcmCompleter GoTo<CR>
-nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 
