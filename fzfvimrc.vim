@@ -5,5 +5,7 @@ nnoremap <c-m><c-m> :History<CR>
 "let g:fzf_history_dir = $VIMRCHOME.'/history'
 let g:fzf_nvim_statusline = 0
 let g:fzf_layout = {'down': '~20%'}
-let g:fzf_history_dir = 'c:/fzf-history'
+if has("win32")
+  let g:fzf_history_dir = 'c:/fzf-history'
+endif
 "nnoremap <leader>g :Ag<CR>
