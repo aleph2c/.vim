@@ -1,32 +1,43 @@
-# To setup up a new nix machine
+# To setup up a new debian machine
 Clone all of the contents of the `.vim` directory into your home directory:
 
-    git clone git@github.com:aleph2c/vimrc.git ~/.vim
+    > git clone git@github.com:aleph2c/vim_tmux.git ~/.vim
 
 Create symbolic links for your rc files:
 
-    ln -s ~/.vim/.vimrc ~/.vimrc
-    ln -s ~/.vim/.tmux.conf ~/.tmux.conf
-    ln -s ~/.vim/snippets ~/snippets
+    > ln -s ~/.vim/.vimrc ~/.vimrc
+    > ln -s ~/.vim/.tmux.conf ~/.tmux.conf
+    > ln -s ~/.vim/snippets ~/snippets
 
-The vim config has been tested on the WSL and it works, the TMUX setup hasn't
-been modernized.  I haven't touched tmux for year.
+To get [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) to work:
 
+    > sudo apt-get install build-essential cmake
+    > sudo apt-get install python-dev python3-dev
+    > cd ~/.vim/bundle/YouCompleteMe
+    > ./install.py
+
+If you are on a raspberry pi or beagle bone, replace the last line with:
+
+    > YCM_CORES=1 ./install.py
 
 # To setup on window (outside of WLS)
-Find root directory of your VIM installation, open VIM and type $VIM.  Take note
+Find root directory of your VIM installation, open VIM and type `:echo $VIM`.  Take note
 of the output, this is your `<Install Root>`.
+
+Now, navigate to `<Install Root>` and type:
+
+    > git clone git@github.com:aleph2c/vim_tmux.git .vim
 
 Open `<Install Root>` in windows explorer.  Edit `_vimrc` with notepad, by
 adding the following at the end of the file:
 
-    source $VIM/.vim/.vim
+    source $VIM/.vim/.vimrc
 
 Restart VIM.  Then type:
 
-:PluginInstall 
+    :PluginInstall 
 
-After this VIM is mostly ready to get.
+After this VIM is mostly ready.
 
 Now if you would like (to waste about 3 hours of your life to get)
 [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) to work, download:
