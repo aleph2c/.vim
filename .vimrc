@@ -26,7 +26,7 @@ else
   call plug#begin($HOME . '/.vim' . '/plugged')
 endif
   " Autocomplete
-  " Plug 'Valloric/YouCompleteMe'
+  Plug 'Valloric/YouCompleteMe'
 
   "Look of nvim
   Plug 'Lokaltog/vim-powerline'
