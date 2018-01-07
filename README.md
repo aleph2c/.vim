@@ -21,7 +21,9 @@ If you are on a raspberry pi or beagle bone, replace the last line with:
     > YCM_CORES=1 ./install.py
 
 # To setup on window (outside of WLS)
-of the output, this is your `<Install Root>`.
+Copy the Plug.vim plugin into the autostart directory of vim.
+
+Type echo $VIM and take note of the of the output this is the `<Install Root>`.
 
 Now, navigate to `<Install Root>` and type:
 
