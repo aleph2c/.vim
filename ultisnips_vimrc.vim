@@ -11,8 +11,8 @@ else
 endif
 
 if has("win32")
-  let g:UltiSnipsSnippetDirectories  = [$HOME . '/.vim' . '/snippets']
-  let g:UltiSnipsSnippetsDir         = $HOME . '/.vim' . '/snippets'
+  let g:UltiSnipsSnippetDirectories  = [$VIM . '/.vim' . '/snippets']
+  let g:UltiSnipsSnippetsDir         = $VIM . '/.vim' . '/snippets'
 else
   let g:UltiSnipsSnippetDirectories  = [$VIMRCHOME . "\snippets"]
   let g:UltiSnipsSnippetsDir         = $VIMRCHOME . "\snippets"
