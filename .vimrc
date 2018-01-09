@@ -35,6 +35,7 @@ endif
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/fonts'
+  Plug 'altercation/vim-colors-solarized'
 
   " Tim Pope
   Plug 'tpope/vim-fugitive'
