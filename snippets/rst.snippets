@@ -1,11 +1,60 @@
+global !p
+import re
+def hypertarget(filename, t):
+  return '..' ' _'+filename + '-' + re.sub(' ', '-',t).lower() + ':'
+
+def captalize_words(t):
+	return " ".join([word.capitalize() for word in t.split()])
+endglobal
+
 snippet abr "abbreviation" 
 :abbr:\`${1:short}(${2:the long form})\`
 endsnippet
 
 snippet code "code block" b
 .. code-block:: python
+  :emphasize-lines: 1
+  :linenos:
 
-		${1:place code here}
+	${1:place code here}
 $0
 endsnippet
 
+snippet "sec" "Writing a section header" rb
+${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:section_title}}
+${3:`!p snip.rv = '=' * len(t[1])`}
+$0
+endsnippet
+
+snippet "sub" "Writing a subtitle" rb
+${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:subsection title}}
+${3:`!p snip.rv = '-' * len(t[1])`}
+$0
+endsnippet
+
+snippet "ssub" "Writing a subtitle" rb
+${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:subsubsection_title}}
+${3:`!p snip.rv = '^' * len(t[1])`}
+$0
+endsnippet
+
+snippet glos "Write a glossary item" b
+	 ${1:name of item}
+			${2:Description of $1}
+
+$0
+endsnippet
+
+snippet term "reference a glossary item" 
+:term:\`${1:name}<${2:`!p snip.rv = captalize_words(t[1])`}>\`
+endsnippet
+
+snippet ref "reference to a link"
+:ref:\`${1:name}<${2:name of link}>\`
+endsnippet
