@@ -186,7 +186,22 @@ if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~
   call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
 endif
 endfunction
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"               Get the number of lines from a visual selection                "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:get_lines_from_visual_selection()
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  return getline(lnum1,lnum2)
+endfunction
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"           Write a visual selection to file, given that file's name           "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:write_visual_selection_to_file(file_name)
+  let file_name = a:file_name
+  let input_strings = s:get_lines_from_visual_selection()
+  return writefile(input_strings,file_name)
+endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "          Convert a visually selected trace into a Sequence Diagram           "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -194,7 +209,6 @@ if has("win32")
   function! s:call_trace_to_sequence_diagram(file_in_which_to_write_trace, diagram_output_file_name)
       let s:path_to_sequence = 'C:/github/sequence/sequence.rb'
       normal mz
-
       let diagram_output_file_name = a:diagram_output_file_name
       let diagram_input_file_name  = a:file_in_which_to_write_trace
       call s:write_visual_selection_to_file(diagram_input_file_name)
@@ -203,8 +217,8 @@ if has("win32")
       " write the trace to the @t register
       let @t = system("ruby ". s:path_to_sequence . " -i ".diagram_input_file_name )
       " remove our input and output files
-      call delete(diagram_input_file_name)
-      call delete(diagram_output_file_name)
+      "call delete(diagram_input_file_name)
+      "call delete(diagram_output_file_name)
       " put the @t register into our buffer at the bottom of the selection
       normal `>
       normal o
