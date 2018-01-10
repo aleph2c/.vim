@@ -698,19 +698,6 @@ nmap <leader><leader>f :NERDTreeFind<CR>
 
 let NERDTreeIgnore = ['\.pyc$', '\.listing$', '\.aux$', '\.maf$' , '\.mtc0$', '\.mtc1$', '\.mtc2$', '\.mtc3$', '\.mtc4$', '\.mtc5$', '\.mtc6$', '\.mtc7$',  '\.mtc8$', '\.mtc9$', '\.mtc10$', '\.mtc11$', '\.mtc12$', '\.mtc13$', '\.mtc14$', '\.mtc15$']
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  ultisnips                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger       = '<c-j>' " tab broken, c-tab slow
-let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsUsePythonVersion    = 3
-
-let g:UltiSnipsSnippetDirectories  = [$VIMRCHOME . "/.vim/snippets"]
-let g:UltiSnipsSnippetsDir         = $VIMRCHOME . "/.vim/snippets"
-let g:UltiSnipsEnableSnipMate      = 0
-map <C-F8> :UltiSnipsEdit<CR>
-
 "let g:airline_section_b = '%{strftime("%c")}'
 "let g:airline_section_y = 'BN: %{bufnr("%s")}'
 
