@@ -217,8 +217,8 @@ if has("win32")
       " write the trace to the @t register
       let @t = system("ruby ". s:path_to_sequence . " -i ".diagram_input_file_name )
       " remove our input and output files
-      "call delete(diagram_input_file_name)
-      "call delete(diagram_output_file_name)
+      call delete(diagram_input_file_name)
+      call delete(diagram_output_file_name)
       " put the @t register into our buffer at the bottom of the selection
       normal `>
       normal o
