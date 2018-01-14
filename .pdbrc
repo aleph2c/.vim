@@ -1,0 +1,6 @@
+import rlcompleter
+import readline
+pdb.Pdb.complete = rlcompleter.Completer(locals()).complete
+
+alias nl n;;l
+alias sl s;;l

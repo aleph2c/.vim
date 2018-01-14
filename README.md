@@ -8,6 +8,7 @@ Create symbolic links for your rc files:
     > ln -s ~/.vim/.vimrc ~/.vimrc
     > ln -s ~/.vim/.tmux.conf ~/.tmux.conf
     > ln -s ~/.vim/snippets ~/snippets
+    > ln -s ~/.vim/.pdbrc ~/.pdbrc
 
 To get [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) to work:
 
