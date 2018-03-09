@@ -45,17 +45,16 @@ SPHINX	= 0x3
 def get_args(arglist):
 	args = [arg.split('=')[0].strip() for arg in arglist.split(',') if arg]
 	args = [arg for arg in args if arg and arg != "self"]
-
 	return args
-
 
 def get_style(snip):
 	style = snip.opt("g:ultisnips_python_style", "normal")
-
-	if	  style == "doxygen": return DOXYGEN
-	elif  style == "sphinx": return SPHINX
-	else: return NORMAL
-
+	if style == "doxygen":
+		return DOXYGEN
+	elif style == "sphinx":
+		return SPHINX
+	else:
+		return NORMAL
 
 def format_arg(arg, style):
 	if style == DOXYGEN:
@@ -65,13 +64,11 @@ def format_arg(arg, style):
 	elif style == NORMAL:
 		return ":%s: @todo" % arg
 
-
 def format_return(style):
 	if style == DOXYGEN:
 		return "@return: @todo"
 	elif style in (NORMAL, SPHINX):
 		return ":returns: @todo"
-
 
 def write_docstring_args(args, snip):
 	if not args:
@@ -249,8 +246,18 @@ import pdb; pdb.set_trace()
 endsnippet
 
 snippet pp "pretty print routine" b
-import pprint
+import pprint fuck off
 def pp(item):
 	pprint.pprint(item)
 endsnippet
+
+snippet "(E|e)vent" "create an Event" r
+Event(signal=signals.${1:event_name})$0
+endsnippet
+
+snippet flat "create a flat state" b
+def ${1:state_function_name}(${2:self}, e ):
+	status return_status.UNHANDLED
+endsnippet
+
 # vim:ft=snippets:

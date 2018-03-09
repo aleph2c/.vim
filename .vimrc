@@ -71,6 +71,7 @@ endif
   " Navigation
   Plug 'scrooloose/nerdtree'
   Plug 'easymotion/vim-easymotion'
+  Plug 'majutsushi/tagbar'
 
   " Fuzzy Searching
   Plug 'junegunn/fzf'
@@ -108,10 +109,10 @@ nmap <silent> <leader><C-k> <Plug>(ale_previous_wrap)
 let g:ale_sign_column_always=1
 let g:ale_python_flake8_executable='flake8'
 
-" PEP8 go to hell (remember autopep8 is clients are autistic about this)
+" PEP8 go to hell
 "
-" Lint is useful but the tool has been attacked with by spam flingers
-" Here are my PEP8-tyrant noise over-rides
+" Lint is useful but the tool has been attacked by tyrannical babies
+" Here are my PEP8-baby-tyrant noise over-rides
 let g:ale_python_flake8_options =  "--ignore=W0311,"
 let g:ale_python_flake8_options .= 'E501,' "line too long for the 70s
 let g:ale_python_flake8_options .= 'E114,' "indent must be 4, no thank you
@@ -119,9 +120,6 @@ let g:ale_python_flake8_options .= 'E111,' "indentation is not a multiple of fou
 let g:ale_python_flake8_options .= 'E272,' "multiple spaces before keyword, breaks tabularize
 let g:ale_python_flake8_options .= 'E221,' "multiple spaces before operator, breaks tabularize
 let g:ale_python_flake8_options .= 'E251,' "continuation line with same indent as next logical line
-
-" If I had an employee making these stupid rules so as to waste everyone's time,
-" I would lay them off:
 let g:ale_python_flake8_options .= 'E241,' "multiple space after ',' breaks tabularize
 let g:ale_python_flake8_options .= 'E121,' "weird OCD overhang noise
 let g:ale_python_flake8_options .= 'E222,' "multiple spaces after operator, breaks tabularize
@@ -132,10 +130,9 @@ let g:ale_python_flake8_options .= 'E116,' "bike-shedding indent
 let g:ale_python_flake8_options .= 'E126,' "bike-shedding indent
 let g:ale_python_flake8_options .= 'E122,' "yet another weird indent issue
 let g:ale_python_flake8_options .= 'W391,' "why care about blank lines at the end of a file?
-let g:ale_python_flake8_options .= 'E302,' "autistic space issue
-let g:ale_python_flake8_options .= 'E303,' "autistic space issue
-let g:ale_python_flake8_options .= 'E305,' "autistic space issue
-
+let g:ale_python_flake8_options .= 'E302,' "strange OCD space issue
+let g:ale_python_flake8_options .= 'E303,' "strange OCD space issue
+let g:ale_python_flake8_options .= 'E305,' "strange OCD space issue
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
