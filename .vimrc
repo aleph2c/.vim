@@ -71,6 +71,7 @@ endif
   " Navigation
   Plug 'scrooloose/nerdtree'
   Plug 'easymotion/vim-easymotion'
+  Plug 'majutsushi/tagbar'
 
   " Fuzzy Searching
   Plug 'junegunn/fzf'
@@ -108,25 +109,30 @@ nmap <silent> <leader><C-k> <Plug>(ale_previous_wrap)
 let g:ale_sign_column_always=1
 let g:ale_python_flake8_executable='flake8'
 
-" PEP8 noise over-rides
+" PEP8 go to hell
+"
+" Lint is useful but the tool has been attacked by tyrannical babies
+" Here are my PEP8-baby-tyrant noise over-rides
 let g:ale_python_flake8_options =  "--ignore=W0311,"
 let g:ale_python_flake8_options .= 'E501,' "line too long for the 70s
-let g:ale_python_flake8_options .= 'E114,' "indent must be 4
-let g:ale_python_flake8_options .= 'E111,' "indentation is not a multiple of four
-let g:ale_python_flake8_options .= 'E272,' "multiple spaces before keyword
-let g:ale_python_flake8_options .= 'E221,' "multiple spaces before operator
+let g:ale_python_flake8_options .= 'E114,' "indent must be 4, no thank you
+let g:ale_python_flake8_options .= 'E111,' "indentation is not a multiple of four, didn't we cover this?
+let g:ale_python_flake8_options .= 'E272,' "multiple spaces before keyword, breaks tabularize
+let g:ale_python_flake8_options .= 'E221,' "multiple spaces before operator, breaks tabularize
 let g:ale_python_flake8_options .= 'E251,' "continuation line with same indent as next logical line
-let g:ale_python_flake8_options .= 'E241,' "multiple space after ','
+let g:ale_python_flake8_options .= 'E241,' "multiple space after ',' breaks tabularize
 let g:ale_python_flake8_options .= 'E121,' "weird OCD overhang noise
-let g:ale_python_flake8_options .= 'E222,' "multiple spaces after operator
-let g:ale_python_flake8_options .= 'E131,' "another weird indent issue
-let g:ale_python_flake8_options .= 'E128,' "another weird indent issue
-let g:ale_python_flake8_options .= 'E127,' "another weird indent issue
-let g:ale_python_flake8_options .= 'E116,' "another weird indent issue
-let g:ale_python_flake8_options .= 'E126,' "another weird indent issue
-let g:ale_python_flake8_options .= 'E122,' "another weird indent issue
+let g:ale_python_flake8_options .= 'E222,' "multiple spaces after operator, breaks tabularize
+let g:ale_python_flake8_options .= 'E131,' "bike-shedding indent
+let g:ale_python_flake8_options .= 'E128,' "bike-shedding indent
+let g:ale_python_flake8_options .= 'E127,' "bike-shedding indent
+let g:ale_python_flake8_options .= 'E116,' "bike-shedding indent
+let g:ale_python_flake8_options .= 'E126,' "bike-shedding indent
+let g:ale_python_flake8_options .= 'E122,' "yet another weird indent issue
 let g:ale_python_flake8_options .= 'W391,' "why care about blank lines at the end of a file?
-
+let g:ale_python_flake8_options .= 'E302,' "strange OCD space issue
+let g:ale_python_flake8_options .= 'E303,' "strange OCD space issue
+let g:ale_python_flake8_options .= 'E305,' "strange OCD space issue
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
