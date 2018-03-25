@@ -108,7 +108,6 @@ nmap <silent> <leader><C-j> <Plug>(ale_next_wrap)
 nmap <silent> <leader><C-k> <Plug>(ale_previous_wrap)
 let g:ale_sign_column_always=1
 let g:ale_python_flake8_executable='flake8'
-
 " PEP8 go to hell
 "
 " Lint is useful but the tool has been attacked by tyrannical babies
@@ -716,7 +715,7 @@ nmap <leader><leader>f :NERDTreeFind<CR>
 "make sure relative line numbers are used
 "autocmd FileType nerdtree setlocal relativenumber
 
-let NERDTreeIgnore = ['\.pyc$', '\.listing$', '\.aux$', '\.maf$' , '\.mtc0$', '\.mtc1$', '\.mtc2$', '\.mtc3$', '\.mtc4$', '\.mtc5$', '\.mtc6$', '\.mtc7$',  '\.mtc8$', '\.mtc9$', '\.mtc10$', '\.mtc11$', '\.mtc12$', '\.mtc13$', '\.mtc14$', '\.mtc15$']
+let NERDTreeIgnore = ['\.pyc$', '\.listing$', '\.aux$', '\.maf$' , '\.mtc0$', '\.mtc1$', '\.mtc2$', '\.mtc3$', '\.mtc4$', '\.mtc5$', '\.mtc6$', '\.mtc7$', '\.mtc8$', '\.mtc9$', '\.mtc10$', '\.mtc11$', '\.mtc12$', '\.mtc13$', '\.mtc14$', '\.mtc15$', '\.un$' ]
 
 "let g:airline_section_b = '%{strftime("%c")}'
 "let g:airline_section_y = 'BN: %{bufnr("%s")}'
