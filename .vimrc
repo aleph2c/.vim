@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 let g:acp_enableAtStartup = 0
 
 let $MYVIMRC = expand("<sfile>:p")
