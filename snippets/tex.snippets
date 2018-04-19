@@ -57,32 +57,6 @@ snippet todo "todo list" b
 	\item $0
 \end{todolist}
 endsnippet
-#snippet desc "Description" b
-#\begin{description}
-#	\item[$1] $0
-#\end{description}
-#endsnippet
-
-#snippet part "Part" b
-#\part{${1:part name}}
-#\label{prt:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/ga}}}
-#
-#$0
-#endsnippet
-
-#snippet sec* "Section" b
-#\section*{${1:section name}}
-#\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-#
-#${0}
-#endsnippet
-
-#snippet sub "Subsection" b
-#\subsection{${1:subsection name}}
-#\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-#
-#$0
-#endsnippet
 
 snippet sub* "Subsection" b
 \subsection*{${1:subsection name}}
@@ -249,5 +223,12 @@ $0
 \newpage
 endsnippet
 
+snippet "ch.*" "Writing a chapter" rb
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\chapter{${1:${VISUAL:chapter title}}}
+\minitoc% Creating a mini table of contents
+$0
+%end of chapter $1
+endsnippet
 # vim:ft=snippets:
 
