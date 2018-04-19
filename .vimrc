@@ -726,3 +726,10 @@ endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 "let g:airline#extensions#tabline#enabled = 1
 
+"copy (write) highlighted text to .vimbuffer
+vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer \| clip.exe<CR><CR>
+
+" paste from buffer
+"map <C-V> :r ~/.vimbuffer<CR>
+
+

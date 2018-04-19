@@ -52,6 +52,11 @@ snippet item "Itemize" b
 \end{itemize}
 endsnippet
 
+snippet todo "todo list" b
+\begin{todolist}
+	\item $0
+\end{todolist}
+endsnippet
 #snippet desc "Description" b
 #\begin{description}
 #	\item[$1] $0
@@ -227,5 +232,22 @@ snippet "ch.*" "Writing a chapter" rb
 $0
 %end of chapter $1
 endsnippet
+
+snippet test "Writing a test" b
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\subsection{${1:Test Name}}
+
+\textbf{Purpose:} ${3:Purpose of the test}
+
+\textbf{Procedure:}
+$0
+
+\textbf{Checklist for Test to Pass:} 
+\begin{todolist}
+	\item ${4:Purpose of the test}
+\end{todolist}
+\newpage
+endsnippet
+
 # vim:ft=snippets:
 
