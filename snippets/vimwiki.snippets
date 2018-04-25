@@ -1,4 +1,87 @@
-snippet troub "trouble shooting methodology" b
+global !p
+from datetime import datetime
+import uuid
+import tzlocal
+def date_now():
+	return datetime.now(tzlocal.get_localzone()).strftime("%Y-%m-%d %H:%M")
+
+def suuid():
+	return str(uuid.uuid4().hex)[0:5]
+
+def from_options(t, options):
+	if t:
+		options = [ m[len(t):] for m in options if m.startswith(t) ]
+	if len(options) == 1:
+		return options[0]
+	else:
+		return "(" + "|".join(options) + ")"
+endglobal
+
+snippet 'rep (\d+) (\w+)' "Repeat" r
+`!p snip.rv = int(match.group(1))*match.group(2)`
+endsnippet
+
+snippet defect "defect found in test" b
+-------------------------------------------------------------------------------
+*Defect*   ${1:Defect Number - Test Section Number} (${2:Name Of Test})
+*Date*     ${3:`!p snip.rv = date_now()`}
+*Id*       `!p
+if not snip.c:
+  snip.rv = suuid()`
+*Severity* $4`!p snip.rv=from_options(t[4], ['critical','major','minor','trivial'])`
+-------------------------------------------------------------------------------
+*Symptoms*
+$6
+
+-------------------------------------------------------------------------------
+*Reproduction Steps*
+$7
+
+-------------------------------------------------------------------------------
+endsnippet
+global !p
+from datetime import datetime
+import uuid
+import tzlocal
+def date_now():
+	return datetime.now(tzlocal.get_localzone()).strftime("%Y-%m-%d %H:%M")
+
+def suuid():
+	return str(uuid.uuid4().hex)[0:5]
+
+def from_options(t, options):
+	if t:
+		options = [ m[len(t):] for m in options if m.startswith(t) ]
+	if len(options) == 1:
+		return options[0]
+	else:
+		return "(" + "|".join(options) + ")"
+endglobal
+
+snippet 'rep (\d+) (\w+)' "Repeat" r
+`!p snip.rv = int(match.group(1))*match.group(2)`
+endsnippet
+
+snippet defect "defect found in test" b
+-------------------------------------------------------------------------------
+*Defect*   ${1:Defect Number - Test Section Number} (${2:Name Of Test})
+*Date*     ${3:`!p snip.rv = date_now()`}
+*Id*       `!p
+if not snip.c:
+  snip.rv = suuid()`
+*Severity* $4`!p snip.rv=from_options(t[4], ['critical','major','minor','trivial'])`
+-------------------------------------------------------------------------------
+*Symptoms*
+$6
+
+-------------------------------------------------------------------------------
+*Reproduction Steps*
+$7
+
+-------------------------------------------------------------------------------
+endsnippet
+
+snippet troub "trouble shooting methodology" !b
 *${1:Title of your investigation}*
 = Observe =
 	*What defines Success?*
@@ -13,9 +96,6 @@ snippet troub "trouble shooting methodology" b
 	*Symptoms:*
 	${4:quick description of symptoms that lead your belief}
 	*Questions for $1:*
-		What don't you know, that you need to know?
-		What else does your solution do?
-		How can you make this funny?
 		Can you simplify your test?
 		Do you have enough information?
 		What recently changed?
@@ -37,4 +117,8 @@ snippet troub "trouble shooting methodology" b
 = Act =
 
 endsnippet
-
+snippet uuid "UUID" !b
+`!p import uuid
+if not snip.c:
+  snip.rv = uuid.uuid4().hex`
+endsnippet
