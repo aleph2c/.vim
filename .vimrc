@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let g:acp_enableAtStartup = 0
 
 let $MYVIMRC = expand("<sfile>:p")
@@ -95,7 +94,6 @@ endif
   Plug 'w0rp/ale'
 
 call plug#end()
-set undofile
 set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     ALE                                      "
