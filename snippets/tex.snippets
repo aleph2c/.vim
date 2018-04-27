@@ -52,32 +52,11 @@ snippet item "Itemize" b
 \end{itemize}
 endsnippet
 
-#snippet desc "Description" b
-#\begin{description}
-#	\item[$1] $0
-#\end{description}
-#endsnippet
-
-#snippet part "Part" b
-#\part{${1:part name}}
-#\label{prt:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/ga}}}
-#
-#$0
-#endsnippet
-
-#snippet sec* "Section" b
-#\section*{${1:section name}}
-#\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-#
-#${0}
-#endsnippet
-
-#snippet sub "Subsection" b
-#\subsection{${1:subsection name}}
-#\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-#
-#$0
-#endsnippet
+snippet todo "todo list" b
+\begin{todolist}
+	\item $0
+\end{todolist}
+endsnippet
 
 snippet sub* "Subsection" b
 \subsection*{${1:subsection name}}
@@ -218,6 +197,30 @@ snippet "sub.*" "Writing a subsection" rb
 \subsection{${1:${VISUAL:subsection title}}}
 $0
 %end of subsection $1
+endsnippet
+
+snippet "ch.*" "Writing a chapter" rb
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\chapter{${1:${VISUAL:chapter title}}}
+\minitoc% Creating a mini table of contents
+$0
+%end of chapter $1
+endsnippet
+
+snippet test "Writing a test" b
+\hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
+\subsection{${1:Test Name}}
+
+\textbf{Purpose:} ${3:Purpose of the test}
+
+\textbf{Procedure:}
+$0
+
+\textbf{Checklist for Test to Pass:} 
+\begin{todolist}
+	\item ${4:Purpose of the test}
+\end{todolist}
+\newpage
 endsnippet
 
 snippet "ch.*" "Writing a chapter" rb
