@@ -50,6 +50,7 @@ endif
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-rake'
   Plug 'tpope/vim-speeddating'
+  Plug 'tpope/vim-vividchalk'
 
   " Directory Changing
   Plug 'airblade/vim-rooter'
