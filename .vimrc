@@ -94,7 +94,6 @@ endif
   Plug 'w0rp/ale'
 
 call plug#end()
-set undofile
 set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     ALE                                      "
