@@ -737,4 +737,4 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 " paste from buffer
 "map <C-V> :r ~/.vimbuffer<CR>
 
-
+colorscheme vividchalk
