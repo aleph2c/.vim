@@ -50,6 +50,7 @@ endif
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-rake'
   Plug 'tpope/vim-speeddating'
+  Plug 'tpope/vim-vividchalk'
 
   " Directory Changing
   Plug 'airblade/vim-rooter'
@@ -735,4 +736,4 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 " paste from buffer
 "map <C-V> :r ~/.vimbuffer<CR>
 
-
+colorscheme vividchalk
