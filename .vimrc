@@ -50,6 +50,7 @@ endif
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-rake'
   Plug 'tpope/vim-speeddating'
+  Plug 'tpope/vim-dispatch'
 
   " Directory Changing
   Plug 'airblade/vim-rooter'
@@ -93,9 +94,12 @@ endif
   " Linting
   Plug 'w0rp/ale'
 
+  " Testing
+  Plug 'janko-m/vim-test'
+
 call plug#end()
-set undofile
 set nocompatible
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     ALE                                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -715,7 +719,7 @@ nmap <leader><leader>f :NERDTreeFind<CR>
 "make sure relative line numbers are used
 "autocmd FileType nerdtree setlocal relativenumber
 
-let NERDTreeIgnore = ['\.pyc$', '\.listing$', '\.aux$', '\.maf$' , '\.mtc0$', '\.mtc1$', '\.mtc2$', '\.mtc3$', '\.mtc4$', '\.mtc5$', '\.mtc6$', '\.mtc7$', '\.mtc8$', '\.mtc9$', '\.mtc10$', '\.mtc11$', '\.mtc12$', '\.mtc13$', '\.mtc14$', '\.mtc15$', '\.un$' ]
+let NERDTreeIgnore = ['\.pyc$', '\.listing$', '\.aux$', '\.maf$', '\.toc$', '\.mtc$', '\.lot$', '\.out$', '\.lof$', '\.mtc0$', '\.mtc1$', '\.mtc2$', '\.mtc3$', '\.mtc4$', '\.mtc5$', '\.mtc6$', '\.mtc7$', '\.mtc8$', '\.mtc9$', '\.mtc10$', '\.mtc11$', '\.mtc12$', '\.mtc13$', '\.mtc14$', '\.mtc15$', '\.un$' ]
 
 "let g:airline_section_b = '%{strftime("%c")}'
 "let g:airline_section_y = 'BN: %{bufnr("%s")}'
