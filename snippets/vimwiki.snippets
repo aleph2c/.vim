@@ -40,6 +40,10 @@ $7
 -------------------------------------------------------------------------------
 endsnippet
 
+snippet 'rep (\d+) (\w+)' "Repeat" r
+`!p snip.rv = int(match.group(1))*match.group(2)`
+endsnippet
+
 snippet troub "trouble shooting methodology" !b
 *${1:Title of your investigation}*
 = Observe =
@@ -81,4 +85,3 @@ snippet uuid "UUID" !b
 if not snip.c:
   snip.rv = uuid.uuid4().hex`
 endsnippet
-

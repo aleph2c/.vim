@@ -51,6 +51,7 @@ endif
   Plug 'tpope/vim-rake'
   Plug 'tpope/vim-speeddating'
   Plug 'tpope/vim-dispatch'
+  Plug 'tpope/vim-vividchalk'
 
   " Directory Changing
   Plug 'airblade/vim-rooter'
@@ -112,10 +113,9 @@ nmap <silent> <leader><C-j> <Plug>(ale_next_wrap)
 nmap <silent> <leader><C-k> <Plug>(ale_previous_wrap)
 let g:ale_sign_column_always=1
 let g:ale_python_flake8_executable='flake8'
-" PEP8 go to hell
-"
-" Lint is useful but the tool has been attacked by tyrannical babies
-" Here are my PEP8-baby-tyrant noise over-rides
+" PEP8 go to hell!  
+" Lint (ale_python_flake8) is an EXTREMELY useful tool, but it has been filled with false alarms by PEP8
+" Here are my PEP8 noise-over-rides
 let g:ale_python_flake8_options =  "--ignore=W0311,"
 let g:ale_python_flake8_options .= 'E501,' "line too long for the 70s
 let g:ale_python_flake8_options .= 'E114,' "indent must be 4, no thank you
@@ -124,7 +124,7 @@ let g:ale_python_flake8_options .= 'E272,' "multiple spaces before keyword, brea
 let g:ale_python_flake8_options .= 'E221,' "multiple spaces before operator, breaks tabularize
 let g:ale_python_flake8_options .= 'E251,' "continuation line with same indent as next logical line
 let g:ale_python_flake8_options .= 'E241,' "multiple space after ',' breaks tabularize
-let g:ale_python_flake8_options .= 'E121,' "weird OCD overhang noise
+let g:ale_python_flake8_options .= 'E121,' "weird OCD overhang noise (wasting my precious heartbeats)
 let g:ale_python_flake8_options .= 'E222,' "multiple spaces after operator, breaks tabularize
 let g:ale_python_flake8_options .= 'E131,' "bike-shedding indent
 let g:ale_python_flake8_options .= 'E128,' "bike-shedding indent
@@ -741,4 +741,4 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 " paste from buffer
 "map <C-V> :r ~/.vimbuffer<CR>
 
-
+colorscheme vividchalk
