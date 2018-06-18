@@ -260,4 +260,30 @@ def ${1:state_function_name}(${2:self}, e ):
 	status return_status.UNHANDLED
 endsnippet
 
+snippet call "create a callback method" b
+def ${1:state_function_name}(${2:chart}, e):
+  status = return_status.HANDLED
+  $3
+  return status
+$0
+endsnippet
+
+snippet oneshot "create a oneshot" b
+${1:chart}.post_fifo(
+  Event(signal=signals.${2:signal_name}),
+  times=1,
+  period=${3:period_in_seconds},
+  deferred=True)$0
+endsnippet
+
+snippet catch "create a catch" b
+catch(signal=signals.${1:signal_name}, handler=${2:handler}). \
+$0
+endsnippet
+
+snippet payload "created namedtuple payload" b
+${1:NamedPayload} = \
+  namedtuple('$1', ['$2', $0 ])
+endsnippet
+
 # vim:ft=snippets:

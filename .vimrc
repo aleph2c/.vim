@@ -90,6 +90,9 @@ endif
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-session'
 
+  " Destroy all buffers not currently open
+  Plug 'artnez/vim-wipeout'
+
   " Linting
   Plug 'w0rp/ale'
 
@@ -131,6 +134,7 @@ let g:ale_python_flake8_options .= 'W391,' "why care about blank lines at the en
 let g:ale_python_flake8_options .= 'E302,' "strange OCD space issue
 let g:ale_python_flake8_options .= 'E303,' "strange OCD space issue
 let g:ale_python_flake8_options .= 'E305,' "strange OCD space issue
+let g:ale_python_flake8_options .= 'E265,' "hashtag comment space noise (distracting while debugging)
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
