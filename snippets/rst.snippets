@@ -1,11 +1,18 @@
 global !p
 import re
+import datetime
 def hypertarget(filename, t):
   return '..' ' _'+filename + '-' + re.sub(' ', '-',t).lower() + ':'
 
 def captalize_words(t):
 	return " ".join([word.capitalize() for word in t.split()])
+
+def current_date():
+	now = datetime.datetime.now()
+	return now.strftime("%Y-%m-%d")
 endglobal
+
+
 
 snippet abr "abbreviation" 
 :abbr:\`${1:short}(${2:the long form})\`
@@ -61,5 +68,25 @@ endsnippet
 
 snippet image "Add an image" b
 .. image:: _static/$1.svg
-    :align: center
+		:target: _static/$1.pdf
+	  :align: center
+endsnippet
+
+snippet note "Add a note" b
+.. note::
+
+  $0
+endsnippet
+
+
+snippet ttr "Things to Remember" b
+.. admonition:: Things to Remember
+
+  $0
+endsnippet
+
+snippet comment "Comment" b
+.. admonition:: Scott Volk: `!p snip.rv = current_date()`
+
+  $0
 endsnippet
