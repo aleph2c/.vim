@@ -221,7 +221,7 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("win32")
   function! s:call_trace_to_sequence_diagram(file_in_which_to_write_trace, diagram_output_file_name)
-      let s:path_to_sequence = 'C:/github/sequence/sequence.rb'
+      let s:path_to_sequence = $VIM . "/.vim/.ruby/sequence.rb"
       normal mz
       let diagram_output_file_name = a:diagram_output_file_name
       let diagram_input_file_name  = a:file_in_which_to_write_trace
