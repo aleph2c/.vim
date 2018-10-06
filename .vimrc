@@ -55,7 +55,7 @@ endif
   Plug 'tpope/vim-vividchalk'
 
   " Directory Changing
-  Plug 'airblade/vim-rooter'
+  "Plug 'airblade/vim-rooter'
 
   " Wiki
   Plug 'vim-scripts/utl.vim'
@@ -83,7 +83,7 @@ endif
 
   " Search and Search/Replace - This is the only neovim plugin
   "                             hardly worth the pain
-  "Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' }
 
 
   " Drawing boxes
@@ -221,7 +221,7 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("win32")
   function! s:call_trace_to_sequence_diagram(file_in_which_to_write_trace, diagram_output_file_name)
-      let s:path_to_sequence = 'C:/github/sequence/sequence.rb'
+      let s:path_to_sequence = $VIM . "/.vim/.ruby/sequence.rb"
       normal mz
       let diagram_output_file_name = a:diagram_output_file_name
       let diagram_input_file_name  = a:file_in_which_to_write_trace
