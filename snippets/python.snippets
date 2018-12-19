@@ -276,6 +276,12 @@ def ${1:state_function_name}(${2:chart}, e):
 $0
 endsnippet
 
+snippet state "create a state" b
+self.${1:state_name} = self.create(state="$1"). \
+  catch(signal=signals.${2:signal},
+	  handler=self.${3:handler}). \
+	catch$0
+endsnippet
 snippet oneshot "create a oneshot" b
 ${1:chart}.post_fifo(
   Event(signal=signals.${2:signal_name}),
@@ -285,8 +291,9 @@ ${1:chart}.post_fifo(
 endsnippet
 
 snippet catch "create a catch" b
-catch(signal=signals.${1:signal_name}, handler=${2:handler}). \
-$0
+catch(signal=signals.${1:signal_name},
+  handler=self.${2:handler}). \
+catch$0
 endsnippet
 
 snippet payload "created namedtuple payload" b

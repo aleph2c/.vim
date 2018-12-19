@@ -48,7 +48,6 @@ endif
   Plug 'tpope/vim-markdown'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-rake'
   Plug 'tpope/vim-speeddating'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-vividchalk'
@@ -97,9 +96,28 @@ endif
 
   " Testing
   Plug 'janko-m/vim-test'
+  Plug '5long/pytest-vim-compiler'
+  Plug 'reinh/vim-makegreen'
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'christoomey/vim-tmux-runner'
+
 
 call plug#end()
 set nocompatible
+
+let test#python#runner = 'pytest'
+let test#strategy = {
+  \ 'nearest': 'make',
+  \ 'file':    'dispatch',
+  \ 'suite':   'dispatch_background',
+  \}
+let test#python#pytest#options = "--color=no --tb=short -q -s"
+
+nmap <silent> <leader>tn :TestNearest<CR> " ,tn
+nmap <silent> <leader>tf :TestFile<CR>    " ,tf
+nmap <silent> <F8> :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>    " ,tl
+nmap <silent> <leader>tg :TestVisit<CR>   " ,tg
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     ALE                                      "
@@ -683,7 +701,7 @@ endif
 noremap ; :Buffers<CR>
 noremap  <c-p> :Files<CR>
 nnoremap <leader>r :Tags<CR>
-nnoremap <c-m><c-m> :History<CR>
+"nnoremap <c-m><c-m> :History<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     Ruby                                     "
@@ -741,4 +759,6 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 " paste from buffer
 "map <C-V> :r ~/.vimbuffer<CR>
 
+set spell!
+nnoremap <F9> :TagbarToggle<CR>
 colorscheme vividchalk
