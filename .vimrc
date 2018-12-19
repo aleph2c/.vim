@@ -28,7 +28,7 @@ endif
   " Autocomplete
   Plug 'Valloric/YouCompleteMe'
 
-  "Look of nvim
+  "Look of vim
   Plug 'Lokaltog/vim-powerline'
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'chriskempson/base16-vim'
@@ -36,6 +36,7 @@ endif
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/fonts'
   Plug 'altercation/vim-colors-solarized'
+  Plug 'ajgrf/parchment'
 
   " Tim Pope
   Plug 'tpope/vim-fugitive'
@@ -90,6 +91,9 @@ endif
   " Because I have to restart nvim all of the time
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-session'
+
+  " Destroy all buffers not currently open
+  Plug 'artnez/vim-wipeout'
 
   " Linting
   Plug 'w0rp/ale'
@@ -154,6 +158,7 @@ let g:ale_python_flake8_options .= 'W391,' "why care about blank lines at the en
 let g:ale_python_flake8_options .= 'E302,' "strange OCD space issue
 let g:ale_python_flake8_options .= 'E303,' "strange OCD space issue
 let g:ale_python_flake8_options .= 'E305,' "strange OCD space issue
+let g:ale_python_flake8_options .= 'E265,' "hashtag comment space noise (distracting while debugging)
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
@@ -234,7 +239,7 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("win32")
   function! s:call_trace_to_sequence_diagram(file_in_which_to_write_trace, diagram_output_file_name)
-      let s:path_to_sequence = 'C:/github/sequence/sequence.rb'
+      let s:path_to_sequence = $VIM . "/.vim/.ruby/sequence.rb"
       normal mz
       let diagram_output_file_name = a:diagram_output_file_name
       let diagram_input_file_name  = a:file_in_which_to_write_trace
