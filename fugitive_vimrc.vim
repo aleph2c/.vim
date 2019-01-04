@@ -12,10 +12,10 @@ autocmd QuickFixCmdPost *grep* cwindow
 nnoremap <leader>gg :execute "Ggrep " . expand("<cword>")<CR>:copen<CR><CR>
 nnoremap <leader>gl :execute "Glog " . "--grep=" . expand("<cword>") . "--"<CR>
 nnoremap <leader>gs :execute "Glog " . "-S" .expand("<cword>") . " -- %"<CR> :copen<CR>
-autocmd User fugitive
-\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-\   nnoremap <buffer> .. :edit %:h<CR> |
-\ endif
+"autocmd User fugitive
+"\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+"\   nnoremap <buffer> .. :edit %:h<CR> |
+"\ endif
 let g:vimwiki_table_mappings=0
 if has("win32")
   let s:path_to_this_file=expand("<sfile>:p:h")

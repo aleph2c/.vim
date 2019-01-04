@@ -535,18 +535,18 @@ highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
 highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
 highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
 if has("autocmd")
-" Enable filetype detection
-filetype plugin indent on
+  " Enable filetype detection
+  filetype plugin indent on
 
-" Restore cursor position
-autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
+  " Restore cursor position
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 endif
 if &t_Co > 2 || has("gui_running")
-" Enable syntax highlighting
-syntax on
+  " Enable syntax highlighting
+  syntax on
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Clip Board Control                              "
@@ -682,10 +682,10 @@ autocmd QuickFixCmdPost *grep* cwindow
 nnoremap <leader>gg :execute "Ggrep " . expand("<cword>")<CR>:copen<CR><CR>
 nnoremap <leader>gl :execute "Glog " . "--grep=" . expand("<cword>") . "--"<CR>
 nnoremap <leader>gs :execute "Glog " . "-S" .expand("<cword>") . " -- %"<CR> :copen<CR>
-autocmd User fugitive
-\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-\   nnoremap <buffer> .. :edit %:h<CR> |
-\ endif
+"autocmd User fugitive
+"\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+"\   nnoremap <buffer> .. :edit %:h<CR> |
+"\ endif
 let g:vimwiki_table_mappings=0
 if has("win32")
   let s:path_to_this_file=expand("<sfile>:p:h")
@@ -767,3 +767,4 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 set spell!
 nnoremap <F9> :TagbarToggle<CR>
 colorscheme vividchalk
+
