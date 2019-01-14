@@ -128,6 +128,57 @@ write_init_body(args, t[2], snip)
 		$0
 endsnippet
 
+snippet method "method with dynamic docblock"
+  def ${1}(self, ${2}):
+`!p
+# Currently Ultisnips does not support dynamic tabstops, so we cannot add
+# tabstops to the datatype for these param tags until that feature is added.
+def format_args(arguments):
+  index = 1
+  for arg in arguments:
+		if arg == '*args':
+			string1  = "       :param \`\`%s\`\`: variable length arguement list" % (arg)
+		elif arg == '**kwargs':
+			string1  = "       :param \`\`%s\`\`: arbitrary keyword arguements" % (arg)
+		else:
+			string1  = "       :param %s: (type1), default: None" % (arg)
+    yield (string1)
+    index += 1
+
+arguments = t[2].split(',')
+arguments = [argument.strip() for argument in arguments if argument]
+
+
+if len(arguments):
+  fargs = format_args(arguments)
+  tags = [next(fargs) for index in range(len(arguments))] 
+	snip.rv = "    '''short description\n"
+	snip.rv += "\n"
+	snip.rv += "    longer description\n"
+	snip.rv += "\n"
+	snip.rv += "    Note:\n"
+	snip.rv += "       Do this not that recommendation\n"
+	snip.rv += "\n"
+	snip.rv += "    Args:"
+	for tag in tags:
+		snip += tag
+	snip.rv += "\n\n"
+	snip.rv += "\n"
+	snip.rv += "    Returns:\n"
+	snip.rv += "       (type): \n"
+	snip.rv += "\n"
+	snip.rv += "    Examples:\n"
+	snip.rv += "      \n"
+  snip.rv += "    .. code-block:: python\n"
+  snip.rv += "       \n"
+  snip.rv += "       print(\"hello world\")"
+	snip.rv += "\n"
+	snip += "  '''"
+	snip += ''
+else:
+	snip.rv = ''
+`    ${0:${VISUAL}}
+endsnippet
 
 snippet slotclass "class with slots and docstrings" b
 class ${1:MyClass}(${2:object}):
@@ -269,7 +320,7 @@ def ${1:state_function_name}(${2:self}, e):
 endsnippet
 
 snippet call "create a callback method" b
-def ${1:state_function_name}(${2:chart}, e):
+def ${1:state_function_name}(${3:chart}, e):
 	status = return_status.HANDLED
 	$3
 	return status

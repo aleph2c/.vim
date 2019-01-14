@@ -767,4 +767,4 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 set spell!
 nnoremap <F9> :TagbarToggle<CR>
 colorscheme vividchalk
-
+au Filetype python setl et ts=2 sw=2
