@@ -137,11 +137,11 @@ def format_args(arguments):
   index = 1
   for arg in arguments:
 		if arg == '*args':
-			string1  = "       :param \`\`%s\`\`: variable length arguement list" % (arg)
+			string1  = "       \`\`%s\`\`: variable length arguement list" % (arg)
 		elif arg == '**kwargs':
-			string1  = "       :param \`\`%s\`\`: arbitrary keyword arguements" % (arg)
+			string1  = "       \`\`%s\`\`: arbitrary keyword arguements" % (arg)
 		else:
-			string1  = "       :param %s: (type1), default: None" % (arg)
+			string1  = "       \`\`%s\`\` (type1): default: None" % (arg)
     yield (string1)
     index += 1
 
@@ -156,24 +156,23 @@ if len(arguments):
 	snip.rv += "\n"
 	snip.rv += "    longer description\n"
 	snip.rv += "\n"
-	snip.rv += "    Note:\n"
+	snip.rv += "    **Note**:\n"
 	snip.rv += "       Do this not that recommendation\n"
 	snip.rv += "\n"
-	snip.rv += "    Args:"
+	snip.rv += "    **Args**:"
 	for tag in tags:
-		snip += tag
-	snip.rv += "\n\n"
+		snip += tag + "\n"
 	snip.rv += "\n"
-	snip.rv += "    Returns:\n"
+	snip.rv += "    **Returns**:\n"
 	snip.rv += "       (type): \n"
 	snip.rv += "\n"
-	snip.rv += "    Examples:\n"
+	snip.rv += "    **Example(s)**:\n"
 	snip.rv += "      \n"
   snip.rv += "    .. code-block:: python\n"
   snip.rv += "       \n"
   snip.rv += "       print(\"hello world\")"
 	snip.rv += "\n"
-	snip += "  '''"
+	snip += "'''"
 	snip += ''
 else:
 	snip.rv = ''
