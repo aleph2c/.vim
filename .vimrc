@@ -49,7 +49,6 @@ endif
   Plug 'tpope/vim-markdown'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-rake'
   Plug 'tpope/vim-speeddating'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-vividchalk'
@@ -101,9 +100,28 @@ endif
 
   " Testing
   Plug 'janko-m/vim-test'
+  Plug '5long/pytest-vim-compiler'
+  Plug 'reinh/vim-makegreen'
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'christoomey/vim-tmux-runner'
+
 
 call plug#end()
 set nocompatible
+
+let test#python#runner = 'pytest'
+let test#strategy = {
+  \ 'nearest': 'make',
+  \ 'file':    'dispatch',
+  \ 'suite':   'dispatch_background',
+  \}
+let test#python#pytest#options = "--color=no --tb=short -q -s"
+
+nmap <silent> <leader>tn :TestNearest<CR> " ,tn
+nmap <silent> <leader>tf :TestFile<CR>    " ,tf
+nmap <silent> <F8> :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>    " ,tl
+nmap <silent> <leader>tg :TestVisit<CR>   " ,tg
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     ALE                                      "
@@ -517,18 +535,18 @@ highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
 highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
 highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
 if has("autocmd")
-" Enable filetype detection
-filetype plugin indent on
+  " Enable filetype detection
+  filetype plugin indent on
 
-" Restore cursor position
-autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
+  " Restore cursor position
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 endif
 if &t_Co > 2 || has("gui_running")
-" Enable syntax highlighting
-syntax on
+  " Enable syntax highlighting
+  syntax on
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Clip Board Control                              "
@@ -664,10 +682,10 @@ autocmd QuickFixCmdPost *grep* cwindow
 nnoremap <leader>gg :execute "Ggrep " . expand("<cword>")<CR>:copen<CR><CR>
 nnoremap <leader>gl :execute "Glog " . "--grep=" . expand("<cword>") . "--"<CR>
 nnoremap <leader>gs :execute "Glog " . "-S" .expand("<cword>") . " -- %"<CR> :copen<CR>
-autocmd User fugitive
-\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-\   nnoremap <buffer> .. :edit %:h<CR> |
-\ endif
+"autocmd User fugitive
+"\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+"\   nnoremap <buffer> .. :edit %:h<CR> |
+"\ endif
 let g:vimwiki_table_mappings=0
 if has("win32")
   let s:path_to_this_file=expand("<sfile>:p:h")
@@ -688,7 +706,7 @@ endif
 noremap ; :Buffers<CR>
 noremap  <c-p> :Files<CR>
 nnoremap <leader>r :Tags<CR>
-nnoremap <c-m><c-m> :History<CR>
+"nnoremap <c-m><c-m> :History<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     Ruby                                     "
@@ -746,4 +764,7 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 " paste from buffer
 "map <C-V> :r ~/.vimbuffer<CR>
 
+set spell!
+nnoremap <F9> :TagbarToggle<CR>
 colorscheme vividchalk
+au Filetype python setl et ts=2 sw=2
