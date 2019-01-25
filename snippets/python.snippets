@@ -135,13 +135,16 @@ snippet method "method with dynamic docblock"
 # tabstops to the datatype for these param tags until that feature is added.
 def format_args(arguments):
   index = 1
+	# we add the '|' to make the arg lists appear on seperate lines.
+	# (I'm starting to wonder about rst... it fills the code with clutter and
+	# distracting garbage)
   for arg in arguments:
 		if arg == '*args':
-			string1  = "       \`\`%s\`\`: variable length arguement list" % (arg)
+			string1  = "       | \`\`%s\`\`: variable length arguement list" % (arg)
 		elif arg == '**kwargs':
-			string1  = "       \`\`%s\`\`: arbitrary keyword arguements" % (arg)
+			string1  = "       | \`\`%s\`\`: arbitrary keyword arguements" % (arg)
 		else:
-			string1  = "       \`\`%s\`\` (type1): default: None" % (arg)
+			string1  = "       | \`\`%s\`\` (type1): " % (arg)
     yield (string1)
     index += 1
 
@@ -161,8 +164,8 @@ if len(arguments):
 	snip.rv += "\n"
 	snip.rv += "    **Args**:"
 	for tag in tags:
-		snip += tag + "\n"
-	snip.rv += "\n"
+		snip += tag
+	snip.rv += "\n\n"
 	snip.rv += "    **Returns**:\n"
 	snip.rv += "       (type): \n"
 	snip.rv += "\n"
@@ -170,13 +173,36 @@ if len(arguments):
 	snip.rv += "      \n"
   snip.rv += "    .. code-block:: python\n"
   snip.rv += "       \n"
-  snip.rv += "       print(\"hello world\")"
+  snip.rv += "       >>> [factorial(n) for n in range(6)]\n"
+  snip.rv += "       [1, 1, 2, 6, 24, 120]\n"
 	snip.rv += "\n"
-	snip += "'''"
+	snip += "    '''"
 	snip += ''
 else:
 	snip.rv = ''
 `    ${0:${VISUAL}}
+endsnippet
+
+snippet module "python module documentation"
+"""$1
+
+The $1 module $0
+
+**Example(s)**:
+  Here is how you can build a ...
+
+  .. code-block:: python
+
+    code goes here
+
+The ``$1`` module provides a lot of features which can be read about in `the
+full spaced-package documentation <https://aleph2c.github.io/spaced/>`_
+
+"""
+endsnippet
+
+snippet att "write a docstring for an attribute"
+"""($1): $2"""$0
 endsnippet
 
 snippet slotclass "class with slots and docstrings" b
@@ -205,6 +231,10 @@ write_init_body(args, t[2], snip)
 		$0
 endsnippet
 
+snippet doctest "method to put in main for doctest" b
+import doctest
+doctest.testmod()
+endsnippet
 
 snippet contain "methods for emulating a container type" b
 def __len__(self):
