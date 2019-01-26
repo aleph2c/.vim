@@ -82,7 +82,7 @@ endif
 
   " Search and Search/Replace - This is the only neovim plugin
   "                             hardly worth the pain
-  Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' }
 
 
   " Drawing boxes
@@ -104,6 +104,10 @@ endif
   Plug 'reinh/vim-makegreen'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'christoomey/vim-tmux-runner'
+
+  " Candidates
+  Plug 'tpope/vim-eunuch'
+  Plug 'terryma/vim-multiple-cursors'
 
 
 call plug#end()
