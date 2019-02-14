@@ -737,3 +737,6 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 "map <C-V> :r ~/.vimbuffer<CR>
 
 colorscheme vividchalk
+set spell!
+
+nnoremap <silent><F9> :TagbarToggle<CR>
