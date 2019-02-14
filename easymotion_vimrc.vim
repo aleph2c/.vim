@@ -7,7 +7,7 @@ let g:EasyMotion_verbose          = 0
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
 nmap s <Plug>(easymotion-overwin-f)
-nmap t <Plug>(easymotion-t)
+"nmap t <Plug>(easymotion-t)
 
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)

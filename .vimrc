@@ -28,7 +28,7 @@ endif
   " Autocomplete
   Plug 'Valloric/YouCompleteMe'
 
-  "Look of nvim
+  "Look of vim
   Plug 'Lokaltog/vim-powerline'
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'chriskempson/base16-vim'
@@ -36,6 +36,7 @@ endif
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/fonts'
   Plug 'altercation/vim-colors-solarized'
+  Plug 'ajgrf/parchment'
 
   " Tim Pope
   Plug 'tpope/vim-fugitive'
@@ -48,12 +49,12 @@ endif
   Plug 'tpope/vim-markdown'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-rake'
   Plug 'tpope/vim-speeddating'
+  Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-vividchalk'
 
   " Directory Changing
-  Plug 'airblade/vim-rooter'
+  "Plug 'airblade/vim-rooter'
 
   " Wiki
   Plug 'vim-scripts/utl.vim'
@@ -81,7 +82,7 @@ endif
 
   " Search and Search/Replace - This is the only neovim plugin
   "                             hardly worth the pain
-  "Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'brooth/far.vim', { 'do': ':UpdateRemotePlugins' }
 
 
   " Drawing boxes
@@ -91,11 +92,42 @@ endif
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-session'
 
+  " Destroy all buffers not currently open
+  Plug 'artnez/vim-wipeout'
+
   " Linting
   Plug 'w0rp/ale'
 
+  " Testing
+  Plug 'janko-m/vim-test'
+  Plug '5long/pytest-vim-compiler'
+  Plug 'reinh/vim-makegreen'
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'christoomey/vim-tmux-runner'
+
+  " Candidates
+  Plug 'tpope/vim-eunuch'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'Valloric/MatchTagAlways'
+
+
 call plug#end()
 set nocompatible
+
+let test#python#runner = 'pytest'
+let test#strategy = {
+  \ 'nearest': 'make',
+  \ 'file':    'dispatch',
+  \ 'suite':   'dispatch_background',
+  \}
+let test#python#pytest#options = "--color=no --tb=short -q -s"
+
+nmap <silent> <leader>tn :TestNearest<CR> " ,tn
+nmap <silent> <leader>tf :TestFile<CR>    " ,tf
+nmap <silent> <F8> :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>    " ,tl
+nmap <silent> <leader>tg :TestVisit<CR>   " ,tg
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     ALE                                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -131,6 +163,7 @@ let g:ale_python_flake8_options .= 'W391,' "why care about blank lines at the en
 let g:ale_python_flake8_options .= 'E302,' "strange OCD space issue
 let g:ale_python_flake8_options .= 'E303,' "strange OCD space issue
 let g:ale_python_flake8_options .= 'E305,' "strange OCD space issue
+let g:ale_python_flake8_options .= 'E265,' "hashtag comment space noise (distracting while debugging)
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
@@ -211,7 +244,7 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("win32")
   function! s:call_trace_to_sequence_diagram(file_in_which_to_write_trace, diagram_output_file_name)
-      let s:path_to_sequence = 'C:/github/sequence/sequence.rb'
+      let s:path_to_sequence = $VIM . "/.vim/.ruby/sequence.rb"
       normal mz
       let diagram_output_file_name = a:diagram_output_file_name
       let diagram_input_file_name  = a:file_in_which_to_write_trace
@@ -507,18 +540,18 @@ highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
 highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
 highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
 if has("autocmd")
-" Enable filetype detection
-filetype plugin indent on
+  " Enable filetype detection
+  filetype plugin indent on
 
-" Restore cursor position
-autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
+  " Restore cursor position
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 endif
 if &t_Co > 2 || has("gui_running")
-" Enable syntax highlighting
-syntax on
+  " Enable syntax highlighting
+  syntax on
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Clip Board Control                              "
@@ -654,10 +687,10 @@ autocmd QuickFixCmdPost *grep* cwindow
 nnoremap <leader>gg :execute "Ggrep " . expand("<cword>")<CR>:copen<CR><CR>
 nnoremap <leader>gl :execute "Glog " . "--grep=" . expand("<cword>") . "--"<CR>
 nnoremap <leader>gs :execute "Glog " . "-S" .expand("<cword>") . " -- %"<CR> :copen<CR>
-autocmd User fugitive
-\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-\   nnoremap <buffer> .. :edit %:h<CR> |
-\ endif
+"autocmd User fugitive
+"\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+"\   nnoremap <buffer> .. :edit %:h<CR> |
+"\ endif
 let g:vimwiki_table_mappings=0
 if has("win32")
   let s:path_to_this_file=expand("<sfile>:p:h")
@@ -678,7 +711,7 @@ endif
 noremap ; :Buffers<CR>
 noremap  <c-p> :Files<CR>
 nnoremap <leader>r :Tags<CR>
-nnoremap <c-m><c-m> :History<CR>
+"nnoremap <c-m><c-m> :History<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     Ruby                                     "
@@ -714,7 +747,7 @@ nmap <leader><leader>f :NERDTreeFind<CR>
 "make sure relative line numbers are used
 "autocmd FileType nerdtree setlocal relativenumber
 
-let NERDTreeIgnore = ['\.pyc$', '\.listing$', '\.aux$', '\.maf$' , '\.mtc0$', '\.mtc1$', '\.mtc2$', '\.mtc3$', '\.mtc4$', '\.mtc5$', '\.mtc6$', '\.mtc7$', '\.mtc8$', '\.mtc9$', '\.mtc10$', '\.mtc11$', '\.mtc12$', '\.mtc13$', '\.mtc14$', '\.mtc15$', '\.un$' ]
+let NERDTreeIgnore = ['\.pyc$', '\.listing$', '\.aux$', '\.maf$', '\.toc$', '\.mtc$', '\.lot$', '\.out$', '\.lof$', '\.mtc0$', '\.mtc1$', '\.mtc2$', '\.mtc3$', '\.mtc4$', '\.mtc5$', '\.mtc6$', '\.mtc7$', '\.mtc8$', '\.mtc9$', '\.mtc10$', '\.mtc11$', '\.mtc12$', '\.mtc13$', '\.mtc14$', '\.mtc15$', '\.un$' ]
 
 "let g:airline_section_b = '%{strftime("%c")}'
 "let g:airline_section_y = 'BN: %{bufnr("%s")}'
@@ -736,7 +769,7 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 " paste from buffer
 "map <C-V> :r ~/.vimbuffer<CR>
 
-colorscheme vividchalk
 set spell!
-
+colorscheme vividchalk
 nnoremap <silent><F9> :TagbarToggle<CR>
+au Filetype python setl et ts=2 sw=2
