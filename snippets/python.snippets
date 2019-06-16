@@ -349,7 +349,8 @@ def ${1:state_function_name}(${2:self}, e):
 endsnippet
 
 snippet call "create a callback method" b
-def ${1:state_function_name}(${3:chart}, e):
+@staticmethod
+def ${1:state_function_name}(${2:chart}, e):
 	status = return_status.HANDLED
 	$3
 	return status

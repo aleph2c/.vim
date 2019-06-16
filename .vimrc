@@ -108,8 +108,6 @@ endif
   " Candidates
   Plug 'tpope/vim-eunuch'
   Plug 'terryma/vim-multiple-cursors'
-  Plug 'Valloric/MatchTagAlways'
-
 
 call plug#end()
 set nocompatible
