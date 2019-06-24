@@ -43,14 +43,14 @@ endif
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-surround'
-  "Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-rails'
   Plug 'tpope/vim-tbone'
   Plug 'tpope/rbenv-ctags'
   Plug 'tpope/vim-markdown'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-speeddating'
-  "Plug 'tpope/vim-dispatch'
+  Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-vividchalk'
 
   " Directory Changing
@@ -99,16 +99,16 @@ endif
   Plug 'w0rp/ale'
 
   " Testing
-  "Plug 'janko-m/vim-test'
-  "Plug '5long/pytest-vim-compiler'
-  "Plug 'reinh/vim-makegreen'
-  "Plug 'skywind3000/asyncrun.vim'
-  "Plug 'christoomey/vim-tmux-runner'
+  Plug 'janko-m/vim-test'
+  Plug '5long/pytest-vim-compiler'
+  Plug 'reinh/vim-makegreen'
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'christoomey/vim-tmux-runner'
 
   " Candidates
-  "Plug 'tpope/vim-eunuch'
-  "Plug 'terryma/vim-multiple-cursors'
-  "Plug 'Valloric/MatchTagAlways'
+  Plug 'tpope/vim-eunuch'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'Valloric/MatchTagAlways'
 
 
 call plug#end()
