@@ -31,12 +31,12 @@ endif
   "Look of vim
   Plug 'Lokaltog/vim-powerline'
   Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'chriskempson/base16-vim'
+  "Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/fonts'
-  Plug 'altercation/vim-colors-solarized'
-  Plug 'ajgrf/parchment'
+  "Plug 'altercation/vim-colors-solarized'
+  "Plug 'ajgrf/parchment'
 
   " Tim Pope
   Plug 'tpope/vim-fugitive'
@@ -108,8 +108,6 @@ endif
   " Candidates
   Plug 'tpope/vim-eunuch'
   Plug 'terryma/vim-multiple-cursors'
-  Plug 'Valloric/MatchTagAlways'
-
 
 call plug#end()
 set nocompatible
@@ -487,7 +485,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Copy Full Path into @" Register                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap cp :let @" = expand("%:p")<CR>
+nmap cp :let @" = expand("%:p")<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Status Line                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -634,7 +632,7 @@ nmap Y v$y
 "colorscheme base16-apathy
 "colorscheme base16-darktooth
 "colorscheme base16-brewer
-colorscheme base16-3024
+"colorscheme base16-3024
 set background=light
 let g:airline_base16_apathy = 1
 
@@ -682,45 +680,7 @@ function! NextClosedFold(dir)
         call winrestview(view)
     endif
 endfunction
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            Fugitive Configuration                            "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"nnoremap <leader>k  :Gvdiff <CR>
-"nnoremap <leader>d  :Gstatus<CR>
 
-" Add the git branch to your status line
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-" Keep the buffer clear of fugitive generated files
-autocmd BufReadPost fugitive://* set bufhidden=delete
-autocmd QuickFixCmdPost *grep* cwindow
-nnoremap <leader>gg :execute "Ggrep " . expand("<cword>")<CR>:copen<CR><CR>
-nnoremap <leader>gl :execute "Glog " . "--grep=" . expand("<cword>") . "--"<CR>
-nnoremap <leader>gs :execute "Glog " . "-S" .expand("<cword>") . " -- %"<CR> :copen<CR>
-"autocmd User fugitive
-"\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-"\   nnoremap <buffer> .. :edit %:h<CR> |
-"\ endif
-let g:vimwiki_table_mappings=0
-if has("win32")
-  let s:path_to_this_file=expand("<sfile>:p:h")
-  let s:path_to_vim_wikis = s:path_to_this_file . '\Dropbox\vimwiki\'
-  let s:path_to_vim_wikis_html = s:path_to_this_file .'Dropbox\vimwiki_html\'
-  let g:vimwiki_list = [{'path': 'C:\Users\lincoln\Dropbox\vimwiki'}]
-  "let s:path_to_vim_wikis = s:path_to_this_file . '\vimwiki\'
-  "let s:path_to_vim_wikis = 'C:\Users\lincoln\Dropbox\vimwiki'
-else
-  "let s:path_to_this_file=expand("<sfile>:p:h:")
-  "let s:path_to_vim_wikis = s:path_to_this_file . '/vimwiki/'
-  let s:path_to_vim_wikis = 'C:\Users\lincoln\Dropbox\vimwiki'
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                     fzf                                      "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap ; :Buffers<CR>
-noremap  <c-p> :Files<CR>
-nnoremap <leader>r :Tags<CR>
-"nnoremap <c-m><c-m> :History<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                     Ruby                                     "
@@ -746,20 +706,6 @@ au BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
 "                                  LaTeX/TeX                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufReadPost *.tex colorscheme base16-3024
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               NERDTree hotkeys                               "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>n :NERDTreeToggle <CR>
-nmap <leader><leader>h :NERDTree .<CR>
-nmap <leader><leader>f :NERDTreeFind<CR>
-"let NERDTreeShowLineNumbers=1
-"make sure relative line numbers are used
-"autocmd FileType nerdtree setlocal relativenumber
-
-let NERDTreeIgnore = ['\.pyc$', '\.listing$', '\.aux$', '\.maf$', '\.toc$', '\.mtc$', '\.lot$', '\.out$', '\.lof$', '\.mtc0$', '\.mtc1$', '\.mtc2$', '\.mtc3$', '\.mtc4$', '\.mtc5$', '\.mtc6$', '\.mtc7$', '\.mtc8$', '\.mtc9$', '\.mtc10$', '\.mtc11$', '\.mtc12$', '\.mtc13$', '\.mtc14$', '\.mtc15$', '\.un$' ]
-
-"let g:airline_section_b = '%{strftime("%c")}'
-"let g:airline_section_y = 'BN: %{bufnr("%s")}'
 
 let g:airline_detect_modified=1
 let g:airline_detect_spell=1
@@ -779,6 +725,14 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 "map <C-V> :r ~/.vimbuffer<CR>
 
 set spell!
-nnoremap <F9> :TagbarToggle<CR>
 colorscheme vividchalk
+nnoremap <silent><F9> :TagbarToggle<CR>
 au Filetype python setl et ts=2 sw=2
+
+" place an A marker above your state definition
+" place a W marker where you want your static functions
+function! s:AutoWriteStaticFunctionMacroToq()
+  let @q= '/handlewwwlvt)"ayj0mA`Wi  @staticmethoddef a(chart, e):status = return_status.HANDLEDreturn statusmW`A'
+endfunction
+
+command! StaticFunctionMacroToq call s:AutoWriteStaticFunctionMacroToq()

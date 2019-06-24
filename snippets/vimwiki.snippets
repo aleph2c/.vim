@@ -10,7 +10,7 @@ def suuid():
 
 def from_options(t, options):
 	if t:
-		options = [ m[len(t):] for m in options if m.startswith(t) ]
+		options = [m[len(t):] for m in options if m.startswith(t)]
 	if len(options) == 1:
 		return options[0]
 	else:
