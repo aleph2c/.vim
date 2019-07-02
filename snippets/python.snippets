@@ -42,6 +42,12 @@ NORMAL	= 0x1
 DOXYGEN = 0x2
 SPHINX	= 0x3
 
+global_state_name = None
+
+def fix_indent(snip):
+  snip.unshift(2)
+  return snip.mkline(line="")
+
 def get_args(arglist):
 	args = [arg.split('=')[0].strip() for arg in arglist.split(',') if arg]
 	args = [arg for arg in args if arg and arg != "self"]
@@ -55,6 +61,21 @@ def get_style(snip):
 		return SPHINX
 	else:
 		return NORMAL
+
+def make_handler(state_name, signal):
+	result = ""
+	result = state_name 
+	result += "_"
+	result += signal.lower()
+	return result
+
+def from_options(t, options):
+	if t:
+		options = [m[len(t):] for m in options if m.startswith(t)]
+	if len(options) == 1:
+		return options[0]
+	else:
+		return "(" + "|".join(options) + ")"
 
 def format_arg(arg, style):
 	if style == DOXYGEN:
@@ -357,12 +378,49 @@ def ${1:state_function_name}(${2:chart}, e):
 $0
 endsnippet
 
+#snippet state "create a state" b
+#self.${1:state_name} = self.create(state="$1"). \
+#  catch(signal=signals.${2:signal},
+#	  handler=self.${3:handler}). \
+#	catch$0
+#endsnippet
+
 snippet state "create a state" b
 self.${1:state_name} = self.create(state="$1"). \
   catch(signal=signals.${2:signal},
-	  handler=self.${3:handler}). \
-	catch$0
+	  handler=self.`!p snip.rv=make_handler(t[1], t[2])`. \
+  $3`!p snip.rv=from_options(t[3], ['catch', 'to_method()'])`$0
 endsnippet
+
+snippet catch "create a catch" b
+catch(signal=signals.${1:signal_name},
+  handler=`!p 
+def is_state_line(state_line):
+	m = re.search('state="(.+)"', state_line)
+	try:
+		m.group(1)
+		result = True
+	except:
+		result = False
+	return result
+previous_line=snip.buffer.cursor[0]-1
+while(is_state_line(snip.buffer[previous_line]) == False):
+	previous_line -= 1
+m = re.search('state="(.+)"', snip.buffer[previous_line])
+state_name = m.group(1)
+snip.rv=make_handler(state_name, t[1])`) . \
+$2`!p snip.rv=from_options(t[2], ['catch', 'to_method'])`$0
+endsnippet
+
+#post_expand "snip.buffer[snip.snippet_end[0]+1:snip.snippet_end[0]+1] = ['']"
+#post_expand "fix_indent(snip)"
+snippet to_method "end state and change indent" 
+`!p snip.rv = snip.mkline("to_method()\n\n")
+snip.unshift(2)
+snip.rv += snip.mkline("  ")
+`
+endsnippet
+
 snippet oneshot "create a oneshot" b
 ${1:chart}.post_fifo(
   Event(signal=signals.${2:signal_name}),
@@ -371,11 +429,6 @@ ${1:chart}.post_fifo(
 	deferred=True)$0
 endsnippet
 
-snippet catch "create a catch" b
-catch(signal=signals.${1:signal_name},
-  handler=self.${2:handler}). \
-catch$0
-endsnippet
 
 snippet payload "created namedtuple payload" b
 ${1:NamedPayload} = \
