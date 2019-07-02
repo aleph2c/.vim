@@ -22,9 +22,8 @@ snippet code "code block" b
 .. code-block:: python
   :emphasize-lines: 1
   :linenos:
-
-	${1:place code here}
-$0
+  
+  $0${1:place code here}
 endsnippet
 
 snippet "sec" "Writing a section header" rb
@@ -32,6 +31,7 @@ ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
 ${1:${VISUAL:section_title}}
 ${3:`!p snip.rv = '=' * len(t[1])`}
+
 $0
 endsnippet
 
@@ -68,8 +68,10 @@ endsnippet
 
 snippet image "Add an image" b
 .. image:: _static/$1.svg
-		:target: _static/$1.pdf
-	  :align: center
+    :target: _static/$1.pdf
+    :align: center
+
+b
 endsnippet
 
 snippet note "Add a note" b
@@ -89,4 +91,59 @@ snippet comment "Comment" b
 .. admonition:: Scott Volk: `!p snip.rv = current_date()`
 
   $0
+endsnippet
+
+# boiler plate for question 1
+snippet question1 "write question html infrastructure" b
+${3:* :ref:\``!p snip.rv = t[1] + '? <' + hypertarget(snip.basename, t[1] + str(1))[4:-1]`>`}
+${2:`!p snip.rv = hypertarget(snip.basename, t[1] + str(1))`}
+**${1:${VISUAL:type your question here}}?**
+.. include:: i_navigation_1.rst
+$0
+endsnippet
+
+# boiler plate for question 2
+snippet question2 "write question html infrastructure" b
+${3:* :ref:\``!p snip.rv = t[1] + '? <' + hypertarget(snip.basename, t[1] + str(2))[4:-1]`>`}
+${2:`!p snip.rv = hypertarget(snip.basename, t[1] + str(2))`}
+**${1:${VISUAL:type your question here}}?**
+.. include:: i_navigation_2.rst
+$0
+endsnippet
+
+# boiler plate for question 3
+snippet question3 "write question html infrastructure" b
+${3:* :ref:\``!p snip.rv = t[1] + '? <' + hypertarget(snip.basename, t[1] + str(3))[4:-1]`>`}
+${2:`!p snip.rv = hypertarget(snip.basename, t[1] + str(3))`}
+**${1:${VISUAL:type your question here}}?**
+.. include:: i_navigation_3.rst
+$0
+endsnippet
+
+# boiler plate for question 4
+snippet question4 "write question html infrastructure" b
+${3:* :ref:\``!p snip.rv = t[1] + '? <' + hypertarget(snip.basename, t[1] + str(4))[4:-1]`>`}
+${2:`!p snip.rv = hypertarget(snip.basename, t[1] + str(4))`}
+**${1:${VISUAL:type your question here}}?**
+.. include:: i_navigation_4.rst
+$0
+endsnippet
+
+# boiler plate for question 5
+snippet question5 "write question html infrastructure" b
+${3:* :ref:\``!p snip.rv = t[1] + '? <' + hypertarget(snip.basename, t[1] + str(5))[4:-1]`>`}
+${2:`!p snip.rv = hypertarget(snip.basename, t[1] + str(5))`}
+**${1:${VISUAL:type your question here}}?**
+.. include:: i_navigation_5.rst
+$0
+endsnippet
+
+
+# boiler plate for question 6
+snippet question6 "write question html infrastructure" b
+${3:* :ref:\``!p snip.rv = t[1] + '? <' + hypertarget(snip.basename, t[1] + str(6))[4:-1]`>`}
+${2:`!p snip.rv = hypertarget(snip.basename, t[1] + str(6))`}
+**${1:${VISUAL:type your question here}}?**
+.. include:: i_navigation_6.rst
+$0
 endsnippet

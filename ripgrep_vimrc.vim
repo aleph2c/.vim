@@ -31,5 +31,5 @@ command! -bang -nargs=* FindVV call fzf#vim#grep('rg --column --line-number --no
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
-nnoremap <leader>g :Find <cword> <CR>
+nnoremap <leader>g :execute "Find " . expand("<cword>")<CR>
 
