@@ -719,3 +719,11 @@ set spell!
 nnoremap <F9> :TagbarToggle<CR>
 colorscheme vividchalk
 au Filetype python setl et ts=2 sw=2
+
+" place an A marker above your state definition
+" place a W marker where you want your static functions
+function! s:AutoWriteStaticFunctionMacroToq()
+  let @q= '/handlewwwlvt)"ayj0mA`Wi  @staticmethoddef a(chart, e):status = return_status.HANDLEDreturn statusmW`A'
+endfunction
+
+command! StaticFunctionMacroToq call s:AutoWriteStaticFunctionMacroToq()
