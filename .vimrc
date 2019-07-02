@@ -31,12 +31,12 @@ endif
   "Look of vim
   Plug 'Lokaltog/vim-powerline'
   Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'chriskempson/base16-vim'
+  "Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/fonts'
-  Plug 'altercation/vim-colors-solarized'
-  Plug 'ajgrf/parchment'
+  "Plug 'altercation/vim-colors-solarized'
+  "Plug 'ajgrf/parchment'
 
   " Tim Pope
   Plug 'tpope/vim-fugitive'
@@ -478,7 +478,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Copy Full Path into @" Register                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap cp :let @" = expand("%:p")<CR>
+nmap cp :let @" = expand("%:p")<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Status Line                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -625,7 +625,7 @@ nmap Y v$y
 "colorscheme base16-apathy
 "colorscheme base16-darktooth
 "colorscheme base16-brewer
-colorscheme base16-3024
+"colorscheme base16-3024
 set background=light
 let g:airline_base16_apathy = 1
 
