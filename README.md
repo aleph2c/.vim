@@ -18,8 +18,8 @@ To get [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) to work:
 
     sudo apt-get install build-essential cmake
     sudo apt-get install python-dev python3-dev
-    cd ~/.vim/bundle/YouCompleteMe
-    ./install.py
+    cd ~/.vim/plugged/YouCompleteMe
+    python3 ./install.py
 
 If you are on a raspberry pi or beagle bone, replace the last line with:
 
