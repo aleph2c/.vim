@@ -10,6 +10,10 @@ Create symbolic links for your rc files:
     ln -s ~/.vim/snippets ~/snippets
     ln -s ~/.vim/.pdbrc ~/.pdbrc
 
+Open Vim, ignore the errors and type:
+    :PlugInstall
+    :PlugUpgrade
+
 To get [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) to work:
 
     sudo apt-get install build-essential cmake
