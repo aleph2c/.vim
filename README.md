@@ -1,25 +1,29 @@
 # To setup up a new debian machine
 Clone all of the contents of the `.vim` directory into your home directory:
 
-    > git clone git@github.com:aleph2c/vim_tmux.git ~/.vim
+    git clone git@github.com:aleph2c/vim_tmux.git ~/.vim
 
 Create symbolic links for your rc files:
 
-    > ln -s ~/.vim/.vimrc ~/.vimrc
-    > ln -s ~/.vim/.tmux.conf ~/.tmux.conf
-    > ln -s ~/.vim/snippets ~/snippets
-    > ln -s ~/.vim/.pdbrc ~/.pdbrc
+    ln -s ~/.vim/.vimrc ~/.vimrc
+    ln -s ~/.vim/.tmux.conf ~/.tmux.conf
+    ln -s ~/.vim/snippets ~/snippets
+    ln -s ~/.vim/.pdbrc ~/.pdbrc
+
+Open Vim, ignore the errors and type:
+    :PlugInstall
+    :PlugUpgrade
 
 To get [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) to work:
 
-    > sudo apt-get install build-essential cmake
-    > sudo apt-get install python-dev python3-dev
-    > cd ~/.vim/bundle/YouCompleteMe
-    > ./install.py
+    sudo apt-get install build-essential cmake
+    sudo apt-get install python-dev python3-dev
+    cd ~/.vim/plugged/YouCompleteMe
+    python3 ./install.py
 
 If you are on a raspberry pi or beagle bone, replace the last line with:
 
-    > YCM_CORES=1 ./install.py
+    YCM_CORES=1 ./install.py
 
 # To setup VIM on Windows 10 (outside of WLS)
 Download a copy of vim that is compiled properly.  Don't use the default
