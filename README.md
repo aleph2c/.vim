@@ -70,6 +70,6 @@ Adjust your path so that the following can by found:
 Restart your shell so your path is updated, then:
 
     > cd <Install Root>\plugged\YouCompleteMe
-    > python install.py
+    > python install.py --msvc 15
 
 Restart Vim.
