@@ -183,6 +183,14 @@ else:
 `    ${0:${VISUAL}}
 endsnippet
 
+snippet handler "write and empty handler"
+@staticmethod
+def $1(cc, e):
+  status = return_status.HANDLED
+	return status
+$0
+endsnippet
+
 snippet module "python module documentation"
 """$1
 

@@ -112,7 +112,7 @@ snippet code "writing a code block in tex" b
 \end{Code}
 endsnippet
 
-snippet includegraphics "including graphics" b
+snippet image "including graphics" b
 \begin{figure}[H]
 \hypertarget{${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}}{}
 \caption{${1:figure title}}
@@ -153,6 +153,12 @@ snippet dv "writing a dv block in tex" b
 \begin{DV}
 	$0
 \end{DV}
+endsnippet
+
+snippet ht "writing a ht block in tex" b
+\begin{HT}
+	$0
+\end{HT}
 endsnippet
 
 snippet ts "writing a ts block in tex" b
