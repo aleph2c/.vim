@@ -9,7 +9,7 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " Keep the buffer clear of fugitive generated files
 autocmd BufReadPost fugitive://* set bufhidden=delete
 autocmd QuickFixCmdPost *grep* cwindow
-nnoremap <leader>gg :execute "Ggrep " . expand("<cword>")<CR>:copen<CR><CR>
+"nnoremap <leader>gg :execute "Ggrep " . expand("<cword>")<CR>:copen<CR><CR>
 nnoremap <leader>gl :execute "Glog " . "--grep=" . expand("<cword>") . "--"<CR>
 nnoremap <leader>gs :execute "Glog " . "-S" .expand("<cword>") . " -- %"<CR> :copen<CR>
 "autocmd User fugitive
