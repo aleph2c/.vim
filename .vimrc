@@ -466,6 +466,15 @@ augroup reload_vimrc_and_init
   autocmd!
   au BufWritePost *.vim  source $MYVIMRC
 augroup END
+
+function! RsyncPython()
+   let job = job_start('/usr/local/bin/python3.6 .rsync_local_files.py')
+endfunction
+
+augroup rsync_python_files
+  autocmd!
+  au BufWritePost *.py  call RsyncPython()
+augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Font/font                                     "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
