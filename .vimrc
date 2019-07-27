@@ -696,7 +696,7 @@ au BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  LaTeX/TeX                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufNewFile,BufReadPost *.tex colorscheme base16-3024
+"au BufNewFile,BufReadPost *.tex colorscheme base16-3024
 
 let g:airline_detect_modified=1
 let g:airline_detect_spell=1
