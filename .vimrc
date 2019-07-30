@@ -31,12 +31,9 @@ endif
   "Look of vim
   Plug 'Lokaltog/vim-powerline'
   Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/fonts'
-  Plug 'altercation/vim-colors-solarized'
-  Plug 'ajgrf/parchment'
 
   " Tim Pope
   Plug 'tpope/vim-fugitive'
@@ -466,6 +463,15 @@ augroup reload_vimrc_and_init
   autocmd!
   au BufWritePost *.vim  source $MYVIMRC
 augroup END
+
+function! RsyncPython()
+   let job = job_start('/usr/local/bin/python3.6 .rsync_local_files.py')
+endfunction
+
+augroup rsync_python_files
+  autocmd!
+  au BufWritePost *.py  call RsyncPython()
+augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Font/font                                     "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -476,7 +482,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Copy Full Path into @" Register                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap cp :let @" = expand("%:p")<CR>
+nmap cp :let @" = expand("%:p")<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Status Line                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -715,8 +721,8 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 "map <C-V> :r ~/.vimbuffer<CR>
 
 set spell!
-nnoremap <F9> :TagbarToggle<CR>
 colorscheme vividchalk
+nnoremap <silent><F9> :TagbarToggle<CR>
 au Filetype python setl et ts=2 sw=2
 
 " place an A marker above your state definition

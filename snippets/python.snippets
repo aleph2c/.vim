@@ -10,7 +10,7 @@ endsnippet
 
 snippet ifmain "ifmain" b
 if __name__ == '__main__':
-	${1:main()}$0
+	$0
 endsnippet
 
 ##########
@@ -172,7 +172,6 @@ def format_args(arguments):
 arguments = t[2].split(',')
 arguments = [argument.strip() for argument in arguments if argument]
 
-
 if len(arguments):
   fargs = format_args(arguments)
   tags = [next(fargs) for index in range(len(arguments))] 
@@ -194,14 +193,21 @@ if len(arguments):
 	snip.rv += "      \n"
   snip.rv += "    .. code-block:: python\n"
   snip.rv += "       \n"
-  snip.rv += "       >>> [factorial(n) for n in range(6)]\n"
-  snip.rv += "       [1, 1, 2, 6, 24, 120]\n"
+  snip.rv += "       "
 	snip.rv += "\n"
 	snip += "    '''"
 	snip += ''
 else:
 	snip.rv = ''
 `    ${0:${VISUAL}}
+endsnippet
+
+snippet handler "write and empty handler"
+@staticmethod
+def $1(cc, e):
+  status = return_status.HANDLED
+	return status
+$0
 endsnippet
 
 snippet module "python module documentation"
@@ -365,8 +371,18 @@ snippet fs "create a formatted string"
 endsnippet
 
 snippet flat "create a flat state" b
-def ${1:state_function_name}(${2:self}, e):
-	status return_status.UNHANDLED
+@spy_on
+def ${1:state_function_name}(${2:chart}, e):
+  status = return_status.UNHANDLED
+  if(e.signal == signals.ENTRY_SIGNAL):
+    status = return_status.HANDLED
+  elif(e.signal == signals.INIT_SIGNAL):
+	  status = return_status.HANDLED
+	else:
+		chart.temp.fun = ${2:parent_state}
+		status = return_status.SUPER
+	return status
+
 endsnippet
 
 snippet call "create a callback method" b
@@ -378,19 +394,163 @@ def ${1:state_function_name}(${2:chart}, e):
 $0
 endsnippet
 
-#snippet state "create a state" b
-#self.${1:state_name} = self.create(state="$1"). \
-#  catch(signal=signals.${2:signal},
-#	  handler=self.${3:handler}). \
-#	catch$0
-#endsnippet
-
 snippet state "create a state" b
 self.${1:state_name} = self.create(state="$1"). \
   catch(signal=signals.${2:signal},
 	  handler=self.`!p snip.rv=make_handler(t[1], t[2])`). \
   $3`!p snip.rv=from_options(t[3], ['catch', 'to_method()'])`$0
 endsnippet
+
+snippet imports "pick import type" b
+$1`!p snip.rv=from_options(t[1], ['active_object_imports', 'factory_imports'])`
+endsnippet
+
+snippet factory_imports "miros imports" b 
+import time
+from collections import namedtuple
+
+from miros import Event
+from miros import signals
+from miros import Factory
+from miros import return_status
+$0
+endsnippet
+
+snippet active_object_imports "miros imports" b 
+import time
+from collections import namedtuple
+
+from miros import Event
+from miros import spy_on
+from miros import signals
+from miros import ActiveObject
+from miros import return_status
+$0
+endsnippet
+
+snippet ifactory "instrumented factory" b
+class InstrumentedFactory(Factory):
+	def __init__(self, name, live_trace=None, live_spy=None):
+		super().__init__(name)
+		self.live_trace = False if live_trace == None else live_trace
+		self.live_spy = False if live_spy == None else live_spy
+
+$0
+endsnippet
+
+snippet factory "miros factory or ifactory class" b
+class ${1:StateChartName}($2`!p snip.rv=from_options(t[2], ['InstrumentedFactory', 'Factory'])`):
+  def __init__(self, name, ${3:argument,} live_trace=None, live_spy=None):
+    '''comment'''
+		`!p 
+def is_ifactory():
+  previous_line=snip.buffer.cursor[0]-1
+  while(re.search('class', snip.buffer[previous_line]) == False):
+    previous_line -= 1
+	if(re.search('InstrumentedFactory', snip.buffer[previous_line]) or
+	   re.search('InstrumentedFactory', snip.buffer[previous_line-1]) or
+	   re.search('InstrumentedFactory', snip.buffer[previous_line-2]) or
+	   re.search('InstrumentedFactory', snip.buffer[previous_line-3])):
+		return  True
+	else:
+		return False
+snip.rv='super().__init__(name, live_trace, live_spy)' if is_ifactory() else \
+	'super().__init__(name)'`
+    $0
+endsnippet
+
+snippet '''comment''' "factory or ifactory comment" 
+'''$0`!p
+def f_args(arguments):
+  index = 1
+	# we add the '|' to make the arg lists appear on seperate lines.
+	# (I'm starting to wonder about rst... it fills the code with clutter and
+	# distracting garbage)
+  for arg in arguments:
+		if arg == '*args':
+			string1  = "       | \`\`%s\`\`: variable length arguement list" % (arg)
+		elif arg == '**kwargs':
+			string1  = "       | \`\`%s\`\`: arbitrary keyword arguements" % (arg)
+		elif arg == 'live_trace=None':
+			string1  = "       | \`\`%s\`\`: enable live_trace feature?" % (arg)
+		elif arg == 'live_spy=None':
+			string1  = "       | \`\`%s\`\`: enable live_spy feature?" % (arg)
+		else:
+			string1  = "       | \`\`%s\`\` (type1): " % (arg)
+    yield (string1)
+    index += 1
+
+if not snip.c:
+  row, col = vim.current.window.cursor
+  previous_line=snip.buffer[int(row)-2]
+  m = re.search('__init__(\(.+)\)', previous_line)
+  if len(m.groups()) == 1:
+    args = m.group(1).split(',')[1:]
+		args = [arg.strip() for arg in args if arg]
+    tags = f_args(args)
+    snip.rv = "short description\n"
+    snip.rv += "\n"
+    snip.rv += "    longer description\n"
+    snip.rv += "\n"
+    snip.rv += "    **Note**:\n"
+    snip.rv += "       Do this not that recommendation\n"
+    snip.rv += "\n"
+    snip.rv += "    **Args**:\n"
+    for tag in tags:
+      snip.rv += tag + "\n"
+    snip.rv += "\n\n"
+    snip.rv += "    **Returns**:\n"
+    snip.rv += "       (type): \n"
+    snip.rv += "\n"
+    snip.rv += "    **Example(s)**:\n"
+    snip.rv += "      \n"
+    snip.rv += "    .. code-block:: python\n"
+    snip.rv += "       \n"
+    snip.rv += "       # example code goes here"
+    snip.rv += "\n"
+    snip += ''
+`'''
+endsnippet
+
+#def is_class_line(line):
+#  m = re.search('(class)', line)
+#  try:
+#    m.group(1)
+#    result = True
+#  else:
+#    result = False
+#
+#previous_line=snip.buffer.cursor[0]-1
+#while(is_class_line(snip.buffer[previous_line]) == False):
+#  previous_line -= 1
+#m = re.search('(InstrumentedFactory)', snip.buffer[previous_line])
+#try:
+#  m.group(1)
+#  snip.rv='super().__init__(name, live_trace, live_spy)'
+#except:
+#  snip.rv='super().__init__(name)'
+#class ${1:StateChartName}($2`!p snip.rv=from_options(t[2], ['Factory', 'InstrumentedFactory')`):
+#  def __init__(self, name, live_trace=None, live_spy=None${3:other arguments}):
+#    super().__(name, live_trace, live_spy)
+
+#
+#def is_class_line(line):
+#  m = re.search('(class)', line)
+#  try:
+#    m.group(1)
+#    result = True
+#  else:
+#    result = False
+#previous_line=snip.buffer.cursor[0]-1
+#while(is_class_line(snip.buffer[previous_line]) == False):
+#  previous_line -= 1
+#m = re.search('(InstrumentedFactory)', snip.buffer[previous_line])
+#try:
+#  m.group(1)
+#  snip.rv='super().__init__(name, live_trace, live_spy)'
+#except:
+#  snip.rv='super().__init__(name)'
+#
 
 snippet catch "create a catch" b
 catch(signal=signals.${1:signal_name},
