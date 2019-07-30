@@ -623,7 +623,6 @@ nmap Y v$y
 "colorscheme base16-apathy
 "colorscheme base16-darktooth
 "colorscheme base16-brewer
-colorscheme base16-3024
 set background=light
 let g:airline_base16_apathy = 1
 
@@ -696,7 +695,7 @@ au BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  LaTeX/TeX                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufNewFile,BufReadPost *.tex colorscheme base16-3024
+au BufNewFile,BufReadPost *.tex colorscheme vividchalk
 
 let g:airline_detect_modified=1
 let g:airline_detect_spell=1
