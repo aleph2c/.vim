@@ -732,3 +732,9 @@ function! s:AutoWriteStaticFunctionMacroToq()
 endfunction
 
 command! StaticFunctionMacroToq call s:AutoWriteStaticFunctionMacroToq()
+
+function! s:AutoWriteFunctionMacroToq()
+  let @q= '/handlewwwlvt)"ayj0mA`Wi  def a(self, e):status = return_status.HANDLEDreturn statusmW`A'
+endfunction
+
+command! FunctionMacroToq call s:AutoWriteFunctionMacroToq()
