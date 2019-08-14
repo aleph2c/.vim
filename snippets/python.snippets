@@ -37,12 +37,15 @@ endsnippet
 # style comments in docstrings.
 
 global !p
-
+import os
 NORMAL	= 0x1
 DOXYGEN = 0x2
 SPHINX	= 0x3
 
 global_state_name = None
+
+def remove_extension(filename):
+	return os.path.splitext(filename)[0] 
 
 def fix_indent(snip):
   snip.unshift(2)
@@ -378,9 +381,9 @@ def ${1:state_function_name}(${2:chart}, e):
     status = return_status.HANDLED
   elif(e.signal == signals.INIT_SIGNAL):
 	  status = return_status.HANDLED
-	else:
-		chart.temp.fun = ${2:parent_state}
-		status = return_status.SUPER
+  else:
+    chart.temp.fun = ${2:parent_state}
+    status = return_status.SUPER
 	return status
 
 endsnippet
@@ -407,6 +410,8 @@ endsnippet
 
 snippet factory_imports "miros imports" b 
 import time
+import logging
+from collections import deque
 from collections import namedtuple
 
 from miros import Event
@@ -430,10 +435,42 @@ endsnippet
 
 snippet ifactory "instrumented factory" b
 class InstrumentedFactory(Factory):
-	def __init__(self, name, live_trace=None, live_spy=None):
-		super().__init__(name)
-		self.live_trace = False if live_trace == None else live_trace
-		self.live_spy = False if live_spy == None else live_spy
+  def __init__(self, name, log_file=None, live_trace=None, live_spy=None):
+    super().__init__(name)
+    self.live_trace = False if live_trace == None else live_trace
+    self.live_spy = False if live_spy == None else live_spy
+    self.log_file = '`!p snip.rv=remove_extension(fn)`.log' if log_file == None else log_file
+
+    self._output = deque(maxlen=1)
+    self._output = {}
+
+    with open(self.log_file, "w") as fp:
+		  fp.write("")
+
+    logging.basicConfig(
+		  format('%(asctime)s %(levelname)s:%(message)s',
+      filename=self.log_file,
+      level=logging.DEBUG)
+
+    self.register_live_spy_callback(partial(self.spy_callback))
+    self.register_live_trace_callback(partial(self.spy_callback))
+
+  @property
+  def output(self):
+    return self._output[-1]
+
+  @output.setter
+  def output(self, item):
+    self._output.append(item)
+
+  def trace_callback(self, trace):
+    '''trace without datetimestamp'''
+    trace_without_datetime = re.search(r'(\[.+\]) (\[.+\].+)', trace).group(2)
+    logging.debug("T: " + trace_without_datetime)
+
+  def spy_callback(self, spy):
+    '''spy with machine name pre-pending'''
+    logging.debug("S: [{}] {}".format(self.name, spy))
 
 $0
 endsnippet
