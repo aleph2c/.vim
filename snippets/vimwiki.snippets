@@ -15,6 +15,7 @@ def from_options(t, options):
 		return options[0]
 	else:
 		return "(" + "|".join(options) + ")"
+
 endglobal
 
 snippet 'rep (\d+) (\w+)' "Repeat" r
@@ -45,41 +46,86 @@ snippet 'rep (\d+) (\w+)' "Repeat" r
 endsnippet
 
 snippet troub "trouble shooting methodology" !b
-*${1:Title of your investigation}*
+*${1:investigation name}*
 = Observe =
-	*What defines Success?*
-	${2:what do you want to happen?}
+  *Evidence:*
+		[[evidence.`!p snip.rv = fn`|evidence]]
 
-	*What is the problem?*
-	${3:what seems to be the problem?}
+  *What defines Success?:*
+		[[subgoals.`!p 
+from pathlib import Path
+goals_path = 'subgoals.' + snip.basename + '.wiki'
+if not (Path('.') / goals_path).exists():
+	with open("./"+goals_path, "w") as fp:
+		fp.write("[[{}|back]]\n".format(snip.basename))
+		fp.write("= Subgoals =\n")
+		fp.write("* [ ] \n")
+		fp.write("* [ ] \n")
+snip.rv = snip.basename
+`|subgoals]]
+		${2:what is your primary goal}
 
-	*Evidence that contradicts Assumptions:*
+  *What is the problem?*
+		${3:what seems to be the problem?}
 	
 = Orient =
-	*Symptoms:*
-	${4:quick description of symptoms that lead your belief}
-	*Questions for $1:*
-		Can you simplify your test?
-		Do you have enough information?
-		What recently changed?
+  *Symptoms:* [[symptoms.`!p snip.rv = fn`|symptoms]]
 
-	*Assumptions:*
+  *Questions for $1:*
+    Can you simplify your test?
+    Do you have enough information?
+    What recently changed?
+	
+== Assumptions == 
 
 = Decide =
-	*Idea/Hypotheses for $1: >=5*
-	* [ ] $5
-	* [ ] $6
-	* [ ] $7
-	* [ ] $8
-	* [ ] $9
-	*Chosen Idea/Hypothesis*
-		$0
+  *Research Goal:*
+    $4
 
-	*Plan to Expand-on-Idea/Disprove-Hypothesis*
+  *Idea/Hypotheses for $1: >=5*
+  * [ ] $5
+  * [ ] $6
+  * [ ] $7
+  * [ ] $8
+  * [ ] $9
+
+  *Chosen Research-Goal/Hypothesis*
+    $0
+
+== Plan ==
+	[[plan.`!p snip.rv = fn`|plan]]
 
 = Act =
+  [[#Plan]]
+  [[#Evidence]]
 
 endsnippet
+
+# [[<name_without_wiki>|goal_like_this]]
+snippet goal "writing a goal link to new OODA loop" 
+$1`!p
+goal_name_underscore = t[1].replace(" ", "_")
+goal_name_underscore = goal_name_underscore.replace("?", "")
+snip.rv = " [[{}|link]]".format(goal_name_underscore)
+`$0`!p
+from pathlib import Path
+current_line = snip.buffer[snip.buffer.cursor[0]]
+m = re.search('\[\[(.+)\\|.+\]\]', current_line)
+if m is not None and len(m.groups()) == 1:
+  file_name = m.group(1) + ".wiki"
+  with open(file_name, "w") as fp:
+    fp.write("[[{}|back]]\n".format(snip.basename))
+  if len(file_name) >= 7:
+    try:
+      os.remove(str(Path(file_name).stem)[0:-1]+".wiki")
+    except:
+			# might be making file noise
+			pass
+
+`
+endsnippet 
+
+
 snippet uuid "UUID" !b
 `!p import uuid
 if not snip.c:
