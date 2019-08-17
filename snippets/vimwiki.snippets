@@ -46,15 +46,14 @@ snippet 'rep (\d+) (\w+)' "Repeat" r
 endsnippet
 
 snippet troub "trouble shooting methodology" !b
-*${1:${VISUAL:`!p snip.rv = snip.v.text`:investigation name}}*
-[[local:`!v trim(substitute(substitute(execute('echo $MYVIMRC'),'\\.vimrc', '', 'g'), '\', '/', "g"))`/ooda.pdf|diagram]]
-= Observe =
-== Evidence ==
-		[[evidence.`!p snip.rv = snip.basename`|evidence]]
+*${1:${VISUAL:name_of_investigation}}*
+= Observer ([[local:`!v trim(substitute(substitute(execute('echo $MYVIMRC'),'\\.vimrc', '', 'g'), '\', '/', "g"))`/ooda.pdf|diagram]]) = 
+== Evidence ([[evidence.`!p snip.rv = snip.basename`|evidence]]) ==
 
-  *What defines Success?:*
-		[[subgoals.`!p 
+  *What defines Success?:* ([[subgoals.`!p 
 from pathlib import Path
+target_dir = Path(path).parent
+os.chdir(target_dir)
 goals_path = 'subgoals.' + snip.basename + '.wiki'
 if not (Path('.') / goals_path).exists():
 	with open("./"+goals_path, "w") as fp:
@@ -62,7 +61,7 @@ if not (Path('.') / goals_path).exists():
 		fp.write("= Subgoals =\n")
 		fp.write("* [ ] \n")
 snip.rv = snip.basename
-`|subgoals]]
+`|subgoals]])
 		${2:what is your primary goal}
 
   *What is the problem?*
@@ -88,7 +87,6 @@ snip.rv = snip.basename
     $4
 
   [[#Questions]]
-  [[#Evidence]]
   *Idea/Hypotheses for $1: >=5*
   * [ ] $5
   * [ ] $6
@@ -99,12 +97,10 @@ snip.rv = snip.basename
   *Chosen Research-Goal/Hypothesis*
     $0
 
-== Plan ==
-	[[plan.`!p snip.rv = snip.basename`|plan]]
+== Plan ([[plan.`!p snip.rv = snip.basename`|plan]]) ==
 
 = Act =
-  [[#Plan]]
-  [[#Evidence]]
+  
 
 endsnippet
 
