@@ -31,12 +31,9 @@ endif
   "Look of vim
   Plug 'Lokaltog/vim-powerline'
   Plug 'nathanaelkane/vim-indent-guides'
-  "Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/fonts'
-  "Plug 'altercation/vim-colors-solarized'
-  "Plug 'ajgrf/parchment'
 
   " Tim Pope
   Plug 'tpope/vim-fugitive'
@@ -466,6 +463,15 @@ augroup reload_vimrc_and_init
   autocmd!
   au BufWritePost *.vim  source $MYVIMRC
 augroup END
+
+function! RsyncPython()
+   let job = job_start('/usr/local/bin/python3.6 .rsync_local_files.py')
+endfunction
+
+augroup rsync_python_files
+  autocmd!
+  au BufWritePost *.py  call RsyncPython()
+augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Font/font                                     "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -623,7 +629,6 @@ nmap Y v$y
 "colorscheme base16-apathy
 "colorscheme base16-darktooth
 "colorscheme base16-brewer
-"colorscheme base16-3024
 set background=light
 let g:airline_base16_apathy = 1
 
@@ -696,7 +701,7 @@ au BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  LaTeX/TeX                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufNewFile,BufReadPost *.tex colorscheme base16-3024
+au BufNewFile,BufReadPost *.tex colorscheme vividchalk
 
 let g:airline_detect_modified=1
 let g:airline_detect_spell=1
@@ -727,3 +732,9 @@ function! s:AutoWriteStaticFunctionMacroToq()
 endfunction
 
 command! StaticFunctionMacroToq call s:AutoWriteStaticFunctionMacroToq()
+
+function! s:AutoWriteFunctionMacroToq()
+  let @q= '/handlewwwlvt)"ayj0mA`Wi  def a(self, e):status = return_status.HANDLEDreturn statusmW`A'
+endfunction
+
+command! FunctionMacroToq call s:AutoWriteFunctionMacroToq()

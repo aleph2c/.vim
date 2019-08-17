@@ -31,5 +31,12 @@ command! -bang -nargs=* FindVV call fzf#vim#grep('rg --column --line-number --no
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
-nnoremap <leader>g :execute "Find " . expand("<cword>")<CR>
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+
+nnoremap <leader>g :execute "GGrep " . expand("<cword>")<CR>
 
