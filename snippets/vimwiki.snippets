@@ -46,10 +46,10 @@ snippet 'rep (\d+) (\w+)' "Repeat" r
 endsnippet
 
 snippet troub "trouble shooting methodology" !b
-*${1:investigation name}*
+*${1:${VISUAL:`!p snip.rv = snip.v.text`:investigation name}}*
 = Observe =
-  *Evidence:*
-		[[evidence.`!p snip.rv = fn`|evidence]]
+== Evidence ==
+		[[evidence.`!p snip.rv = snip.basename`|evidence]]
 
   *What defines Success?:*
 		[[subgoals.`!p 
@@ -60,7 +60,6 @@ if not (Path('.') / goals_path).exists():
 		fp.write("[[{}|back]]\n".format(snip.basename))
 		fp.write("= Subgoals =\n")
 		fp.write("* [ ] \n")
-		fp.write("* [ ] \n")
 snip.rv = snip.basename
 `|subgoals]]
 		${2:what is your primary goal}
@@ -69,19 +68,26 @@ snip.rv = snip.basename
 		${3:what seems to be the problem?}
 	
 = Orient =
-  *Symptoms:* [[symptoms.`!p snip.rv = fn`|symptoms]]
+  *Symptoms:* [[symptoms.`!p snip.rv = snip.basename`|symptoms]]
 
-  *Questions for $1:*
-    Can you simplify your test?
+== Questions ==
+  *Questions for $1: >= 5*
     Do you have enough information?
+    Are your resources organized so you can quickly find them?
+    Can you reproduce the problem?
+    Can you simplify the test?
     What recently changed?
+    What don't you know that you need to know?
 	
-== Assumptions == 
+  *Assumptions*
 
 = Decide =
-  *Research Goal:*
+  [[#Questions]]
+  *Research Needed For?:*
     $4
 
+  [[#Questions]]
+  [[#Evidence]]
   *Idea/Hypotheses for $1: >=5*
   * [ ] $5
   * [ ] $6
@@ -93,7 +99,7 @@ snip.rv = snip.basename
     $0
 
 == Plan ==
-	[[plan.`!p snip.rv = fn`|plan]]
+	[[plan.`!p snip.rv = snip.basename`|plan]]
 
 = Act =
   [[#Plan]]
@@ -102,28 +108,50 @@ snip.rv = snip.basename
 endsnippet
 
 # [[<name_without_wiki>|goal_like_this]]
-snippet goal "writing a goal link to new OODA loop" 
-$1`!p
-goal_name_underscore = t[1].replace(" ", "_")
-goal_name_underscore = goal_name_underscore.replace("?", "")
-snip.rv = " [[{}|link]]".format(goal_name_underscore)
-`$0`!p
-from pathlib import Path
-current_line = snip.buffer[snip.buffer.cursor[0]]
-m = re.search('\[\[(.+)\\|.+\]\]', current_line)
-if m is not None and len(m.groups()) == 1:
-  file_name = m.group(1) + ".wiki"
-  with open(file_name, "w") as fp:
-    fp.write("[[{}|back]]\n".format(snip.basename))
-  if len(file_name) >= 7:
-    try:
-      os.remove(str(Path(file_name).stem)[0:-1]+".wiki")
-    except:
-			# might be making file noise
-			pass
+#snippet goal "writing a goal link to new OODA loop" 
+#$1`!p
+#goal_name_underscore = t[1].replace(" ", "_")
+#goal_name_underscore = goal_name_underscore.replace("?", "")
+#snip.rv = " [[{}|link]]".format(goal_name_underscore)
+#`$2`!p
+#from pathlib import Path
+#current_line = snip.buffer[snip.buffer.cursor[0]]
+#m = re.search('\[\[(.+)\\|.+\]\]', current_line)
+#if m is not None and len(m.groups()) == 1:
+#  file_name = m.group(1) + ".wiki"
+#  with open(file_name, "w") as fp:
+#    fp.write("[[{}|back]]\n".format(snip.basename))
+#  if len(file_name) >= 7:
+#    try:
+#      os.remove(str(Path(file_name).stem)[0:-1]+".wiki")
+#    except:
+#			# might be making file noise
+#			pass
+#
+#`
+#* [ ] goal$0
+#endsnippet 
 
-`
-endsnippet 
+snippet goal ""
+${VISUAL}	[[`!p
+import os
+from pathlib import Path
+text = snip.v.text.replace(" ", "_")
+text = text.replace("?", "")
+text = text.rstrip()
+file_name = text + '.wiki'
+current_dir = Path.cwd()
+target_dir = Path(path).parent
+os.chdir(target_dir)
+with open(file_name, "w") as fp:
+	fp.write("[[{}|back]]\n".format(snip.basename))
+	title = text.replace("_", " ")
+	words = [word.capitalize() for word in title.split(" ")]
+	title = " ".join(words)
+	fp.write("{}\n".format(title))
+os.chdir(current_dir)
+snip.rv = "{}|link]]".format(text)`$0
+endsnippet
 
 
 snippet uuid "UUID" !b
