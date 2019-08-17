@@ -39,7 +39,7 @@ snippet "sub" "Writing a subtitle" rb
 ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
 ${1:${VISUAL:subsection title}}
-${3:`!p snip.rv = '-' * len(t[1])`}
+${3:`!p snip.rv = '^' * len(t[1])`}
 $0
 endsnippet
 
@@ -47,7 +47,15 @@ snippet "ssub" "Writing a subtitle" rb
 ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
 ${1:${VISUAL:subsubsection_title}}
-${3:`!p snip.rv = '^' * len(t[1])`}
+${3:`!p snip.rv = '-' * len(t[1])`}
+$0
+endsnippet
+
+snippet "sssub" "Writing a subtitle" rb
+${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:subsubsubsection_title}}
+${3:`!p snip.rv = '"' * len(t[1])`}
 $0
 endsnippet
 

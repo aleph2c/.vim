@@ -54,7 +54,7 @@ endif
   Plug 'tpope/vim-vividchalk'
 
   " Directory Changing
-  "Plug 'airblade/vim-rooter'
+  Plug 'airblade/vim-rooter'
 
   " Wiki
   Plug 'vim-scripts/utl.vim'

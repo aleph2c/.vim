@@ -18,5 +18,5 @@ else
   let g:UltiSnipsSnippetsDir         = $VIMRCHOME . "/snippets"
 endif
 let g:UltiSnipsEnableSnipMate      = 0
-map <C-F8> :UltiSnipsEdit<CR>
+map <F8> :UltiSnipsEdit<CR>
 

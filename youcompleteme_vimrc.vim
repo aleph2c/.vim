@@ -20,9 +20,9 @@ let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_confirm_extra_conf=0
 let g:ycm_goto_buffer_command='horizontal-split'
 let g:ycm_use_ultisnips_completer=1
-map <F9> :YcmRestartServer<CR>
 nnoremap <leader>yd :YcmDiags<CR>
 nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>g  :YcmCompleter GoTo<CR>
 nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>rr :YcmCompleter GoToReferences<CR>
