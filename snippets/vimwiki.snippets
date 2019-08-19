@@ -139,7 +139,7 @@ text = text.rstrip()
 file_name = text + '.wiki'
 current_dir = Path.cwd()
 target_dir = Path(path).parent
-os.chdir(target_dir)
+os.chdir(str(target_dir))
 with open(file_name, "w") as fp:
 	fp.write("[[{}|back]]\n".format(snip.basename))
 	title = text.replace("_", " ")
