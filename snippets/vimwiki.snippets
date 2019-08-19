@@ -47,7 +47,7 @@ endsnippet
 
 snippet troub "trouble shooting methodology" !b
 *${1:${VISUAL:name_of_investigation}}*
-= Observer ([[local:`!v trim(substitute(substitute(execute('echo $MYVIMRC'),'\\.vimrc', '', 'g'), '\', '/', "g"))`/ooda.pdf|diagram]]) = 
+= Observer ([[local:`!v substitute(substitute(substitute(execute('echo $MYVIMRC'),'\\.vimrc', '', 'g'), '\', '/', "g"), "\n", "", "g")`/ooda.pdf|diagram]]) = 
 == Evidence ([[evidence.`!p snip.rv = snip.basename`|evidence]]) ==
 
   *What defines Success?:* ([[subgoals.`!p 
