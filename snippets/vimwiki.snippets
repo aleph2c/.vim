@@ -72,10 +72,12 @@ snip.rv = snip.basename
 
 == Questions ==
   *Questions for $1: >= 5*
+    Can you think of anyway to speed up your feedback cycle?
     Do you have enough information?
-    Are your resources organized so you can quickly find them?
+    Is your information organized?
     Can you reproduce the problem?
-    Can you simplify the test?
+    Can you simplify your test?
+    Do you have something to baseline from?
     What recently changed?
     What don't you know that you need to know?
 	
@@ -146,7 +148,7 @@ with open(file_name, "w") as fp:
 	words = [word.capitalize() for word in title.split(" ")]
 	title = " ".join(words)
 	fp.write("{}\n".format(title))
-os.chdir(current_dir)
+os.chdir(str(current_dir))
 snip.rv = "{}|link]]".format(text)`$0
 endsnippet
 
