@@ -53,7 +53,7 @@ snippet troub "trouble shooting methodology" !b
   *What defines Success?:* ([[subgoals.`!p 
 from pathlib import Path
 target_dir = Path(path).parent
-os.chdir(target_dir)
+os.chdir(str(target_dir))
 goals_path = 'subgoals.' + snip.basename + '.wiki'
 if not (Path('.') / goals_path).exists():
 	with open("./"+goals_path, "w") as fp:
