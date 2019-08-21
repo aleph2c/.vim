@@ -738,3 +738,7 @@ function! s:AutoWriteFunctionMacroToq()
 endfunction
 
 command! FunctionMacroToq call s:AutoWriteFunctionMacroToq()
+
+" To deal with tmux (mapping special control to ctrl-a), so need to remap
+" something onto ctrl-a in vim
+noremap <C-b> <C-a>
