@@ -1,8 +1,8 @@
 global !p
 from datetime import datetime
 import uuid
-import tzlocal
 def date_now():
+	import tzlocal
 	return datetime.now(tzlocal.get_localzone()).strftime("%Y-%m-%d %H:%M")
 
 def suuid():
