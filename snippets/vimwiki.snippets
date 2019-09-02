@@ -47,7 +47,7 @@ endsnippet
 
 snippet troub "trouble shooting methodology" !b
 *${1:${VISUAL:name_of_investigation}}*
-= Observer ([[local:`!v trim(substitute(substitute(execute('echo $MYVIMRC'),'\\.vimrc', '', 'g'), '\', '/', "g"))`/ooda.pdf|diagram]]) = 
+= Observer ([[local:`!v substitute(substitute(substitute(execute('echo $MYVIMRC'),'\\.vimrc', '', 'g'), '\', '/', "g"), "\n", "", "g")`/ooda.pdf|diagram]]) = 
 == Evidence ([[evidence.`!p snip.rv = snip.basename`|evidence]]) ==
 
   *What defines Success?:* ([[subgoals.`!p 
@@ -72,10 +72,12 @@ snip.rv = snip.basename
 
 == Questions ==
   *Questions for $1: >= 5*
+    Can you think of anyway to speed up your feedback cycle?
     Do you have enough information?
-    Are your resources organized so you can quickly find them?
+    Is your information organized?
     Can you reproduce the problem?
-    Can you simplify the test?
+    Can you simplify your test?
+    Do you have something to baseline from?
     What recently changed?
     What don't you know that you need to know?
 	
@@ -139,14 +141,14 @@ text = text.rstrip()
 file_name = text + '.wiki'
 current_dir = Path.cwd()
 target_dir = Path(path).parent
-os.chdir(target_dir)
+os.chdir(str(target_dir))
 with open(file_name, "w") as fp:
 	fp.write("[[{}|back]]\n".format(snip.basename))
 	title = text.replace("_", " ")
 	words = [word.capitalize() for word in title.split(" ")]
 	title = " ".join(words)
 	fp.write("{}\n".format(title))
-os.chdir(current_dir)
+os.chdir(str(current_dir))
 snip.rv = "{}|link]]".format(text)`$0
 endsnippet
 
