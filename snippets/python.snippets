@@ -520,9 +520,10 @@ def f_args(arguments):
 if not snip.c:
   row, col = vim.current.window.cursor
   previous_line=snip.buffer[int(row)-2]
-  m = re.search('__init__(\(.+)\)', previous_line)
-  if len(m.groups()) == 1:
-    args = m.group(1).split(',')[1:]
+  m1 = re.search('__init__(\(.+)\)', previous_line)
+  m2 = re.search('.+?\((.+)\)', previous_line)
+  if m1 != None and len(m1.groups()) == 1:
+    args = m1.group(1).split(',')[1:]
 		args = [arg.strip() for arg in args if arg]
     tags = f_args(args)
     snip.rv = "short description\n"
@@ -546,6 +547,34 @@ if not snip.c:
     snip.rv += "       # example code goes here"
     snip.rv += "\n"
     snip += ''
+	elif m2 != None and len(m2.groups()) == 1:
+    args = m2.group(1).split(',')[0:]
+		args = [arg.strip() for arg in args if arg]
+		if args[0] == 'self':
+			args = args[1:]
+    tags = f_args(args)
+    snip.rv = "short description\n"
+    snip.rv += "\n"
+    snip.rv += "    longer description\n"
+    snip.rv += "\n"
+    snip.rv += "    **Note**:\n"
+    snip.rv += "       Do this not that recommendation\n"
+    snip.rv += "\n"
+    snip.rv += "    **Args**:\n"
+    for tag in tags:
+      snip.rv += tag + "\n"
+    snip.rv += "\n\n"
+    snip.rv += "    **Returns**:\n"
+    snip.rv += "       (type): \n"
+    snip.rv += "\n"
+    snip.rv += "    **Example(s)**:\n"
+    snip.rv += "      \n"
+    snip.rv += "    .. code-block:: python\n"
+    snip.rv += "       \n"
+    snip.rv += "       # example code goes here"
+    snip.rv += "\n"
+    snip += ''
+		
 `'''
 endsnippet
 
