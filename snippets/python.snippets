@@ -454,7 +454,7 @@ class InstrumentedFactory(Factory):
       level=logging.DEBUG)
 
     self.register_live_spy_callback(partial(self.spy_callback))
-    self.register_live_trace_callback(partial(self.spy_callback))
+    self.register_live_trace_callback(partial(self.trace_callback))
 
   @property
   def output(self):
