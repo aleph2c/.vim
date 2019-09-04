@@ -436,7 +436,7 @@ endsnippet
 
 snippet ifactory "instrumented factory" b
 class InstrumentedFactory(Factory):
-  def __init__(self, name, log_file=None, live_trace=None, live_spy=None):
+  def __init__(self, name, *, log_file=None, live_trace=None, live_spy=None):
     super().__init__(name)
     self.live_trace = False if live_trace == None else live_trace
     self.live_spy = False if live_spy == None else live_spy
@@ -492,7 +492,7 @@ def is_ifactory():
 		return  True
 	else:
 		return False
-snip.rv='super().__init__(name, live_trace, live_spy)' if is_ifactory() else \
+snip.rv='super().__init__(name, live_trace=live_trace, live_spy=live_spy)' if is_ifactory() else \
 	'super().__init__(name, live_trace, live_spy)'`
     $0
 endsnippet
