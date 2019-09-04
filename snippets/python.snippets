@@ -442,7 +442,7 @@ class InstrumentedFactory(Factory):
     self.log_file = '`!p snip.rv=remove_extension(fn)`.log' if log_file == None else log_file
 
     self._output = deque(maxlen=1)
-    self._output = {}
+    self._output.append(None)
 
     with open(self.log_file, "w") as fp:
 		  fp.write("")
