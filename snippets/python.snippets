@@ -409,6 +409,7 @@ $1`!p snip.rv=from_options(t[1], ['active_object_imports', 'factory_imports'])`
 endsnippet
 
 snippet factory_imports "miros imports" b 
+import re
 import time
 import logging
 from functools import partial
@@ -423,7 +424,11 @@ $0
 endsnippet
 
 snippet active_object_imports "miros imports" b 
+import re
 import time
+import logging
+from functools import partial
+from collections import deque
 from collections import namedtuple
 
 from miros import Event
