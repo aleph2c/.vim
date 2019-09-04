@@ -493,7 +493,7 @@ def is_ifactory():
 	else:
 		return False
 snip.rv='super().__init__(name, live_trace, live_spy)' if is_ifactory() else \
-	'super().__init__(name)'`
+	'super().__init__(name, live_trace, live_spy)'`
     $0
 endsnippet
 
