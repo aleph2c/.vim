@@ -2,8 +2,11 @@ global !p
 from datetime import datetime
 import uuid
 def date_now():
-	import tzlocal
-	return datetime.now(tzlocal.get_localzone()).strftime("%Y-%m-%d %H:%M")
+	try:
+		import tzlocal
+		return datetime.now(tzlocal.get_localzone()).strftime("%Y-%m-%d %H:%M")
+	except:
+		return "'pip install tzlocal' required before this will work"
 
 def suuid():
 	return str(uuid.uuid4().hex)[0:5]
@@ -41,6 +44,11 @@ $7
 -------------------------------------------------------------------------------
 endsnippet
 
+snippet date "write the date"
+`!p snip.rv = date_now()`
+endsnippet
+
+
 snippet 'rep (\d+) (\w+)' "Repeat" r
 `!p snip.rv = int(match.group(1))*match.group(2)`
 endsnippet
@@ -66,6 +74,8 @@ snip.rv = snip.basename
 
   *What is the problem?*
 		${3:what seems to be the problem?}
+
+	*Discoveries:* ([[notes.`!p snip.rv = snip.basename`|notes]])
 	
 = Orient =
   *Symptoms:* [[symptoms.`!p snip.rv = snip.basename`|symptoms]]
