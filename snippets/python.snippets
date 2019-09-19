@@ -447,9 +447,6 @@ class InstrumentedFactory(Factory):
     self.live_spy = False if live_spy == None else live_spy
     self.log_file = '`!p snip.rv=remove_extension(fn)`.log' if log_file == None else log_file
 
-    self._output = deque(maxlen=1)
-    self._output.append(None)
-
     with open(self.log_file, "w") as fp:
 		  fp.write("")
 
@@ -460,14 +457,6 @@ class InstrumentedFactory(Factory):
 
     self.register_live_spy_callback(partial(self.spy_callback))
     self.register_live_trace_callback(partial(self.trace_callback))
-
-  @property
-  def output(self):
-    return self._output[-1]
-
-  @output.setter
-  def output(self, item):
-    self._output.append(item)
 
   def trace_callback(self, trace):
     '''trace without datetimestamp'''
