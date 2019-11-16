@@ -439,6 +439,37 @@ from miros import return_status
 $0
 endsnippet
 
+snippet sfactory "systemd factory" b
+class SysLogInstrumentedFactory(Factory, ThreadSafeAttributes):
+
+  def __init__(self, name, live_trace=None, live_spy=None):
+    '''comment'''
+    super().__init__(name)
+    self.live_trace = False if live_trace == None else live_trace
+    self.live_spy = False if live_spy == None else live_spy
+
+    syslog.openlog(logoption=syslog.LOG_PID, facility=syslog.LOG_DAEMON)
+    syslog.syslog(syslog.LOG_ERR, "initializing {}".format(self.name))
+
+    self.register_live_spy_callback(partial(self.spy_callback))
+    self.register_live_trace_callback(partial(self.trace_callback))
+
+  def trace_callback(self, trace):
+    '''trace without datetimestamp'''
+    trace_without_datetime = re.search(r'(\[.+\]) (\[.+\].+)', trace).group(2)
+    syslog.syslog("T: " + trace_without_datetime)
+
+  def spy_callback(self, spy):
+    '''spy with machine name pre-pending'''
+    syslog.syslog("S: [{}] {}".format(self.name, spy))
+
+  def logging(self, message):
+		'''provide logging to the syslog'''
+    syslog.syslog("[{}]".format(self.name, message))
+
+$0
+endsnippet
+
 snippet ifactory "instrumented factory" b
 class InstrumentedFactory(Factory):
   def __init__(self, name, *, log_file=None, live_trace=None, live_spy=None):
@@ -471,9 +502,9 @@ $0
 endsnippet
 
 snippet factory "miros factory or ifactory class" b
-class ${1:StateChartName}($2`!p snip.rv=from_options(t[2], ['InstrumentedFactory', 'Factory'])`):
-  def __init__(self, name, ${3:argument,} live_trace=None, live_spy=None):
-    '''comment'''
+class ${1:StateChartName}($2`!p snip.rv=from_options(t[2], ['InstrumentedFactory', 'SysLogInstrumentedFactory', 'Factory'])`):
+  def __init__(self, name, live_trace=None, live_spy=None):
+    '''comment'''$0
 		`!p 
 def is_ifactory():
   previous_line=snip.buffer.cursor[0]-1
@@ -488,7 +519,6 @@ def is_ifactory():
 		return False
 snip.rv='super().__init__(name, live_trace=live_trace, live_spy=live_spy)' if is_ifactory() else \
 	'super().__init__(name, live_trace, live_spy)'`
-    $0
 endsnippet
 
 snippet '''comment''' "factory or ifactory comment" 
