@@ -28,7 +28,7 @@ endif
   " Autocomplete
   Plug 'Valloric/YouCompleteMe'
 
-  "Look of vim
+  "Look of vim o
   Plug 'Lokaltog/vim-powerline'
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'vim-airline/vim-airline'
@@ -744,3 +744,7 @@ command! FunctionMacroToq call s:AutoWriteFunctionMacroToq()
 noremap <C-b> <C-a>
 
 set encoding=utf-8
+
+" Show tabs in make files
+set list
+set listchars=tab:>-
