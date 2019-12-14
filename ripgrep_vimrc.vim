@@ -38,5 +38,5 @@ command! -bang -nargs=* GGrep
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
-nnoremap <leader>g :execute "GGrep " . expand("<cword>")<CR>
+nnoremap <leader>g :execute ":Rg " . expand("<cword>")<CR>
 

@@ -1,0 +1,121 @@
+snippet package "c-package" b
+/*=============================================================================
+                                                                               
+  Copyright © 2019 Legend Power Inc.                                                      
+                                                                               
+  All Rights Reserved. All trademarks are owned by Legend Power Inc.               
+                                                                               
+@brief `!p snip.rv = snip.basename`.c
+
+@code{.c}
+  // `!p snip.rv = snip.basename`.c basic package usage
+  $0
+@endcode
+
+==============================================================================*/
+endsnippet
+
+snippet comment "c-comment" b
+/*=======================================================================*//*!
+`!p
+def f_args(arguments):
+  for arg in arguments:
+		string1  = "@param\n  %s\n" % (arg)
+    yield (string1)
+text = snip.v.text
+m1 = re.search('(.+)?[ ]([_a-zA-Z]+)\((.+)\)', text)
+args = m1.group(3).split(',')[1:]
+args = [arg.strip() for arg in args if arg]
+tags = f_args(args)
+snip.rv = "@brief <!-- %s -->" % m1.group(2)
+snip.rv += "\n\n"
+snip.rv += "@code{.c}\n"
+snip.rv += "  // Interface example\n"
+snip.rv += "  %s(...)\n" % m1.group(2)
+snip.rv += "@endcode\n\n"
+
+for tag in tags:
+  snip.rv += tag + "\n"
+
+snip.rv += "@return\n"
+snip.rv += "  %s\n" % m1.group(1)
+#if not snip.c:
+#	snip.rv = text
+`
+*//* REVISION HISTORY:
+
+Version: 1.0  Date: `!p from datetime import date; snip.rv=date.today().strftime("%B %d, %Y")`  By: Scott Volk
+	- created
+
+============================================================================*/
+${VISUAL})
+endsnippet
+
+snippet date "c-comment" b
+`!p from datetime import date; snip.rv=date.today().strftime("%B %d, %Y")`
+endsnippet
+
+snippet version "version" b
+`!p
+import sys
+from datetime import date
+if not snip.c:
+  previous_line=snip.buffer.cursor[1]-1
+  snip.rv = str(previous_line) + '\n'
+  m = None
+
+while(m is None):
+  m = re.search('Version:[ ]+([1-9])+\.([0-9])+', snip.buffer[previous_line])
+  previous_line -= 1
+
+new_version = str(m.group(1)) + "." + str(int(m.group(2))+1)
+snip.rv = "Version: %s  Date: %s  By: Scott Volk" % (new_version, date.today().strftime("%B %d, %Y"))
+`
+  - $1
+
+$0
+endsnippet
+
+#def f_args(arguments):
+#  index = 3
+#	# we add the '|' to make the arg lists appear on seperate lines.
+#	# (I'm starting to wonder about rst... it fills the code with clutter and
+#	# distracting garbage)
+#  for arg in arguments:
+#		string1  = "       | \`\`%s\`\` (type1): " % (arg)
+#    yield (string1)
+#    index += 1
+#
+#if not snip.c:
+#  row, col = vim.current.window.cursor
+#	rn.snip = row
+#  #next_line=snip.buffer[int(row)+1]
+#	#rv.snip = next_line
+#	#m2 = re.search('(.+)?[ ]([_a-zA-Z]+)\((.+)\)', fn)
+#  #if m1 != None and len(m1.groups()) == 1:
+#  #  args = m1.group(1).split(',')[1:]
+#	#	args = [arg.strip() for arg in args if arg]
+#  #  tags = f_args(args)
+#  #  snip.rv = "short description\n"
+#  #  snip.rv += "\n"
+#  #  snip.rv += "    longer description\n"
+#  #  snip.rv += "\n"
+#  #  snip.rv += "    **Note**:\n"
+#  #  snip.rv += "       Do this not that recommendation\n"
+#  #  snip.rv += "\n"
+#  #  snip.rv += "    **Args**:\n"
+#  #  for tag in tags:
+#  #    snip.rv += tag + "\n"
+#  #  snip.rv += "\n\n"
+##    snip.rv += "    **Returns**:\n"
+##    snip.rv += "       (type): \n"
+##    snip.rv += "\n"
+##    snip.rv += "    **Example(s)**:\n"
+##    snip.rv += "      \n"
+##    snip.rv += "    .. code-block:: python\n"
+##    snip.rv += "       \n"
+##    snip.rv += "       # example code goes here"
+##    snip.rv += "\n"
+##    snip += ''
+##
+#`
