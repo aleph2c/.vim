@@ -25,6 +25,9 @@ if has("win32")
 else
   call plug#begin($HOME . '/.vim' . '/plugged')
 endif
+  " XML
+  Plug 'othree/xml.vim'
+
   " Autocomplete
   Plug 'Valloric/YouCompleteMe'
 
@@ -187,6 +190,7 @@ source $VIMRCHOME\ultisnips_vimrc.vim
 source $VIMRCHOME\youcompleteme_vimrc.vim
 source $VIMRCHOME\trace.vim
 source $VIMRCHOME\ripgrep_vimrc.vim
+source $VIMRCHOME\vimlsp_vimrc.vim
 
 let g:session_directory = $VIMRCHOME.'/sessions'
 
@@ -517,7 +521,7 @@ let g:Powerline_symbols = 'compatible'
 "   S-Tab> <-
 set wildmode=full
 set wildmenu
-set wildignore=*.pdf,*.fo,*.xml
+set wildignore=*.pdf,*.fo
 set suffixes=.otl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                         Disable Swapfile and Backup                          "
@@ -744,6 +748,7 @@ command! FunctionMacroToq call s:AutoWriteFunctionMacroToq()
 noremap <C-b> <C-a>
 
 set encoding=utf-8
+nnoremap Q yt=A<C-r>=<C-r>"<CR><Esc>
 
 " Show tabs in make files
 set list
