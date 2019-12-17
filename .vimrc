@@ -748,3 +748,4 @@ set encoding=utf-8
 " Show tabs in make files
 set list
 set listchars=tab:>-
+set listchars=trail:-
