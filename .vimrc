@@ -753,6 +753,7 @@ nnoremap Q yt=A<C-r>=<C-r>"<CR><Esc>
 " Show tabs in make files
 set list
 set listchars=tab:>-
+nmap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 set listchars=trail:-
 
 " place result of last g command in new window
