@@ -754,3 +754,4 @@ nnoremap Q yt=A<C-r>=<C-r>"<CR><Esc>
 set list
 set listchars=tab:>-
 nmap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+set listchars=trail:-
