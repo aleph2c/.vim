@@ -9,7 +9,13 @@ ln -s ~/.vim/.vimrc ~/.vimrc
 ln -s ~/.vim/.tmux.conf ~/.tmux.conf
 ln -s ~/.vim/snippets ~/snippets
 ln -s ~/.vim/.pdbrc ~/.pdbrc
+ln -s ~/.vim/.pdbrc.py ~/.pdbrc.py
 ```
+Install pdbpp:
+```bash
+pip install pdbpp
+```
+
 Open Vim, ignore the errors and type:
 ```
 :PlugInstall
