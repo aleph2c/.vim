@@ -753,3 +753,13 @@ nnoremap Q yt=A<C-r>=<C-r>"<CR><Esc>
 " Show tabs in make files
 set list
 set listchars=tab:>-
+nmap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+set listchars=trail:-
+
+" place result of last g command in new window
+" redir @a   -> redirect output to register a
+" g//        -> repeat last global command
+" redir END  -> end the redirect
+" new        -> create new window
+" put! a     -> paste the register a into the new window
+nnoremap <silent> <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR>
