@@ -82,13 +82,16 @@ snip.rv = snip.basename
 
 == Questions ==
   *Questions for $1: >= 5*
-    Can you think of anyway to speed up your feedback cycle?
     Do you have enough information?
     Is your information organized?
+    Do you need to write something to make it easier to see?
+    Can you think of anyway to speed up your feedback cycle?
+    Do you have something to baseline from?
     Can you reproduce the problem?
     Can you simplify your test?
-    Do you have something to baseline from?
     What recently changed?
+    Are you still working on the right problem?
+    Are you still focused on the right goal?
     What don't you know that you need to know?
 	
   *Assumptions*
@@ -142,7 +145,7 @@ endsnippet
 #endsnippet 
 
 snippet goal ""
-${VISUAL}	[[`!p
+${VISUAL} [[`!p
 import os
 from pathlib import Path
 text = snip.v.text.replace(" ", "_")
