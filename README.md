@@ -13,7 +13,7 @@ ln -s ~/.vim/.pdbrc.py ~/.pdbrc.py
 ```
 Install pdbpp:
 ```bash
-pip install pdbpp
+pip3 install pdbpp
 ```
 
 Open Vim, ignore the errors and type:
