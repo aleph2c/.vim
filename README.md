@@ -1,3 +1,6 @@
+# To build Vim
+Follow the instructions in [Valloric's YouCompleteMe wiki](https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source)
+
 # To setup up a new debian machine
 Clone all of the contents of the `.vim` directory into your home directory:
 ```bash
@@ -23,16 +26,16 @@ Open Vim, ignore the errors and type:
 ```
 To get [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) to work:
 ```bash
-sudo apt-get install build-essential cmake
-sudo apt-get install python-dev python3-dev
+sudo apt-get -y install build-essential cmake
+sudo apt-get -y install python-dev python3-dev
 cd ~/.vim/plugged/YouCompleteMe
 python3 ./install.py
 ```
-If you are on a raspberry pi or beagle bone, replace the last line with:
+If you are on a raspberry pi (<=3) or beagle bone, replace the last line with:
 ```bash
 YCM_CORES=1 ./install.py
 ```
-# To setup VIM on Windows 10 (outside of WLS)
+# To setup VIM on Windows 10 (outside of WSL)
 Download a copy of vim that is compiled properly.  Don't use the default
 installer from the main vim.org site, since it is missing python3 support.  Use
 the builds from the tuxproject:
