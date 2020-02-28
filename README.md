@@ -2,6 +2,10 @@
 Follow the instructions in [Valloric's YouCompleteMe wiki](https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source)
 
 # To setup up a new debian machine
+Install tmux:
+```bash
+sudo apt-get -y install tmux
+```
 Clone all of the contents of the `.vim` directory into your home directory:
 ```bash
 git clone git@github.com:aleph2c/vim_tmux.git ~/.vim
