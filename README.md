@@ -1,3 +1,15 @@
+# To setup your keys
+login to the new machine:
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+Just hit enter for all options.
+
+The copy the output of the following command into [your github keys](https://github.com/settings/keys)
+```
+cat ~/.ssh/id_rsa.pub
+```
+
 # To build Vim
 Follow the instructions in [Valloric's YouCompleteMe wiki](https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source)
 
