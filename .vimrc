@@ -25,10 +25,13 @@ if has("win32")
 else
   call plug#begin($HOME . '/.vim' . '/plugged')
 endif
+  " XML
+  Plug 'othree/xml.vim'
+
   " Autocomplete
   Plug 'Valloric/YouCompleteMe'
 
-  "Look of vim
+  "Look of vim o
   Plug 'Lokaltog/vim-powerline'
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'vim-airline/vim-airline'
@@ -187,6 +190,7 @@ source $VIMRCHOME\ultisnips_vimrc.vim
 source $VIMRCHOME\youcompleteme_vimrc.vim
 source $VIMRCHOME\trace.vim
 source $VIMRCHOME\ripgrep_vimrc.vim
+source $VIMRCHOME\vimlsp_vimrc.vim
 
 let g:session_directory = $VIMRCHOME.'/sessions'
 
@@ -517,7 +521,7 @@ let g:Powerline_symbols = 'compatible'
 "   S-Tab> <-
 set wildmode=full
 set wildmenu
-set wildignore=*.pdf,*.fo,*.xml
+set wildignore=*.pdf,*.fo
 set suffixes=.otl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                         Disable Swapfile and Backup                          "
@@ -744,3 +748,18 @@ command! FunctionMacroToq call s:AutoWriteFunctionMacroToq()
 noremap <C-b> <C-a>
 
 set encoding=utf-8
+nnoremap Q yt=A<C-r>=<C-r>"<CR><Esc>
+
+" Show tabs in make files
+set list
+set listchars=tab:>-
+nmap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+set listchars=trail:-
+
+" place result of last g command in new window
+" redir @a   -> redirect output to register a
+" g//        -> repeat last global command
+" redir END  -> end the redirect
+" new        -> create new window
+" put! a     -> paste the register a into the new window
+nnoremap <silent> <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR>

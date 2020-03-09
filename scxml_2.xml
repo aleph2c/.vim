@@ -1,0 +1,6 @@
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0">
+  <state id="foo1">
+    <transition target="bar"/> 
+  </state>
+      <state id="foo2"></state>
+</scxml>

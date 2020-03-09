@@ -8,14 +8,14 @@ require 'htmlentities'
 
 # highlight code blocks
 class HTMLwithAlbino < Redcarpet::Render::HTML
-	def block_code(code, language)
-		if !language.nil? and !language.empty? then
-			Albino.colorize(code, language)
-		else
-			coder = HTMLEntities.new
-			return "<pre class=\"highlight\"><code>" + coder.encode(code, :named) + "</code></pre>"
-		end
-	end
+  def block_code(code, language)
+    if !language.nil? and !language.empty? then
+      Albino.colorize(code, language)
+    else
+      coder = HTMLEntities.new
+      return "<pre class=\"highlight\"><code>" + coder.encode(code, :named) + "</code></pre>"
+    end
+  end
 end
 
 # initialize markdown renderer
@@ -26,18 +26,18 @@ opt = Getopt::Std.getopts("T:o:hHcnp")
 
 title = ARGV[0]
 if opt["T"] then
-	title = opt["T"]
+  title = opt["T"]
 end
 
 if opt["h"] or opt["H"] or ARGV[0].nil? or !File.exist? ARGV[0] then
-	puts "#{$0} [Options] <input-file>"
-	puts "  -T <title>        HTML-Title"
-	puts "  -o <output-file>  Output file"
-	puts "  -h                Help"
-	puts "  -c                Use external CSS"
-	puts "  -n                Dont create the CSS Files"
-	puts "  -p                Plain, no HTML"
-	exit 0
+  puts "#{$0} [Options] <input-file>"
+  puts "  -T <title>        HTML-Title"
+  puts "  -o <output-file>  Output file"
+  puts "  -h                Help"
+  puts "  -c                Use external CSS"
+  puts "  -n                Dont create the CSS Files"
+  puts "  -p                Plain, no HTML"
+  exit 0
 end
 
 # make it pretty
@@ -125,51 +125,51 @@ eos
 
 # choose template
 if opt["c"] then
-	template = <<eos
+  template = <<eos
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>{{TITLE}}</title>
-		<meta charset="utf-8">
-		<link href="main.css" type="text/css" rel="stylesheet">
-		<link href="pygment.css" type="text/css" rel="stylesheet">
-	</head>
-	<body>
+  <head>
+    <title>{{TITLE}}</title>
+    <meta charset="utf-8">
+    <link href="main.css" type="text/css" rel="stylesheet">
+    <link href="pygment.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
 {{CONTENT}}
-	</body>
+  </body>
 </html>
 eos
 else
-	template = <<eos
+  template = <<eos
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>{{TITLE}}</title>
-		<meta charset="utf-8">
-		<style type="text/css">
+  <head>
+    <title>{{TITLE}}</title>
+    <meta charset="utf-8">
+    <style type="text/css">
 #{main_css}
 #{pygment_css}
-		</style>
-	</head>
-	<body>
+    </style>
+  </head>
+  <body>
 {{CONTENT}}
-	</body>
+  </body>
 </html>
 eos
 end
 
 # parse markdown
 if opt["p"] then
-	puts markdown.render(File.open(ARGV[0], "rb").read)
+  puts markdown.render(File.open(ARGV[0], "rb").read)
 elsif opt["o"] then
-	File.open(opt["o"],"w+").puts template.gsub("{{TITLE}}", title).gsub("{{CONTENT}}", markdown.render(File.open(ARGV[0],"rb").read))
+  File.open(opt["o"],"w+").puts template.gsub("{{TITLE}}", title).gsub("{{CONTENT}}", markdown.render(File.open(ARGV[0],"rb").read))
 else
-	puts template.gsub("{{TITLE}}", title).gsub("{{CONTENT}}", markdown.render(File.open(ARGV[0], "rb").read))
+  puts template.gsub("{{TITLE}}", title).gsub("{{CONTENT}}", markdown.render(File.open(ARGV[0], "rb").read))
 end
 
 # create css files
 if opt["c"] and !opt["n"] and !opt["p"] then
-	File.open("main.css","w+").puts main_css if !File.exist? "main.css"
-	File.open("pygment.css","w+").puts pygment_css if !File.exists? "pygment.css"
+  File.open("main.css","w+").puts main_css if !File.exist? "main.css"
+  File.open("pygment.css","w+").puts pygment_css if !File.exists? "pygment.css"
 end
 
