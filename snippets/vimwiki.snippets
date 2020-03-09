@@ -48,6 +48,20 @@ snippet date "write the date"
 `!p snip.rv = date_now()`
 endsnippet
 
+snippet change "change log" b
+-------------------------------------------------------------------------------
+*${1:Hat2}*   v${2:major}.${3:minor}.${4:build}
+*Date*     ${3:`!p snip.rv = date_now()`}
+-------------------------------------------------------------------------------
+*Improvments:*
+$5
+
+-------------------------------------------------------------------------------
+*Fixed Issues:*
+$6
+
+-------------------------------------------------------------------------------
+endsnippet
 
 snippet 'rep (\d+) (\w+)' "Repeat" r
 `!p snip.rv = int(match.group(1))*match.group(2)`
