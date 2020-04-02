@@ -30,11 +30,10 @@ ln -s ~/.vim/snippets ~/snippets
 ln -s ~/.vim/.pdbrc ~/.pdbrc
 ln -s ~/.vim/.pdbrc.py ~/.pdbrc.py
 ```
-Install pdbpp:
+Install [pdbpp](https://pypi.org/project/pdbpp/) and [tmuxp](http://tmuxp.git-pull.com/en/latest/index.html):
 ```bash
-pip3 install pdbpp
+pip3 install pdbpp tmuxp
 ```
-
 Open Vim, ignore the errors and type:
 ```
 :PlugInstall
