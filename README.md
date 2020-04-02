@@ -1,4 +1,6 @@
-# To setup your keys
+# To setup VIM on Windows 10 (outside of WSL)
+
+## To setup your keys
 login to the new machine:
 ```bash
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
@@ -10,10 +12,10 @@ The copy the output of the following command into [your github keys](https://git
 cat ~/.ssh/id_rsa.pub
 ```
 
-# To build Vim
+## To build Vim
 Follow the instructions in [Valloric's YouCompleteMe wiki](https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source)
 
-# To setup up a new debian machine
+## Install required debian packages and the information in this repo
 Install tmux:
 ```bash
 sudo apt-get -y install tmux
@@ -50,7 +52,7 @@ If you are on a raspberry pi (<=3) or beagle bone, replace the last line with:
 ```bash
 YCM_CORES=1 ./install.py
 ```
-# To setup VIM on Windows 10 (outside of WSL)
+## To setup VIM on Windows 10 (outside of WSL)
 Download a copy of vim that is compiled properly.  Don't use the default
 installer from the main vim.org site, since it is missing python3 support.  Use
 the builds from the tuxproject:
