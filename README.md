@@ -55,7 +55,7 @@ Both ``pdbpp`` and ``tmuxp`` seem to have environment problems:
 ```
 
   If you follow his documentation and use the ``eval "$(_TMUX_COMPLETE=source
-  tmuxp)" you will see a need for imagemagic and end up with Xwindows errors.
+  tmuxp)`` you will see a need for imagemagic and end up with Xwindows errors.
   So do use this feature.
 
 ---
