@@ -39,17 +39,25 @@ pip3 install pdbpp tmuxp
 ---
 **NOTES**
 
+Both ``pdbpp`` and ``tmuxp`` seem to have environment problems:
 
-The ``pdbpp`` package doesn't work very well in the WSL (the ``display`` command
-doesn' working and ever step takes ages to render.)
 
-The ``tmuxp`` package creates a very fragile environment.   To make it work you
-need to add the following to your ``.bashrc`` or ``.bash_profile``:
+  The ``pdbpp`` package causes some debug steps to take ages to render (``pdp``
+  steps are instantaneous), and ``display`` does not work in the WSL.  A lot
+  of the core ``pdbpp`` features can be offered by a decent ``.pdbrc`` file.  I may
+  removed it ``pdbpp`` in the future.
 
+  The ``tmuxp`` package creates a very fragile environment.   To make it work you
+  need to add the following to your ``.bashrc`` or ``.bash_profile``:
 
 ```bash
   export PATH=$PATH:$HOME/.local/bin
 ```
+
+  If you follow his documentation and use the ``eval "$(_TMUX_COMPLETE=source
+  tmuxp)" you will see a need for imagemagic and end up with Xwindows errors.
+  So do use this feature.
+
 ---
 
 Open Vim, ignore the errors and type:
