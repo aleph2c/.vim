@@ -36,6 +36,22 @@ Install [pdbpp](https://pypi.org/project/pdbpp/) and [tmuxp](http://tmuxp.git-pu
 ```bash
 pip3 install pdbpp tmuxp
 ```
+---
+**NOTES**
+
+
+The ``pdbpp`` package doesn't work very well in the WSL (the ``display`` command
+doesn' working and ever step takes ages to render.)
+
+The ``tmuxp`` package creates a very fragile environment.   To make it work you
+need to add the following to your ``.bashrc`` or ``.bash_profile``:
+
+
+```bash
+  export PATH=$PATH:$HOME/.local/bin
+```
+---
+
 Open Vim, ignore the errors and type:
 ```
 :PlugInstall
