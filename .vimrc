@@ -763,3 +763,5 @@ set listchars=trail:-
 " new        -> create new window
 " put! a     -> paste the register a into the new window
 nnoremap <silent> <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR>
+noremap <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
