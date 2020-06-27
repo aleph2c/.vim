@@ -45,15 +45,12 @@ was debugging.  I would have to type "reset" to get it working again.
 One day I had enough and invested 30 seconds into googling how to fix this
 issue.  It turns out that bash will run the contents of the ``PROMPT_COMMAND``
 variable before it creates its prompt.  The ``stty sane`` command will fix a
-broken terminal, so if you add the following to your ``.bashrc`` or
+broken terminal. So add the following to your ``.bashrc`` or
 ``.bash_profile``:
 
 ```bash
   PROMPT_COMMAND='stty sane'
 ````
-
-If you do this, the weird post-debugging issues caused by pdb will be fixed in
-your terminal.
 
 Both ``pdbpp`` and ``tmuxp`` seem to have environment problems (or maybe my
 environment has problems with them):
