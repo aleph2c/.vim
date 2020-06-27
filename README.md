@@ -18,7 +18,7 @@ Follow the instructions in [Valloric's YouCompleteMe wiki](https://github.com/yc
 ## Install required debian packages and the information in this repo
 Install tmux:
 ```bash
-sudo apt-get -y install tmux
+sudo apt-get -y install tmux inotify-tools
 ```
 Clone all of the contents of the `.vim` directory into your home directory:
 ```bash
