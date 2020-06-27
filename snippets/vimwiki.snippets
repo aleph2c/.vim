@@ -96,20 +96,49 @@ snip.rv = snip.basename
   *Symptoms:* [[symptoms.`!p snip.rv = snip.basename`|symptoms]]
 
 == Questions ==
-  *Questions for $1: >= 5*
-    Do you have enough information?
-    Is your information organized?
-    Do you need to write something to make it easier to see?
-    Can you think of anyway to speed up your feedback cycle?
-    Do you have something to baseline from?
-    Can you reproduce the problem?
-    Can you simplify your test?
-    What recently changed?
-    Are you still working on the right problem?
-    Are you still focused on the right goal?
-    What don't you know that you need to know?
-	
-  *Assumptions*
+
+  *Assumptions (at first invisible)*
+    To find your assumptions, look for two pieces of evidence that contradict
+    each other. (may have to wait a couple of loops)
+    * [ ] 
+
+  *Questions for $1*
+  === Pre trouble-shooting questions ===
+    * [ ] Do you have enough information?
+    * [ ] Is your information organized?
+    * [ ] Can you draw a diagram of the components and their interactions?
+    * [ ] Do you need to write some code to make it easier to see?
+    * [ ] Can you think of anyway to speed up your feedback cycle?
+
+    * [ ] Is it a repair or a pioneering problem?  Did it work once before, or did it
+          work somewhere else?  Yes: Repair, No: Pioneering.
+
+  === Repair (Complexity increases exponentially) ===
+    * [ ] Can you test the individual components to reduce complexity?
+    * [ ] Can you exchange components?
+    * [ ] Can you reduce the number of interactions?
+    * [ ] Are you continuing event though you know that something you have previously
+          tested isn't working?
+    * [ ] Has a thing you have previously tested fooled you into thinking it works,
+          when it doesn't work? (Never assume something is right before you have
+          checked it twice)
+
+  == Pioneering ==
+    * [ ] Has someone else solved this before (search)? Can you turn this into a
+          repair?
+    * [ ] Do you have something to baseline from?
+    * [ ] Looking under the problem, are you focused on the right goals?  Are you
+          stuck on solving a hard problem, when there is an easy problem?
+    * [ ] Do you understand how your existing system works?  If not, can you draw
+          diagrams and describe how it works before you continue?
+    * [ ] What don't you know that you need to know?
+
+  == Custom Questions: (>=5) ==
+    * [ ] 
+    * [ ] 
+    * [ ] 
+    * [ ] 
+    * [ ] 
 
 = Decide =
   [[#Questions]]
@@ -133,7 +162,49 @@ snip.rv = snip.basename
   
 
 endsnippet
+snippet questions ""
+  *Assumptions (at first invisible)*
+    To find your assumptions, look for two peices of evidence that contradict
+    each other. (may have to wait a couple of loops)
 
+  *Questions for $1:*
+  === Pre trouble-shooting questions ===
+    * [ ] Do you have enough information?
+    * [ ] Is your information organized?
+    * [ ] Can you draw a diagram of the components and their interactions?
+    * [ ] Do you need to write some code to make it easier to see?
+    * [ ] Can you think of anyway to speed up your feedback cycle?
+
+    * [ ] Is it a repair or a pioneering problem?  Did it work once before, or did it
+          work somewhere else?  Yes: Repair, No: Pioneering.
+
+  === Repair (Complexity increases exponentially) ===
+    * [ ] Can you test the individual components to reduce complexity?
+    * [ ] Can you exchange components?
+    * [ ] Can you reduce the number of interactions?
+    * [ ] Are you continuing event though you know that something you have previously
+          tested isn't working?
+    * [ ] Has a thing you have previously tested fooled you into thinking it works,
+          when it doesn't work? (Never assume something is right before you have
+          checked it twice)
+
+  == Pioneering ==
+    * [ ] Has someone else solved this before (search)? Can you turn this into a
+          repair?
+    * [ ] Do you have something to baseline from?
+    * [ ] Looking under the problem, are you focused on the right goals?  Are you
+          stuck on solving a hard problem, when there is an easy problem?
+    * [ ] Do you understand how your existing system works?  If not, can you draw
+          diagrams and describe how it works before you continue?
+    * [ ] What don't you know that you need to know?
+
+  == Custom Questions: (>=5) ==
+    * [ ] 
+    * [ ] 
+    * [ ] 
+    * [ ] 
+    * [ ] 
+endsnippet
 # [[<name_without_wiki>|goal_like_this]]
 #snippet goal "writing a goal link to new OODA loop" 
 #$1`!p
