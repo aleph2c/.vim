@@ -50,6 +50,7 @@ broken terminal, so if you add
 ```bash
   PROMPT_COMMAND='stty sane'
 ````
+
 to your ``.bashrc`` or ``.bash_profile``, the weird post-debugging issues caused
 by pdb will be fixed in your terminal.
 
@@ -57,9 +58,9 @@ Both ``pdbpp`` and ``tmuxp`` seem to have environment problems:
 
 
   The ``pdbpp`` package causes some debug steps to take ages to render (``pdp``
-  steps are instantaneous), and ``display`` does not work in the WSL.  A lot
-  of the core ``pdbpp`` features can be offered by a decent ``.pdbrc`` file.  I may
-  remove it ``pdbpp`` in the future.
+  steps are instantaneous), and ``display`` does not work in the WSL.  A lot of
+  the core ``pdbpp`` features can be offered by a decent ``.pdbrc`` file.  So I
+  may remove ``pdbpp`` in the future.
 
   The ``tmuxp`` package creates a very fragile environment.   To make it work you
   need to add the following to your ``.bashrc`` or ``.bash_profile``:
