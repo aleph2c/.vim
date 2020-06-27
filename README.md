@@ -68,9 +68,9 @@ Both ``pdbpp`` and ``tmuxp`` seem to have environment problems:
   export PATH=$PATH:$HOME/.local/bin
 ```
 
-  If the tmuxp's author follow his documentation and use the ``eval "$(_TMUX_COMPLETE=source
-  tmuxp)``, for autocompletion,  you will see a need for imagemagic and end up
-  with Xwindows errors.  So do not use this feature.
+  The tmuxp's author suggest adding ``eval "$(_TMUX_COMPLETE=source tmuxp)``, to
+  your ``.bashrc`` for autocompletion, but if you do this you will see a need for
+  imagemagic and end up with Xwindows errors.  Do not use this feature.
 
 ---
 
