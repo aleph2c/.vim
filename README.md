@@ -39,15 +39,19 @@ pip3 install pdbpp tmuxp
 ---
 **NOTES**
 
-For years, ``pdb`` trashed my shell after breaking out of a program.
-I would have to type "reset" to get it working again.  One day I had
-enough and invested 30 seconds into googling how to fix this issue.
-It turns out that bash will run the contents of the
-``PROMPT_COMMAND`` variable before it creates its prompt.  ``stty
-sane`` will fix a broken terminal, so if you add
-``PROMPT_COMMAN=`stty sane`` to your ``.bashrc`` or
-``.bash_profile`` the weird post-debugging issues are fixed in the
-terminal.
+For years, ``pdb`` trashed my shell after breaking out of the Python program I
+was debugging.  I would have to type "reset" to get it working again.
+
+One day I had enough and invested 30 seconds into googling how to fix this
+issue.  It turns out that bash will run the contents of the ``PROMPT_COMMAND``
+variable before it creates its prompt.  The ``stty sane`` command will fix a
+broken terminal, so if you add
+
+```bash
+  PROMPT_COMMAND='stty sane'
+````
+to your ``.bashrc`` or ``.bash_profile``, the weird post-debugging issues caused
+by pdb will be fixed in your terminal.
 
 Both ``pdbpp`` and ``tmuxp`` seem to have environment problems:
 
