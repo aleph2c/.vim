@@ -39,13 +39,23 @@ pip3 install pdbpp tmuxp
 ---
 **NOTES**
 
+For years, ``pdb`` trashed my shell after breaking out of a program.
+I would have to type "reset" to get it working again.  One day I had
+enough and invested 30 seconds into googling how to fix this issue.
+It turns out that bash will run the contents of the
+``PROMPT_COMMAND`` variable before it creates its prompt.  ``stty
+sane`` will fix a broken terminal, so if you add
+``PROMPT_COMMAN=`stty sane`` to your ``.bashrc`` or
+``.bash_profile`` the weird post-debugging issues are fixed in the
+terminal.
+
 Both ``pdbpp`` and ``tmuxp`` seem to have environment problems:
 
 
   The ``pdbpp`` package causes some debug steps to take ages to render (``pdp``
   steps are instantaneous), and ``display`` does not work in the WSL.  A lot
   of the core ``pdbpp`` features can be offered by a decent ``.pdbrc`` file.  I may
-  removed it ``pdbpp`` in the future.
+  remove it ``pdbpp`` in the future.
 
   The ``tmuxp`` package creates a very fragile environment.   To make it work you
   need to add the following to your ``.bashrc`` or ``.bash_profile``:
@@ -54,9 +64,9 @@ Both ``pdbpp`` and ``tmuxp`` seem to have environment problems:
   export PATH=$PATH:$HOME/.local/bin
 ```
 
-  If you follow his documentation and use the ``eval "$(_TMUX_COMPLETE=source
+  If the tmuxp's author follow his documentation and use the ``eval "$(_TMUX_COMPLETE=source
   tmuxp)``, for autocompletion,  you will see a need for imagemagic and end up
-  with Xwindows errors.  So do use this feature.
+  with Xwindows errors.  So do not use this feature.
 
 ---
 
