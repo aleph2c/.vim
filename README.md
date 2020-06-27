@@ -39,39 +39,41 @@ pip3 install pdbpp tmuxp
 ---
 **NOTES**
 
-For years, ``pdb`` trashed my shell after breaking out of the Python program I
+For years, pdb would trash my shell after I broke out of the Python program I
 was debugging.  I would have to type "reset" to get it working again.
 
 One day I had enough and invested 30 seconds into googling how to fix this
 issue.  It turns out that bash will run the contents of the ``PROMPT_COMMAND``
 variable before it creates its prompt.  The ``stty sane`` command will fix a
-broken terminal, so if you add
+broken terminal, so if you add the following to your ``.bashrc`` or
+``.bash_profile``:
 
 ```bash
   PROMPT_COMMAND='stty sane'
 ````
 
-to your ``.bashrc`` or ``.bash_profile``, the weird post-debugging issues caused
-by pdb will be fixed in your terminal.
+If you do this, the weird post-debugging issues caused by pdb will be fixed in
+your terminal.
 
-Both ``pdbpp`` and ``tmuxp`` seem to have environment problems:
+Both ``pdbpp`` and ``tmuxp`` seem to have environment problems (or maybe my
+environment has problems with them):
 
 
-  The ``pdbpp`` package causes some debug steps to take ages to render (``pdp``
-  steps are instantaneous), and ``display`` does not work in the WSL.  A lot of
-  the core ``pdbpp`` features can be offered by a decent ``.pdbrc`` file.  So I
-  may remove ``pdbpp`` in the future.
+The ``pdbpp`` package causes some debug steps to take ages to render (``pdp``
+steps are instantaneous), and ``display`` does not work in the WSL.  A lot of
+the core ``pdbpp`` features can be offered by a decent ``.pdbrc`` file.  So I
+may remove ``pdbpp`` in the future.
 
-  The ``tmuxp`` package creates a very fragile environment.   To make it work you
-  need to add the following to your ``.bashrc`` or ``.bash_profile``:
+The ``tmuxp`` package creates a very fragile environment.   To make it work you
+need to add the following to your ``.bashrc`` or ``.bash_profile``:
 
 ```bash
   export PATH=$PATH:$HOME/.local/bin
 ```
 
-  The tmuxp's author suggest adding ``eval "$(_TMUX_COMPLETE=source tmuxp)``, to
-  your ``.bashrc`` for autocompletion, but if you do this you will see a need for
-  imagemagic and end up with Xwindows errors.  Do not use this feature.
+The tmuxp's author suggest adding ``eval "$(_TMUX_COMPLETE=source tmuxp)``, to
+your ``.bashrc`` for autocompletion, but if you do this you will see a need for
+imagemagic and end up with Xwindows errors.  Do not use this feature.
 
 ---
 
