@@ -37,7 +37,7 @@ Install [pdbpp](https://pypi.org/project/pdbpp/) and [tmuxp](http://tmuxp.git-pu
 pip3 install pdbpp tmuxp
 ```
 ---
-**NOTES**
+**NOTES on setting up bash**
 
 For years, pdb would trash my shell after I broke out of the Python program I
 was debugging.  I would have to type "reset" to get it working again.
@@ -49,6 +49,7 @@ broken terminal. So add the following to your ``.bashrc`` or
 ``.bash_profile``:
 
 ```bash
+  # fix your terminal after you break of of pdb session
   PROMPT_COMMAND='stty sane'
 ````
 
@@ -65,6 +66,7 @@ The ``tmuxp`` package creates a very fragile environment.   To make it work you
 need to add the following to your ``.bashrc`` or ``.bash_profile``:
 
 ```bash
+  # fix broken environment assumption needed for tmuxp
   export PATH=$PATH:$HOME/.local/bin
 ```
 
@@ -72,6 +74,24 @@ The tmuxp's author suggest adding ``eval "$(_TMUX_COMPLETE=source tmuxp)``, to
 your ``.bashrc`` for autocompletion, but if you do this you will see a need for
 imagemagic and end up with Xwindows errors.  Do not use this feature.
 
+----
+
+I heavily depend on [UMLet](https://www.umlet.com/) for architectural drawings.  UMLet is a dumpster fire, but you get what you pay for.
+
+UMLet accepts command line arguments for converting pictures from ``*.uxf`` into ``*.pdf|*.svg|..``.  Do not use UMLet via apt-get, it is hopelessly out of date and broken.  If you install UMLet on your computer, say in Windows 10, it will run using a GUI.  It is written in Java, so in theory its code is portable.  After spending many hours trying to construct WSL make-files which can call out to the UMLet Java program installed in Windows, I found that the best approach is to make calls to the ``umlet.sh`` included in the UMLet Windows directory.  Unfortunately, this script has a bug on line 31.  If you go to the UMLet github repo, it has been [fixed](https://github.com/umlet/umlet/blob/master/umlet-standalone/src/exe/umlet.sh), but it has not been fixed in their UMLet download-site, so your local copy is probably broken.  Fix this.
+
+To get the latest version of UMLet working from within the WSL, install the old UMLet, ``sudo apt-get install umlet``.  We will not use this outdated version, but we will use the version of Java (avoiding Java dependency hell) that is installed with it in the WSL.  Then add pathing the the ``umlet.sh`` to your ``.bashrc`` or ``.bash_profile``:
+
+```bash
+  # add umlet.sh to path
+  export PATH=$PATH:/c/mnt/Users/lincoln/Desktop/Umlet:
+```
+
+The ``umlet.sh`` will crash when called from the WSL.  To make it work you will need to prepend ``DISPLAY=`` to any command that uses it.  So to convert a ``uxf`` file to an ``svg`` file from within the WSL, you would type:
+
+```bash
+  DISPLAY= umlet.sh -action=convert -format=svg -filename=example.uxf
+```
 ---
 
 Open Vim, ignore the errors and type:
