@@ -76,22 +76,49 @@ imagemagic and end up with Xwindows errors.  Do not use this feature.
 
 ----
 
-I heavily depend on [UMLet](https://www.umlet.com/) for architectural drawings.  UMLet is a dumpster fire, but you get what you pay for.
+I heavily depend on [UMLet](https://www.umlet.com/) for architectural drawings.  UMLet is a great tool, but it has a lot of problems too (it's free like a mattress).
 
-UMLet accepts command line arguments for converting pictures from ``*.uxf`` into ``*.pdf|*.svg|..``.  Do not use UMLet via apt-get, it is hopelessly out of date and broken.  If you install UMLet on your computer, say in Windows 10, it will run using a GUI.  It is written in Java, so in theory its code is portable.  After spending many hours trying to construct WSL make-files which can call out to the UMLet Java program installed in Windows, I found that the best approach is to make calls to the ``umlet.sh`` included in the UMLet Windows directory.  Unfortunately, this script has a bug on line 31.  If you go to the UMLet github repo, it has been [fixed](https://github.com/umlet/umlet/blob/master/umlet-standalone/src/exe/umlet.sh), but it has not been fixed in their UMLet download-site, so your local copy is probably broken.  Fix this.
+UMLet accepts command line arguments for converting pictures from ``*.uxf`` into ``*.pdf|*.svg|..``.  This means you can construct a make file for your documents and automatically convert any changed ``*.uxf`` file into another format, then have these newly made diagrams built into your pdf/html-pages automatically.
 
-To get the latest version of UMLet working from within the WSL, install the old UMLet, ``sudo apt-get install umlet``.  We will not use this outdated version, but we will use the version of Java (avoiding Java dependency hell) that is installed with it in the WSL.  Then add pathing the the ``umlet.sh`` to your ``.bashrc`` or ``.bash_profile``:
+Do not use UMLet via apt-get, it is hopelessly out of date and broken.  If you install UMLet on your computer, say in Windows 10, it will run using a GUI.  UMLet is written in Java, so in theory its code is portable.  To use UMLet, just download it and run it as a GUI in your native OS.  If you are running in Linux/OSX there is ``umlet.sh`` which can be used in your make files included in the UMLet install directory.  Unfortunately, this script has a bug on line 31.  If you go to the UMLet github repo, it has been [fixed](https://github.com/umlet/umlet/blob/master/umlet-standalone/src/exe/umlet.sh), but it has not been fixed in their UMLet download-site, so your local copy is probably broken.  Fix this.
+
+To get the latest version of UMLet working from within the WSL, install the old UMLet, ``sudo apt-get install umlet``.  We will not use this outdated version, but we will use the version of Java (avoiding Java dependency hell) that is installed with it.  Then add pathing the the ``umlet.sh`` to your ``.bashrc`` or ``.bash_profile``:
 
 ```bash
   # add umlet.sh to path
   export PATH=$PATH:/c/mnt/Users/lincoln/Desktop/Umlet:
 ```
 
-The ``umlet.sh`` will crash when called from the WSL.  To make it work you will need to prepend ``DISPLAY=`` to any command that uses it.  So to convert a ``uxf`` file to an ``svg`` file from within the WSL, you would type:
+The ``umlet.sh`` will crash when called from a headless machine.  To make it work you will need to prepend ``DISPLAY=`` to any command that uses it.  So to convert a ``uxf`` file to an ``svg`` file from within a headless system, you would type:
 
 ```bash
   DISPLAY= umlet.sh -action=convert -format=svg -filename=example.uxf
 ```
+
+If you are using the Windows 10 UMLet GUI, but are building your documents using the WSL **DO NOT USE** ``umlet.sh`` file.  It will work, but it will draw pictures using the Linux fonts and these will mangle all of your rendered pictures.  Instead of using ``umlet.sh``, have your WSL Makefile call to the ``cmd.exe \C <windows_path_to_UMLET>`` followed by the conversion string.
+
+Generally speaking do the following:
+
+1. Add an environmental variable which has a windows path to UMLET.  You will have to use double backslashes:
+
+```bash
+  export WINDOWS_UMLET="C:\\Users\\lincoln\\Desktop\\Umlet\\Umlet.exe"
+```
+
+2. In a picture making make file:
+
+```bash
+CC = "$(WINDOWS_UMLET)"
+UXF = $(shell find . -name "*.uxf")
+SVG = $(patsubst %.uxf, %.svg, $(UXF))
+
+.RECEPEPREFIX = >
+all : $(SVG)
+%.svg: %.uxf
+> echo $<; \
+> cmd.exe /C $(CC) -action=convert -format=svg -filename=$<;
+```
+
 ---
 
 Open Vim, ignore the errors and type:
