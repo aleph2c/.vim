@@ -32,6 +32,22 @@ ln -s ~/.vim/snippets ~/snippets
 ln -s ~/.vim/.pdbrc ~/.pdbrc
 ln -s ~/.vim/.pdbrc.py ~/.pdbrc.py
 ```
+
+Have the same vim configuration work as root:
+```bash
+sudo su
+other='pi'  # or, the username used to install your vim/tmux configuration
+root_home=`cat /etc/passwd | grep root | awk 'BEGIN {FS=":"}; {print $6}'`
+other_home=`cat /etc/passwd | grep $other | awk 'BEGIN {FS=":"}; {print $6}'`
+ln -s $other_home/.vim $root_home/.vim
+ln -s $other_home/.vim/.vimrc $root_home/.vimrc
+ln -s $other_home/.vim/.tmux.conf $root_home/.tmux.conf
+ln -s $other_home/.vim/snippets $root_home/snippets
+ln -s $other_home/.vim/.pdbrc $root_home/.pdbrc
+ln -s $other_home/.pdbrc.py $root_home/.pdbrc.py
+exit
+```
+
 Install [pdbpp](https://pypi.org/project/pdbpp/) and [tmuxp](http://tmuxp.git-pull.com/en/latest/index.html):
 ```bash
 pip3 install pdbpp tmuxp
