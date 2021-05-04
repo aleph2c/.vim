@@ -1,3 +1,10 @@
+# part     #
+# chapter  *
+# sec      =
+# sub      -
+# ssub     ^
+# sssub    ,
+
 global !p
 import re
 import datetime
@@ -26,6 +33,24 @@ snippet code "code block" b
   $0${1:place code here}
 endsnippet
 
+snippet "part" "Writing a part header" rb
+${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:section_title}}
+${3:`!p snip.rv = '#' * len(t[1])`}
+
+$0
+endsnippet
+
+snippet "chapter" "Writing a chapter header" rb
+${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:section_title}}
+${3:`!p snip.rv = '*' * len(t[1])`}
+
+$0
+endsnippet
+
 snippet "sec" "Writing a section header" rb
 ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
@@ -39,7 +64,7 @@ snippet "sub" "Writing a subtitle" rb
 ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
 ${1:${VISUAL:subsection title}}
-${3:`!p snip.rv = '^' * len(t[1])`}
+${3:`!p snip.rv = '-' * len(t[1])`}
 $0
 endsnippet
 
@@ -47,7 +72,7 @@ snippet "ssub" "Writing a subtitle" rb
 ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
 ${1:${VISUAL:subsubsection_title}}
-${3:`!p snip.rv = '-' * len(t[1])`}
+${3:`!p snip.rv = '^' * len(t[1])`}
 $0
 endsnippet
 

@@ -100,7 +100,7 @@ endif
 
   " Testing
   Plug 'janko-m/vim-test'
-  Plug '5long/pytest-vim-compiler'
+  "Plug '5long/pytest-vim-compiler'
   Plug 'reinh/vim-makegreen'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'christoomey/vim-tmux-runner'
