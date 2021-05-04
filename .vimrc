@@ -53,6 +53,9 @@ endif
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-vividchalk'
 
+  " vividchalk doesn't work for searching
+  Plug 'altercation/vim-colors-solarized'
+
   " Directory Changing
   Plug 'airblade/vim-rooter'
 
