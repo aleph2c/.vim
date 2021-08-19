@@ -50,7 +50,7 @@ endsnippet
 
 snippet change "change log" b
 -------------------------------------------------------------------------------
-*${1:Hat2}*   v${2:major}.${3:minor}.${4:build}
+*${1:XGW}*   v${2:major}.${3:minor}.${4:build}
 *Date*     ${5:`!p snip.rv = date_now()`}
 *Hash*     $6
 -------------------------------------------------------------------------------
@@ -205,30 +205,6 @@ snippet questions ""
     * [ ] 
     * [ ] 
 endsnippet
-# [[<name_without_wiki>|goal_like_this]]
-#snippet goal "writing a goal link to new OODA loop" 
-#$1`!p
-#goal_name_underscore = t[1].replace(" ", "_")
-#goal_name_underscore = goal_name_underscore.replace("?", "")
-#snip.rv = " [[{}|link]]".format(goal_name_underscore)
-#`$2`!p
-#from pathlib import Path
-#current_line = snip.buffer[snip.buffer.cursor[0]]
-#m = re.search('\[\[(.+)\\|.+\]\]', current_line)
-#if m is not None and len(m.groups()) == 1:
-#  file_name = m.group(1) + ".wiki"
-#  with open(file_name, "w") as fp:
-#    fp.write("[[{}|back]]\n".format(snip.basename))
-#  if len(file_name) >= 7:
-#    try:
-#      os.remove(str(Path(file_name).stem)[0:-1]+".wiki")
-#    except:
-#			# might be making file noise
-#			pass
-#
-#`
-#* [ ] goal$0
-#endsnippet 
 
 snippet goal ""
 ${VISUAL} [[`!p
@@ -256,4 +232,31 @@ snippet uuid "UUID" !b
 `!p import uuid
 if not snip.c:
   snip.rv = uuid.uuid4().hex`
+endsnippet
+
+snippet newpage "newpage" !b
+<p style="page-break-before: always" ></p>
+endsnippet
+
+snippet np "newpage" !b
+<p style="page-break-before: always" ></p>
+endsnippet
+
+snippet admon "admonition" !b
+!!! $1`!p snip.rv=from_options(t[1], ['summary', 'note', 'success', 'failure', 'warning', 'danger'])`
+		${2:contents of admonition}
+endsnippet
+
+
+snippet code "code" !b
+\`\`\`${1:syntax}
+$2
+\`\`\`
+endsnippet
+
+snippet image "image" !b
+<div class="img-box">
+		<img src="./../assets/$1" alt="$2"/>
+</div>
+$0
 endsnippet
