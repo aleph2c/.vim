@@ -1,8 +1,24 @@
+# =======
+# chapter  (not in rst, but in Jessica's theme)
+# =======
+
+# sec (section in rst)
+# ===
+
+# sub (subsection in rst)
+# ---
+
+# ssub (subsubsection in rst)
+# ^^^^
+
+# sssub (paragraph in rst)
+# ,,,,,
+
 global !p
 import re
 import datetime
 def hypertarget(filename, t):
-  return '..' ' _'+filename + '-' + re.sub(' ', '-',t).lower() + ':'
+  return '..' ' _' + filename + '__' + re.sub(r'([ ?]{1,})', '_', t).lower() + ':'
 
 def captalize_words(t):
 	return " ".join([word.capitalize() for word in t.split()])
@@ -10,6 +26,14 @@ def captalize_words(t):
 def current_date():
 	now = datetime.datetime.now()
 	return now.strftime("%Y-%m-%d")
+
+def from_options(t, options):
+	if t:
+		options = [m[len(t):] for m in options if m.startswith(t)]
+	if len(options) == 1:
+		return options[0]
+	else:
+		return "(" + "|".join(options) + ")"
 endglobal
 
 
@@ -26,6 +50,25 @@ snippet code "code block" b
   $0${1:place code here}
 endsnippet
 
+snippet "part" "Writing a part header" rb
+${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:section_title}}
+${3:`!p snip.rv = '#' * len(t[1])`}
+
+$0
+endsnippet
+
+snippet "chapter" "Writing a chapter header" rb
+#${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+ 
+#${4:`!p snip.rv = '#' * (len(t[1]) + 1)`}
+# ${1:${VISUAL:section_title}}
+#${3:`!p snip.rv = '#' * (len(t[1]) + 1)`}
+
+$0
+endsnippet
+
 snippet "sec" "Writing a section header" rb
 ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
@@ -39,7 +82,7 @@ snippet "sub" "Writing a subtitle" rb
 ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
 ${1:${VISUAL:subsection title}}
-${3:`!p snip.rv = '^' * len(t[1])`}
+${3:`!p snip.rv = '-' * len(t[1])`}
 $0
 endsnippet
 
@@ -47,7 +90,7 @@ snippet "ssub" "Writing a subtitle" rb
 ${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
 
 ${1:${VISUAL:subsubsection_title}}
-${3:`!p snip.rv = '-' * len(t[1])`}
+${3:`!p snip.rv = '^' * len(t[1])`}
 $0
 endsnippet
 
@@ -77,9 +120,19 @@ endsnippet
 snippet image "Add an image" b
 .. image:: _static/$1.svg
     :target: _static/$1.pdf
-    :align: center
+    :align: $3`!p snip.rv=from_options(t[3], ['scale-to-fit', 'noscale-center', 'noscale-left', 'noscale-left-wrap', 'noscale-right-wrap'])`
 
-b
+$0
+endsnippet
+
+snippet video "Add a video" b
+.. raw:: html
+
+  <div class="video-content">
+    <iframe src="$1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+
+$0
 endsnippet
 
 snippet note "Add a note" b
