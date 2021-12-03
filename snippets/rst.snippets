@@ -43,11 +43,11 @@ snippet abr "abbreviation"
 endsnippet
 
 snippet code "code block" b
-.. code-block:: python
+.. code-block:: ${1:python}
   :emphasize-lines: 1
   :linenos:
-  
-  $0${1:place code here}
+
+  $2
 endsnippet
 
 snippet "part" "Writing a part header" rb
@@ -120,7 +120,7 @@ endsnippet
 snippet image "Add an image" b
 .. image:: _static/$1.svg
     :target: _static/$1.pdf
-    :align: $3`!p snip.rv=from_options(t[3], ['scale-to-fit', 'noscale-center', 'noscale-left', 'noscale-left-wrap', 'noscale-right-wrap'])`
+    :class: $3`!p snip.rv=from_options(t[3], ['scale-to-fit', 'noscale-center', 'noscale-left', 'noscale-left-wrap', 'noscale-right-wrap'])`
 
 $0
 endsnippet
