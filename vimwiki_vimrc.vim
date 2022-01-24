@@ -7,4 +7,12 @@
 "let g:vimwiki_list = [{ 'path': '~\legend\doc\wiki\' }]
 "let g:vimwiki_folding = 1
 "
-let g:vimwiki_list = [{'syntax': 'markdown', 'ext': '.md'}]
+"let g:vimwiki_list = [ { 'syntax': 'markdown', 'ext': '.md', 'path': '/home/pi/projects/confidante/time_tracking/diary.md' } ]
+
+" Vimwiki settings
+let g:vimwiki_list          = [
+  \ {'syntax' : 'markdown',
+  \ 'ext': '.md' ,
+  \ 'path': '~/projects/confidante/time_tracking/diary'},
+  \ ]
+let g:vimwiki_use_calendar=0
