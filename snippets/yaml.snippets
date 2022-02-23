@@ -1,0 +1,33 @@
+snippet shell_fact "create a shell fact with ansible"
+- name: $0
+  become: yes
+  ansible.builtin.shell: |
+    $1
+  register:
+    $2_cap
+  args:
+    executable: /usr/bin/bash
+  failed_when: $2_cap.rc > 2
+  tags:
+    - $3
+
+- name:  Set $4 to false
+  ansible.builtin.set_fact:
+    $4: false
+  tags:
+    - $3
+
+- name: Set $4 to true if $2_cap found something
+  ansible.builtin.set_fact:
+    $4: true
+  when: $2_cap.stdout != ''
+  tags:
+    - $3
+
+- name: Observe the $4 fact
+  ansible.builtin.debug:
+    msg: "$4: {{ $4 }}"
+  tags:
+    - $3
+
+endsnippet
