@@ -31,3 +31,39 @@ snippet shell_fact "create a shell fact with ansible"
     - $3
 
 endsnippet
+
+
+snippet file_exists "check to see if a file exists"
+- name: $0
+  become: yes
+  ansible.builtin.stat:
+    path: $1
+  register: $2_cap
+  tags:
+    - $3
+
+- name:  Set $4 to false
+  ansible.builtin.set_fact:
+    $4: false
+  tags:
+    - $3
+
+- name: Set $4 to true if $2_cap found something
+  ansible.builtin.set_fact:
+    $4: true
+  when: $2_cap.stat.exists
+  tags:
+    - $3
+
+endsnippet
+
+snippet shell "Write a shell command"
+- name: $0
+  ansible.builtin.shell: |
+    $1
+  args:
+    executable: /usr/bin/bash
+    chdir: $2
+  tags:
+    - $3
+endsnippet
