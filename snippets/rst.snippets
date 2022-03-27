@@ -14,6 +14,8 @@
 # sssub (paragraph in rst)
 # ,,,,,
 
+
+
 global !p
 import re
 import datetime
@@ -43,11 +45,11 @@ snippet abr "abbreviation"
 endsnippet
 
 snippet code "code block" b
-.. code-block:: python
+.. code-block:: ${1:python}
   :emphasize-lines: 1
   :linenos:
-  
-  $0${1:place code here}
+
+  $2
 endsnippet
 
 snippet "part" "Writing a part header" rb
@@ -59,12 +61,30 @@ ${3:`!p snip.rv = '#' * len(t[1])`}
 $0
 endsnippet
 
+snippet "\#\#" "Writing a chapter header" rb
+#${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:section_title}}
+#${3:`!p snip.rv = '#' * (len(t[1]) + 1)`}
+
+$0
+endsnippet
+
 snippet "chapter" "Writing a chapter header" rb
 #${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
- 
+
 #${4:`!p snip.rv = '#' * (len(t[1]) + 1)`}
 # ${1:${VISUAL:section_title}}
 #${3:`!p snip.rv = '#' * (len(t[1]) + 1)`}
+
+$0
+endsnippet
+
+snippet "\=\=" "Writing a section header" rb
+${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+
+${1:${VISUAL:section_title}}
+${3:`!p snip.rv = '=' * len(t[1])`}
 
 $0
 endsnippet
@@ -78,27 +98,67 @@ ${3:`!p snip.rv = '=' * len(t[1])`}
 $0
 endsnippet
 
-snippet "sub" "Writing a subtitle" rb
-${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+snippet "\*\*" "Writing a subtitle" rb
+`!p snip.rv = hypertarget(snip.basename, t[1])`
 
 ${1:${VISUAL:subsection title}}
-${3:`!p snip.rv = '-' * len(t[1])`}
+`!p snip.rv = '*' * len(t[1])`
+$0
+endsnippet
+
+snippet "sub" "Writing a subtitle" rb
+`!p snip.rv = hypertarget(snip.basename, t[1])`
+
+${1:${VISUAL:subsection title}}
+`!p snip.rv = '*' * len(t[1])`
+$0
+endsnippet
+
+snippet "\-\-" "Writing a subsubtitle" rb
+`!p snip.rv = hypertarget(snip.basename, t[1])`
+
+${1:${VISUAL:subsubsection_title}}
+`!p snip.rv = '-' * len(t[1])`
 $0
 endsnippet
 
 snippet "ssub" "Writing a subtitle" rb
-${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+`!p snip.rv = hypertarget(snip.basename, t[1])`
 
 ${1:${VISUAL:subsubsection_title}}
-${3:`!p snip.rv = '^' * len(t[1])`}
+`!p snip.rv = '-' * len(t[1])`
+$0
+endsnippet
+
+snippet "\^\^" "Writing a subsubsubtitle" rb
+`!p snip.rv = hypertarget(snip.basename, t[1])`
+
+${1:${VISUAL:subsubsubsection_title}}
+`!p snip.rv = '^' * len(t[1])`
 $0
 endsnippet
 
 snippet "sssub" "Writing a subtitle" rb
-${2:`!p snip.rv = hypertarget(snip.basename, t[1])`}
+`!p snip.rv = hypertarget(snip.basename, t[1])`
 
 ${1:${VISUAL:subsubsubsection_title}}
-${3:`!p snip.rv = '"' * len(t[1])`}
+`!p snip.rv = '^' * len(t[1])`
+$0
+endsnippet
+
+snippet "\"\"" "Writing a subtitle" rb
+`!p snip.rv = hypertarget(snip.basename, t[1])`
+
+${1:${VISUAL:subsubsubsection_title}}
+`!p snip.rv = '"' * len(t[1])`
+$0
+endsnippet
+
+snippet "ssssub" "Writing a subtitle" rb
+`!p snip.rv = hypertarget(snip.basename, t[1])`
+
+${1:${VISUAL:subsubsubsection_title}}
+`!p snip.rv = '"' * len(t[1])`
 $0
 endsnippet
 
@@ -109,6 +169,14 @@ snippet glos "Write a glossary item" b
 $0
 endsnippet
 
+snippet toc "add a table of contents" b
+.. contents::
+   :depth: $1
+   :local:
+   :backlinks: none
+   :class: page-toc
+endsnippet
+
 snippet term "reference a glossary item" 
 :term:\`${1:name}<${2:`!p snip.rv = captalize_words(t[1])`}>\`
 endsnippet
@@ -117,11 +185,20 @@ snippet ref "reference to a link"
 :ref:\`${1:name}<${2:name of link}>\`
 endsnippet
 
-snippet image "Add an image" b
-.. image:: _static/$1.svg
-    :target: _static/$1.pdf
-    :align: $3`!p snip.rv=from_options(t[3], ['scale-to-fit', 'noscale-center', 'noscale-left', 'noscale-left-wrap', 'noscale-right-wrap'])`
+snippet link "create a link"
+\`$1 <$2>\`_
+endsnippet
 
+# 
+#    :class: $3`!p snip.rv=from_options(t[3], ['scale-to-fit', 'noscale-center', 'noscale-left', 'noscale-left-wrap', 'noscale-right-wrap'])`
+    
+snippet image "Add an image" b
+.. figure:: _static/$1.svg
+    :target: _static/$1.pdf
+    :name: $1
+    :class: noscale-center
+
+    source file: \`\`_static/$1.uxf\`\`
 $0
 endsnippet
 
@@ -141,6 +218,9 @@ snippet note "Add a note" b
   $0
 endsnippet
 
+snippet '' "fuckoff"
+\`\`$1\`\` $0
+endsnippet
 
 snippet ttr "Things to Remember" b
 .. admonition:: Things to Remember

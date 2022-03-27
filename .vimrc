@@ -29,7 +29,7 @@ endif
   Plug 'othree/xml.vim'
 
   " Autocomplete
-  "Plug 'Valloric/YouCompleteMe'
+  Plug 'Valloric/YouCompleteMe'
 
   "Look of vim o
   Plug 'Lokaltog/vim-powerline'
@@ -111,6 +111,7 @@ endif
   " Candidates
   Plug 'tpope/vim-eunuch'
   Plug 'terryma/vim-multiple-cursors'
+  Plug 'yanqd0/nginx.vim'
 
 call plug#end()
 set nocompatible
