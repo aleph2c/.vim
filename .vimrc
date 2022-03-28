@@ -43,7 +43,6 @@ endif
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-rails'
   Plug 'tpope/vim-tbone'
   Plug 'tpope/rbenv-ctags'
   Plug 'tpope/vim-markdown'
@@ -62,6 +61,7 @@ endif
   " Wiki
   Plug 'vim-scripts/utl.vim'
   Plug 'vimwiki/vimwiki'
+  Plug 'vim-scripts/calendar.vim--Matsumoto'
 
   " Alignment
   Plug 'godlygeek/tabular'
