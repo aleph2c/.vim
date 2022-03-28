@@ -29,7 +29,7 @@ endif
   Plug 'othree/xml.vim'
 
   " Autocomplete
-  " Plug 'Valloric/YouCompleteMe'
+  Plug 'Valloric/YouCompleteMe'
 
   "Look of vim o
   Plug 'Lokaltog/vim-powerline'
@@ -71,7 +71,7 @@ endif
   Plug 'SirVer/ultisnips'
 
   " Folding
-  Plug 'Konfekt/FastFold'
+  " Plug 'Konfekt/FastFold'
 
   " Navigation
   Plug 'scrooloose/nerdtree'
@@ -136,7 +136,8 @@ nmap <silent> <leader>tg :TestVisit<CR>   " ,tg
 " Turn on only one linter per language, or you will be trying to shut off
 " messages in the wrong tool.
 let g:ale_linters ={
-\ 'python': ['flake8']
+\ 'python': ['flake8'],
+\ 'javascript': ['eslint']
 \}
 nmap <silent> <leader><C-j> <Plug>(ale_next_wrap)
 nmap <silent> <leader><C-k> <Plug>(ale_previous_wrap)
@@ -169,6 +170,7 @@ let g:ale_python_flake8_options .= 'E265,' "hashtag comment space noise (distrac
 let g:session_autoload        = 'no'
 let g:session_autosave        = 'yes'
 let g:session_default_to_last = 'yes'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Custom configurations for plugins found in the same directory as $MYVIMRC   "
