@@ -169,7 +169,14 @@ snippet glos "Write a glossary item" b
 $0
 endsnippet
 
-snippet toc "add a table of contents" b
+snippet toc "add a submenu" b
+.. toctree::
+   :maxdepth: 2
+
+   $1
+endsnippet
+
+snippet contents "add a table of contents" b
 .. contents::
    :depth: $1
    :local:
@@ -178,11 +185,11 @@ snippet toc "add a table of contents" b
 endsnippet
 
 snippet term "reference a glossary item" 
-:term:\`${1:name}<${2:`!p snip.rv = captalize_words(t[1])`}>\`
+:term:\`${1:name} <${2:`!p snip.rv = captalize_words(t[1])`}>\`
 endsnippet
 
 snippet ref "reference to a link"
-:ref:\`${1:name}<${2:name of link}>\`
+:ref:\`${1:name} <${2:name of link}>\`
 endsnippet
 
 snippet link "create a link"
@@ -195,7 +202,7 @@ endsnippet
 snippet image "Add an image" b
 .. figure:: /_static/$1.svg
     :target: /_static/$1.pdf
-    :class: noscale-center
+    :class: noscale-center white-bg
 
     source file: \`\`_static/$1.uxf\`\`
 $0
