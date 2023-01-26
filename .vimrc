@@ -27,6 +27,7 @@ else
 endif
   " XML
   Plug 'othree/xml.vim'
+  Plug 'christoomey/vim-tmux-navigator'
 
   " Autocomplete
   Plug 'Valloric/YouCompleteMe'
