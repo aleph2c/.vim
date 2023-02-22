@@ -1,0 +1,46 @@
+global !p
+
+from datetime import datetime
+import uuid
+
+def from_options(t, options):
+	if t:
+		options = [m[len(t):] for m in options if m.startswith(t)]
+	if len(options) == 1:
+		return options[0]
+	else:
+		return "(" + "|".join(options) + ")"
+
+endglobal
+
+snippet start "Setting up the top of the file"
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="3.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:output method="$1">
+template$0
+</xsl:stylesheet>
+endsnippet
+
+snippet template "Creating a template"
+<xsl:template match="$1">
+  $0
+</xsl:template>
+
+endsnippet
+
+snippet templated "Create a detailed template"
+<xsl:template match="$1" mode="$2" priority="$3`!p snip.rv=from_options(t[3], ['0.0', '-0.25', '0.25', '0.5'])`">
+  $0
+</xsl:template>
+endsnippet
+
+snippet value "Setting a value of"
+  <xsl:value-of select="$1" />
+endsnippet
+
+snippet apply "Apply templates"
+<xsl:apply-templates select="$1" />
+$0
+endsnippet
