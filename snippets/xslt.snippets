@@ -1,3 +1,23 @@
+################################################################################
+#                            Comparison operators                              #
+################################################################################
+# location paths, location steps, axis, node test, predicats: Otegem p.154
+# predicats can be cascaded [][] or you can use [ () and () or () ]
+#
+# eq
+# @flag eq 'favorite'
+#
+# ne
+# @flag ne 'favorite'
+#
+# lt, le, gt, ge
+# @flag lt 'favorite', true if the value of flag comes before favorite
+#
+# = != < <= > >=
+#
+# test="@rating &lt 2" same as test="2 > @rating"
+# not(Program/@flag = 'favorite')
+#
 global !p
 
 from datetime import datetime
@@ -13,14 +33,27 @@ def from_options(t, options):
 
 endglobal
 
+# select the text (it can be multiline)
+# ctrl-j
+# --
+# ctrl-j
+snippet -- "comment"
+<!--
+${VISUAL}
+-->$0
+endsnippet
+
+# <xsl:output method="html" version="5.0" encoding="UTF-8" indent="yes" />
 snippet start "Setting up the top of the file"
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="3.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:output method="$1`!p snip.rv=from_options(t[1], [ 'xml', 'html', 'xhtml',
-'text', 'json', 'adaptive'])`" indent="$2`!p snip.rv=from_options(t[2], ['no',
-'yes'])`" />
+<xsl:output method="$1`!p snip.rv=from_options(t[1], [
+'xml', 'html', 'xhtml', 'text', 'json', 'adaptive'
+])`" encoding="UTF-8" version="$2`!p snip.rv=from_options(t[2], [
+'1.0', '5.0'])`" indent="$3`!p snip.rv=from_options(t[3], [
+'no', 'yes'])`" />
 
 template$0
 </xsl:stylesheet>
@@ -32,26 +65,30 @@ endsnippet
 
 snippet template "Creating a template"
 <xsl:template match="$1">
-  $0
+  ${VISUAL}$0
 </xsl:template>
 
 endsnippet
 
 snippet template-named "Creating a named template"
 <xsl:template match="$1" name="$2">
-  $0
+  ${VISUAL}$0
 </xsl:template>
 
 endsnippet
 
 snippet templated "Create a detailed template"
 <xsl:template match="$1" mode="$2" priority="$3`!p snip.rv=from_options(t[3], ['0.0', '-0.25', '0.25', '0.5'])`">
-  $0
+  ${VISUAL}$0
 </xsl:template>
 
 endsnippet
 
 snippet "(.)?value" "Setting a value of" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:value-of select="$1" />
+endsnippet
+
+snippet "(.)?value-escaping" "Setting a value of" r
 `!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:value-of select="$1" />
 endsnippet
 
@@ -69,13 +106,13 @@ endsnippet
 
 snippet "(.)?element" "Programmatically define an element" r
 `!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:element name="${1:\{name()\}}">
-  $0
+  ${VISUAL}$0
 </xsl:element>
 endsnippet
 
 snippet "element-attrs" "Programmatically define an attribute with an attribute set" 
 <xsl:element name="$1" use-attribute-sets="$2">
-  $0
+  ${VISUAL}$0
 </xsl:element>
 endsnippet
 
@@ -91,16 +128,95 @@ endsnippet
 
 snippet copy "Shallow copy"
 <xsl:copy>
-  $0
+  ${VISUAL}$0
 </xsl:copy>
 endsnippet
 
 snippet copy-attrs "Shallow copy with attribute set"
 <xsl:copy use-attribute-sets="$1">
-  $0
+  ${VISUAL}$0
 </xsl:copy>
 endsnippet
 
 snippet "(.)?copy-of" "Deep copy" r
 `!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:copy-of select="$1" />
+endsnippet
+
+snippet for-each "For each"
+<xsl:for-each select="$1">
+  ${VISUAL}$0
+</xsl:for-each>
+endsnippet
+
+snippet strip-space "Stripe white space"
+<xsl:strip-space elements="*" />
+endsnippet
+
+# normalize-space is an XPath expression
+snippet "(.)?normalize" "Stripe white space from selection" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`normalize-space(${1:.})
+endsnippet
+
+snippet preserve-space "Preserve the white space for a/an element(s)"
+<xsl:preserve-space elements="$1" />$0
+endsnippet
+
+# <text xml:space="preserve">
+#   Canadian <athlete>sprinter</athlete> <person>John Benson</person>
+#   blah blah
+# </text>
+
+snippet "(.)?if" "If statement" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:if test="$1">$2</xsl:if>
+endsnippet
+
+snippet choose "Choose statement"
+<xsl:choose>
+  when$0
+</xsl:choose>
+endsnippet
+
+snippet when "when statement"
+<xsl:when test="$1">
+  
+</xsl:when>
+$2`!p snip.rv=from_options(t[2], ['when', 'otherwise'])`$0
+endsnippet
+
+snippet otherwise "otherwise"
+<xsl:otherwise>
+  ${VISUAL}$0
+</xsl:otherwise>
+endsnippet
+
+snippet "(.)?newline" "New Line" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:text>&#xA;</xsl:text>
+endsnippet
+
+snippet "(.)?space" "Space" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:text>&#xA0;</xsl:text>
+endsnippet
+
+snippet "(.)?tab" "tab" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:text>&#x9;</xsl:text>
+endsnippet
+
+snippet "(.)?text" "Add Text" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:text>${VISUAL}$0</xsl:text>
+endsnippet
+
+snippet "(.)?text-disable" "Add Text and disable output escaping" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:text disable-output-escaping="yes">$0</xsl:text>
+endsnippet
+
+snippet comment "Add a comment to the output XML/HTML" 
+<xsl:comment>
+${VISUAL}$0
+</xsl:comment>
+endsnippet
+
+snippet "(.)?cdata(.)?" "Add cdata" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<![CDATA[
+${VISUAL}$0
+]]>`!p snip.rv = match.group(2) if match.group(2) else ""`
 endsnippet

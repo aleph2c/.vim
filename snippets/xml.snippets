@@ -1,0 +1,10 @@
+snippet start "Setting up the top of the file"
+<?xml version="1.0" encoding="UTF-8"?>
+$0
+endsnippet
+
+snippet "(.)?cdata(.)?" "Add cdata" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<![CDATA[
+${VISUAL}$0
+]]>`!p snip.rv = match.group(2) if match.group(2) else ""`
+endsnippet
