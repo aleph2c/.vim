@@ -4,12 +4,12 @@ from datetime import datetime
 import uuid
 
 def from_options(t, options):
-	if t:
-		options = [m[len(t):] for m in options if m.startswith(t)]
-	if len(options) == 1:
-		return options[0]
-	else:
-		return "(" + "|".join(options) + ")"
+  if t:
+    options = [m[len(t):] for m in options if m.startswith(t)]
+  if len(options) == 1:
+    return options[0]
+  else:
+    return "(" + "|".join(options) + ")"
 
 endglobal
 
@@ -18,9 +18,16 @@ snippet start "Setting up the top of the file"
 <xsl:stylesheet version="3.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:output method="$1">
+<xsl:output method="$1`!p snip.rv=from_options(t[1], [ 'xml', 'html', 'xhtml',
+'text', 'json', 'adaptive'])`" indent="$2`!p snip.rv=from_options(t[2], ['no',
+'yes'])`" />
+
 template$0
 </xsl:stylesheet>
+endsnippet
+
+snippet call-template "Call a named template"
+<xsl:call-template name="$1" />
 endsnippet
 
 snippet template "Creating a template"
@@ -30,17 +37,70 @@ snippet template "Creating a template"
 
 endsnippet
 
+snippet template-named "Creating a named template"
+<xsl:template match="$1" name="$2">
+  $0
+</xsl:template>
+
+endsnippet
+
 snippet templated "Create a detailed template"
 <xsl:template match="$1" mode="$2" priority="$3`!p snip.rv=from_options(t[3], ['0.0', '-0.25', '0.25', '0.5'])`">
   $0
 </xsl:template>
+
 endsnippet
 
-snippet value "Setting a value of"
-  <xsl:value-of select="$1" />
+snippet "(.)?value" "Setting a value of" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:value-of select="$1" />
 endsnippet
 
-snippet apply "Apply templates"
-<xsl:apply-templates select="$1" />
-$0
+snippet "(.)?apply" "Apply templates" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:apply-templates />$0
+endsnippet
+
+snippet "(.)?applys" "Apply template with select" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:apply-templates select="$1" />$0
+endsnippet
+
+snippet "(.)?applyd" "Apply detailed template" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:apply-templates select="$1" mode="${2:#all}" priority="$3`!p snip.rv=from_options(t[3], ['0.0', '-0.25', '0.25', '0.5'])`" />$0
+endsnippet
+
+snippet "(.)?element" "Programmatically define an element" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:element name="${1:\{name()\}}">
+  $0
+</xsl:element>
+endsnippet
+
+snippet "element-attrs" "Programmatically define an attribute with an attribute set" 
+<xsl:element name="$1" use-attribute-sets="$2">
+  $0
+</xsl:element>
+endsnippet
+
+snippet "attribute-set" "Create an attribute set"
+<xsl:attribute-set name="$1">
+  attribute$0
+</xsl:attribute-set>
+endsnippet
+
+snippet "(.)?attribute" "Programmatically define an attribute" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:attribute name="${1:\{name()\}}">$0</xsl:attribute>
+endsnippet
+
+snippet copy "Shallow copy"
+<xsl:copy>
+  $0
+</xsl:copy>
+endsnippet
+
+snippet copy-attrs "Shallow copy with attribute set"
+<xsl:copy use-attribute-sets="$1">
+  $0
+</xsl:copy>
+endsnippet
+
+snippet "(.)?copy-of" "Deep copy" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:copy-of select="$1" />
 endsnippet
