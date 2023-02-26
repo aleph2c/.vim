@@ -47,6 +47,7 @@ endsnippet
 snippet start "Setting up the top of the file"
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="3.0"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:output method="$1`!p snip.rv=from_options(t[1], [
@@ -60,7 +61,17 @@ template$0
 endsnippet
 
 snippet call-template "Call a named template"
-<xsl:call-template name="$1" />
+<xsl:call-template name="$1">
+  with-param$0
+</xsl:call-template>
+endsnippet
+
+snippet with-param "Parameter for a call"
+<xsl:with-param name="$1">$2</xsl:with-param>
+endsnippet
+
+snippet param "A parameter"
+<xsl:param name="$1">$2</xsl:param>
 endsnippet
 
 snippet template "Creating a template"
@@ -70,8 +81,8 @@ snippet template "Creating a template"
 
 endsnippet
 
-snippet template-named "Creating a named template"
-<xsl:template match="$1" name="$2">
+snippet named-template "Creating a named template"
+<xsl:template name="$2">
   ${VISUAL}$0
 </xsl:template>
 
@@ -148,7 +159,7 @@ snippet for-each "For each"
 </xsl:for-each>
 endsnippet
 
-snippet strip-space "Stripe white space"
+snippet strip "Stripe white space"
 <xsl:strip-space elements="*" />
 endsnippet
 
@@ -193,8 +204,24 @@ snippet "(.)?newline" "New Line" r
 `!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:text>&#xA;</xsl:text>
 endsnippet
 
+snippet "(.)?-nl" "Newline Character" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`&#xA;
+endsnippet
+
 snippet "(.)?space" "Space" r
 `!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:text>&#xA0;</xsl:text>
+endsnippet
+
+snippet "(.)?-sp" "Space Character" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`&#xA0;
+endsnippet
+
+snippet "(.)?-<" "Less than Character" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`&lt;
+endsnippet
+
+snippet "(.)?->" "Greater than Character" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`&gt;
 endsnippet
 
 snippet "(.)?tab" "tab" r
@@ -220,3 +247,61 @@ snippet "(.)?cdata(.)?" "Add cdata" r
 ${VISUAL}$0
 ]]>`!p snip.rv = match.group(2) if match.group(2) else ""`
 endsnippet
+
+snippet var "Add a variable"
+<xsl:variable name="${VISUAL}$1">$2</xsl:variable>
+endsnippet
+
+snippet varc "Make a complex variable"
+<xsl:variable name="$1">
+  ${VISUAL}$0
+</xsl:variable>
+endsnippet
+
+# /menu/entrees/dish[position() = ((($week - 1) mod count(/menu/appetizers/dish) + 1)]
+# select the line
+# ctrl-j
+# vars
+# fill in var name with weekentree
+snippet vars "Make a variable with select (Xpath query)"
+<xsl:variable name="$1"
+  select="${VISUAL}$2" />
+endsnippet
+
+snippet sort "Sort item for for-each"
+<xsl:sort select="${VISUAL}$1" order="$2`!p snip.rv=from_options(t[2], ['ascending', 'descending' ])`" />
+endsnippet
+
+snippet number "Number a template"
+<xsl:number />
+endsnippet
+
+# to create sections:
+# <xsl:number level="multiple" count="*" />
+# or
+# <xsl:number level="multiple" count='dish|menu/*' />
+#
+# for numbers to continue from 1 through boundaries
+# <xsl:number level="any" />
+
+snippet numberd "Number a template"
+<xsl:number level="$1`!p snip.rv=from_options(t[1], ['single', 'any', 'multiple' ])`" count="$0" />
+endsnippet
+
+# <xsl:number level="multiple" count='*' from="menu/* />
+# format:
+#  1
+#  01
+#  a (any letter to start at)
+#  A (any letter to start at)
+#  i
+#  I
+# example:
+# <xsl:number level="multiple" count='*' from="menu/* token='1.a' />
+# <xsl:number level="multiple" count='*' from="menu/* token='1-I' />
+
+snippet numberdd "Number a template"
+<xsl:number level="$1`!p snip.rv=from_options(t[1], ['single', 'any', 'multiple'
+])`" count="$2" from="$3" format="$4"/>
+endsnippet
+
