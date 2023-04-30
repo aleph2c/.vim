@@ -47,8 +47,15 @@ endsnippet
 snippet start "Setting up the top of the file"
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="3.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+  xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+  xmlns:lfn="http://127.0.0.1/local/functions"
+  xmlns:private-lfn="http://127.0.0.1/private/local/functions"
+  exclude-result-prefixes="lfn private-lfn"
+>
+
 
 <xsl:output method="$1`!p snip.rv=from_options(t[1], [
 'xml', 'html', 'xhtml', 'text', 'json', 'adaptive'
@@ -56,22 +63,96 @@ snippet start "Setting up the top of the file"
 '1.0', '5.0'])`" indent="$3`!p snip.rv=from_options(t[3], [
 'no', 'yes'])`" />
 
-template$0
+$4`!p snip.rv=from_options(t[4], ['usage', 'program-param'])`
+
+strip$0
+<!--
+# XSLT 3.0
+# shallow-skip: causes all node that are not matched (including text nodes)
+#               to be skipped
+# fail:         treats a no-match as an error
+# true:         results in a warning
+-->
+mode3
+
+template
+
+<!-- remove default behavior, for XSLT 1.0/2.0 -->
+<xsl:template match="*">
+  <xsl:message terminate="no">
+    WARNING: Unmatched element: <xsl:value-of select="name()"/>
+  </xsl:message>
+  <xsl:apply-templates/>
+</xsl:template>
 </xsl:stylesheet>
 endsnippet
 
-snippet call-template "Call a named template"
-<xsl:call-template name="$1">
-  with-param$0
-</xsl:call-template>
+snippet usage "Describe how to use the program"
+<!--
+  $1`!p snip.rv=from_options(t[1], [
+'try', 'xslt'])`
+  -d $2
+  $3`!p snip.rv=from_options(t[3], [
+'ex', 'convert'])`
+  -x $4 \
+  -l $5 \
+  -o $7
+  -v
+-->
+endsnippet
+
+snippet program-param "Add a program Param"
+<!--
+  $1`!p snip.rv=from_options(t[1], [
+'try', 'xslt'])`
+  -d $2
+  $3`!p snip.rv=from_options(t[3], [
+'ex', 'convert'])`
+  -x $4 \
+  -l $5 \
+  -a ${6:sortkey1='model',sortkey2='manufacturer'"} \
+  -o $7
+  -v
+-->
+<xsl:param name="$8">$9</xsl:param>
+endsnippet
+
+# XSLT 3.0
+# shallow-skip: causes all node that are not matched (including text nodes)
+#               to be skipped
+# fail:         treats a no-match as an error
+# true:         results in a warning
+snippet mode3 "Set the mode for the spreadsheet"
+<xsl:mode on-no-match="$1`!p snip.rv=from_options(t[1], [
+'shallow-skip', 'fail', 'true'
+])`" />
+endsnippet
+
+snippet "(.)ns" "Name space" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`xmlns:$1="http://www.$2"
+$0
+endsnippet
+
+# result-prefix - the namespace you want in the output
+# stylesheet-prefix - the namespace used in this sheet
+snippet namespace-alias "Setup a namespace alias"
+<xsl:namespace-alias stylesheet-prefix="$1" result-prefix="$2" />
+endsnippet
+
+snippet remove-ns "Remove a namespace"
+<xsl:exclude-result-prefixes="$1" />$0
 endsnippet
 
 snippet with-param "Parameter for a call"
 <xsl:with-param name="$1">$2</xsl:with-param>
 endsnippet
 
-snippet param "A parameter"
-<xsl:param name="$1">$2</xsl:param>
+snippet param-global "A global input parameter"
+<xsl:param name="$1">$2</xsl:param>$0
+endsnippet
+
+snippet param "A template/function parameter"
+<xsl:param name="$1" as="$2" />$0
 endsnippet
 
 snippet template "Creating a template"
@@ -95,8 +176,14 @@ snippet templated "Create a detailed template"
 
 endsnippet
 
+snippet call-template "Call a named template"
+<xsl:call-template name="$1">
+  with-param$0
+</xsl:call-template>
+endsnippet
+
 snippet "(.)?value" "Setting a value of" r
-`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:value-of select="$1" />
+`!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:value-of select="${VISUAL}$1" />
 endsnippet
 
 snippet "(.)?value-escaping" "Setting a value of" r
@@ -157,6 +244,33 @@ snippet for-each "For each"
 <xsl:for-each select="$1">
   ${VISUAL}$0
 </xsl:for-each>
+endsnippet
+
+#  Usage example:
+#  <xsl:for-each-group select="//xhtml:article/xhtml:div/xhtml:div/*" group-starting-with="xhtml:h1">
+#    <xsl:if test="self::xhtml:h1[@id='observe']">
+#      <xsl:for-each-group select="current-group() except ." group-starting-with="xhtml:h2">
+#    </xsl:if>
+#  </xsl:for-each-group>
+snippet for-each-group "For each group"
+<xsl:for-each-group select="$1" group-starting-with="$2">
+  ${VISUAL}$0
+</xsl:for-each>
+endsnippet
+
+snippet range "Loop over a range"
+<!-- range(1, $1) -->
+<xsl:variable name="indexes" as="xs:integer*">
+  <xsl:for-each select="1 to $1">
+      <xsl:sequence select="." />
+  </xsl:for-each>
+</xsl:variable>
+<xsl:for-each select="1 to count($indexes)">
+  <xsl:variable name="index" select="." />
+  <!-- $index contains your iteration number -->
+  ${VISUAL}$0
+</xsl:for-each>
+
 endsnippet
 
 snippet strip "Stripe white space"
@@ -236,10 +350,22 @@ snippet "(.)?text-disable" "Add Text and disable output escaping" r
 `!p snip.rv = match.group(1) if match.group(1) else ""`<xsl:text disable-output-escaping="yes">$0</xsl:text>
 endsnippet
 
-snippet comment "Add a comment to the output XML/HTML" 
+snippet comment1 "Add a comment to the output XML/HTML" 
 <xsl:comment>
 ${VISUAL}$0
 </xsl:comment>
+endsnippet
+
+snippet comment "Add a comment to the output XML/HTML" 
+<!--
+${VISUAL}$0
+-->
+endsnippet
+
+snippet reflect "Use the message output to reflect upon a variable"
+<xsl:message>
+  <xsl:copy-of select="\$$1"/>
+</xsl:message>
 endsnippet
 
 snippet "(.)?cdata(.)?" "Add cdata" r
@@ -249,7 +375,30 @@ ${VISUAL}$0
 endsnippet
 
 snippet var "Add a variable"
-<xsl:variable name="${VISUAL}$1">$2</xsl:variable>
+<xsl:variable name="${VISUAL}$1" select="$2" />
+endsnippet
+
+snippet var-sandwich "Add a variable"
+<xsl:variable name="${VISUAL}$1">$2</xsl:variable>$0
+endsnippet
+
+snippet var-stair "Add a variable"
+<xsl:variable
+  name="${VISUAL}$1"
+  select="$2"
+/>
+endsnippet
+
+snippet stair "Add a variable"
+<xsl:variable
+  name="${VISUAL}$1"
+  select="$2"
+/>
+endsnippet
+
+# <xsl:variable name="dishes" select="document('menu3.xml')//dish" />
+snippet var-doc "Add a variable from a document"
+<xsl:variable name="$3" select="document('${VISUAL}$1')//$2" />
 endsnippet
 
 snippet varc "Make a complex variable"
@@ -304,4 +453,99 @@ snippet numberdd "Number a template"
 <xsl:number level="$1`!p snip.rv=from_options(t[1], ['single', 'any', 'multiple'
 ])`" count="$2" from="$3" format="$4"/>
 endsnippet
+
+# keys
+#
+# XML:
+# ...
+# <car:cars ... />
+#   <car:model car:name="Golf" m:id="VW" car:year="2001" />
+# ...
+#
+# <car:cars ... />
+#   <m:manufacturers>
+#     <m:manufacturer m:id="VW" m:name="Volkswagen" m:country='Germany' />
+#  ...
+#
+# XSLT:
+# <xsl:key name="mfc" match="m:manufacturer" use='@m:id' />
+#
+# to use it in(context: car:cars/car:models):
+#
+# <xsl:value-of select="key('mfc', @m:id)/@m.name" />
+#
+# In the above we use the @m:id in the car:cars/car:models to get the
+# data from car:cars/m:manufacturer, then get its @m.name; "Volkwagen"
+snippet key "Add a key"
+<xsl:key name="$1" match="$2" use="$3" />
+<!-- to use: key('$1', $3) -->
+endsnippet
+
+snippet "(.)?message" "Write a message to the terminal" r
+<xsl:message>
+  ${VISUAL}$1
+</xsl:message>
+endsnippet
+
+snippet fn "Write an XPath function"
+<xsl:function name="lfn:${VISUAL}$1" as="${2:xs:string}">
+  param$0
+</xsl:function>
+endsnippet
+
+snippet private-fn "Write a private XPath function"
+<xsl:function name="private-lfn:${VISUAL}$1" as="${2:xs:string}">
+  param$0
+</xsl:function>
+endsnippet
+
+snippet evaluate "Write an evaluation function"
+<xsl:evaluate context-item="${1:.}" xpath="$2"></xsl:evaluate>
+endsnippet
+
+snippet analyze "Analyze a string"
+<xsl:analyze-string select="${VISUAL}$1" regex="($2)" >
+  <xsl:matching-substring>
+    $3
+    <!--
+    <xsl:value-of select="regex-group(1)" />
+    -->
+  </xsl:matching-substring>
+  matching$0
+  <xsl:non-matching-substring>
+  </xsl:non-matching-substring>
+</xsl:analyze-string>
+endsnippet
+
+snippet matching "Create a matching substring snippet"
+<xsl:matching-substring>
+  $1
+</xsl:matching-substring>
+endsnippet
+
+snippet map "create a map"
+<xsl:variable name="$1">
+  <xsl:map>
+    <xsl:map-entry key="'$2'" select="$3" />
+    map-entry$0
+  </xsl:map>
+</xsl:variable>
+endsnippet
+
+snippet map-entry "create a map entry"
+<xsl:map-entry key="'$1'" select="$2" />
+map-entry$0
+endsnippet
+
+snippet seqf "create a sequence"
+<xsl:for-each select="$1">
+   <xsl:sequence select="$2" />
+</xsl:for-each>
+endsnippet
+
+snippet seq "create a sequence"
+<xsl:sequence select="$1" />
+endsnippet
+
+
 

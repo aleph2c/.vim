@@ -8,3 +8,9 @@ snippet "(.)?cdata(.)?" "Add cdata" r
 ${VISUAL}$0
 ]]>`!p snip.rv = match.group(2) if match.group(2) else ""`
 endsnippet
+
+snippet "(.)ns" "Name space" r
+`!p snip.rv = match.group(1) if match.group(1) else ""`xmlns:$1="http://www.$2"
+$0
+endsnippet
+

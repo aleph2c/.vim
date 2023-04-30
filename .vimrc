@@ -52,6 +52,7 @@ endif
   Plug 'tpope/vim-speeddating'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-vividchalk'
+  Plug 'tpope/vim-commentary'
 
   " vividchalk doesn't work for searching
   Plug 'altercation/vim-colors-solarized'
@@ -200,6 +201,11 @@ source $VIMRCHOME\ripgrep_vimrc.vim
 source $VIMRCHOME\vimlsp_vimrc.vim
 
 let g:session_directory = $VIMRCHOME.'/sessions'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Pasting                                    "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>pp :set paste!<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Tabularize                                  "
