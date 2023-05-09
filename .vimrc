@@ -728,6 +728,12 @@ function! AirlineInit()
   set laststatus=2
 endfunction
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Markdown                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType markdown setlocal wrap
+autocmd FileType markdown setlocal formatoptions-=t
+
 autocmd User AirlineAfterInit call AirlineInit()
 "let g:airline#extensions#tabline#enabled = 1
 
