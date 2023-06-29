@@ -20,6 +20,7 @@ set noundofile
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Installed Plugins                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 if has("win32")
   call plug#begin($VIM . '/.vim' .'/plugged')
 else
@@ -105,6 +106,7 @@ endif
 
   " Testing
   Plug 'janko-m/vim-test'
+
   "Plug '5long/pytest-vim-compiler'
   Plug 'reinh/vim-makegreen'
   Plug 'skywind3000/asyncrun.vim'
@@ -118,17 +120,37 @@ endif
 call plug#end()
 set nocompatible
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             Resizing the Window                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Use Leader + h to decrease window width
+nnoremap <Leader>h :vertical resize -2<CR>
+
+" Use Leader + l to increase window width
+nnoremap <Leader>l :vertical resize +2<CR>
+
+" Use Leader + k to increase window height
+nnoremap <Leader>k :resize +2<CR>
+
+" Use Leader + j to decrease window height
+nnoremap <Leader>j :resize -2<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                       janko-m vim-test plugin control                        "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let test#python#runner = 'pytest'
+
 let test#strategy = {
   \ 'nearest': 'make',
   \ 'file':    'dispatch',
   \ 'suite':   'dispatch_background',
   \}
-let test#python#pytest#options = "--color=no --tb=short -q -s"
 
+let test#python#pytest#options = "--color=no --tb=short -q -s"
 nmap <silent> <leader>tn :TestNearest<CR> " ,tn
 nmap <silent> <leader>tf :TestFile<CR>    " ,tf
-nmap <silent> <F8> :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>    " ,tl
 nmap <silent> <leader>tg :TestVisit<CR>   " ,tg
 
@@ -549,8 +571,16 @@ syntax on
 "                           Recurse to the tags file                           "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tags+=tags;/
+let solana_path = substitute(system('which solana'), '\n\+$', '', '')
+let solana_directory_path = fnamemodify(solana_path, ':h')
+let solana_tags = solana_directory_path . '/sdk/bpf/c/tags'
+let solana_c_dir = fnamemodify(solana_tags, ':h')
+" Generate the solana tags
+call system('ctags -R -f ' . solana_tags . ' ' . solana_c_dir)
+execute 'set tags+=' . solana_tags
+" echom "The solana tags file is located at " . solana_tags
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                      Set our page size to 80 characters                      "
+"                      Set our page size to 81 characters                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tw=80
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -660,11 +690,11 @@ hi link EasyMotionShade  Comment
 nmap s <Plug>(easymotion-overwin-f)
 nmap t <Plug>(easymotion-t)
 
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>h <Plug>(easymotion-linebackward)
+"" JK motions: Line motions
+"map <Leader>j <Plug>(easymotion-j)
+"map <Leader>k <Plug>(easymotion-k)
+"map <Leader>l <Plug>(easymotion-lineforward)
+"map <Leader>h <Plug>(easymotion-linebackward)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                 Fast Fold, I'm not sure if this works at all                 "
@@ -733,6 +763,7 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType markdown setlocal wrap
 autocmd FileType markdown setlocal formatoptions-=t
+autocmd FileType markdown setlocal nonumber
 
 autocmd User AirlineAfterInit call AirlineInit()
 "let g:airline#extensions#tabline#enabled = 1
@@ -747,6 +778,8 @@ set spell!
 colorscheme vividchalk
 nnoremap <silent><F9> :TagbarToggle<CR>
 au Filetype python setl et ts=2 sw=2
+
+nnoremap <silent><F8> :set paste!<CR>
 
 " place an A marker above your state definition
 " place a W marker where you want your static functions
