@@ -117,6 +117,9 @@ endif
   Plug 'terryma/vim-multiple-cursors'
   Plug 'yanqd0/nginx.vim'
 
+  " Refactoring
+  Plug 'python-rope/ropevim'
+
 call plug#end()
 set nocompatible
 
@@ -503,14 +506,6 @@ augroup reload_vimrc_and_init
   au BufWritePost *.vim  source $MYVIMRC
 augroup END
 
-function! RsyncPython()
-   let job = job_start('/usr/local/bin/python3.6 .rsync_local_files.py')
-endfunction
-
-augroup rsync_python_files
-  autocmd!
-  au BufWritePost *.py  call RsyncPython()
-augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Font/font                                     "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -740,10 +735,9 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    Python                                    "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType *.py setlocal ts=2 sts=2 sw=2
-autocmd FileType *.py setlocal ts=2 sts=2 sw=2
+autocmd FileType *.py setlocal ts=4 sts=4 sw=4
 au BufNewFile,BufReadPost *.py setl foldmethod=indent nofoldenable
-au BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.py setl shiftwidth=4 expandtab
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  LaTeX/TeX                                   "
@@ -777,9 +771,8 @@ vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> :silent! !cat /home/scott/.vimbuffer 
 set spell!
 colorscheme vividchalk
 nnoremap <silent><F9> :TagbarToggle<CR>
-au Filetype python setl et ts=2 sw=2
 
-nnoremap <silent><F8> :set paste!<CR>
+set pastetoggle=<F2>
 
 " place an A marker above your state definition
 " place a W marker where you want your static functions

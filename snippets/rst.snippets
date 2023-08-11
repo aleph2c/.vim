@@ -190,8 +190,12 @@ snippet contents "add a table of contents" b
    :class: page-toc
 endsnippet
 
+#snippet term "reference a glossary item" 
+#:term:\`${1:name} <${2:`!p snip.rv = captalize_words(t[1])`}>\`
+#endsnippet
+
 snippet term "reference a glossary item" 
-:term:\`${1:name} <${2:`!p snip.rv = captalize_words(t[1])`}>\`
+:term:\`${1:${VISUAL:name}}`
 endsnippet
 
 snippet ref "reference to a link"
@@ -299,4 +303,8 @@ ${2:`!p snip.rv = hypertarget(snip.basename, t[1] + str(6))`}
 **${1:${VISUAL:type your question here}}?**
 .. include:: i_navigation_6.rst
 $0
+endsnippet
+
+snippet date "Insert current date" iA
+`!v strftime("%Y-%m-%d")`
 endsnippet
